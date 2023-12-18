@@ -239,7 +239,7 @@ h4,h5{
 	}
 #home h1
     {
-        border: 3px solid #00ff1e;
+       /* border: 3px solid #00ff1e; */
         color: rgb(0, 214, 0);
         display: inline-block;
         letter-spacing: 5px;
