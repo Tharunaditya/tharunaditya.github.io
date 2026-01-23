@@ -15,6 +15,8 @@ class BlogEnhancements {
         this.initCopyCode();
         this.initSearch();
         this.initGiscusTheme();
+        this.initTagCloud();
+        this.initViewCount();
     }
 
     /**
@@ -290,6 +292,83 @@ class BlogEnhancements {
         });
 
         observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    /**
+     * Tag Cloud Filtering
+     */
+    initTagCloud() {
+        const tagItems = document.querySelectorAll('.tag-cloud-item');
+        const blogCards = document.querySelectorAll('.blog-card');
+        
+        if (tagItems.length === 0) return;
+
+        tagItems.forEach(tagItem => {
+            tagItem.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedTag = tagItem.dataset.tag;
+                
+                // Toggle active state
+                const isActive = tagItem.classList.contains('active');
+                
+                if (isActive) {
+                    // Deactivate and show all posts
+                    tagItem.classList.remove('active');
+                    blogCards.forEach(card => {
+                        card.style.display = '';
+                    });
+                } else {
+                    // Deactivate all other tags
+                    tagItems.forEach(item => item.classList.remove('active'));
+                    tagItem.classList.add('active');
+                    
+                    // Filter posts
+                    blogCards.forEach(card => {
+                        const cardTags = card.querySelectorAll('.blog-tags .tag');
+                        let hasTag = false;
+                        
+                        cardTags.forEach(tag => {
+                            const tagSlug = tag.textContent.toLowerCase().replace(/\s+/g, '-');
+                            if (tagSlug === selectedTag) {
+                                hasTag = true;
+                            }
+                        });
+                        
+                        card.style.display = hasTag ? '' : 'none';
+                    });
+                    
+                    // Scroll to results
+                    document.querySelector('.blog-grid').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    }
+
+    /**
+     * View Count Display (using localStorage for simplicity)
+     * For production, consider using a backend service or analytics API
+     */
+    initViewCount() {
+        const viewCountElements = document.querySelectorAll('.post-view-count');
+        
+        viewCountElements.forEach(element => {
+            const postUrl = element.dataset.url || window.location.pathname;
+            const storageKey = `view_count_${postUrl}`;
+            
+            // Get or initialize view count
+            let viewCount = parseInt(localStorage.getItem(storageKey) || '0');
+            
+            // Increment on first visit (check session)
+            const sessionKey = `viewed_${postUrl}`;
+            if (!sessionStorage.getItem(sessionKey)) {
+                viewCount++;
+                localStorage.setItem(storageKey, viewCount);
+                sessionStorage.setItem(sessionKey, 'true');
+            }
+            
+            // Display count
+            element.innerHTML = `<i class="fas fa-eye"></i> ${viewCount} ${viewCount === 1 ? 'view' : 'views'}`;
+        });
     }
 }
 

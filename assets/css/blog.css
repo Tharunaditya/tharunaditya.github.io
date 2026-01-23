@@ -89,6 +89,82 @@
     color: var(--text-secondary);
 }
 
+/* Tag Cloud */
+.tag-cloud-section {
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.tag-cloud-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.tag-cloud-item {
+    padding: 0.5rem 1.25rem;
+    background: rgba(0, 255, 65, 0.1);
+    border: 2px solid rgba(0, 255, 65, 0.3);
+    border-radius: 25px;
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tag-cloud-item:hover {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 255, 65, 0.3);
+}
+
+.tag-cloud-item.active {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+}
+
+.tag-count {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.light-mode .tag-cloud {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-mode .tag-cloud-item {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: rgba(37, 99, 235, 0.3);
+    color: var(--accent-primary);
+}
+
+.light-mode .tag-cloud-item:hover,
+.light-mode .tag-cloud-item.active {
+    background: var(--accent-primary);
+    color: #ffffff;
+}
+
 /* Blog Section */
 .blog-section {
     padding: 80px 0;
@@ -647,6 +723,19 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+/* View Count */
+.post-view-count {
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.post-view-count i {
+    color: var(--accent-primary);
 }
 
 /* Back to Top Button */

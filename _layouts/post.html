@@ -80,6 +80,9 @@ layout: default
                         {{ words | divided_by: 180 }} min read
                     {% endif %}
                 </span>
+                <span class="post-view-count" data-url="{{ page.url }}">
+                    <i class="fas fa-eye"></i> Loading...
+                </span>
                 {% if page.categories %}
                 <span class="post-category">
                     <i class="far fa-folder"></i>

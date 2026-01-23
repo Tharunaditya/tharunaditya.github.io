@@ -1,49 +1,19 @@
 ---
 layout: default
-title: Blog
 ---
 
 <section class="blog-hero">
     <div class="container">
-        <h1 class="blog-title">Blog</h1>
-        <p class="blog-description">Insights on Cybersecurity, AI, Design, and Development</p>
-        
-        <!-- Search Bar -->
-        <div class="blog-search-wrapper">
-            <input type="text" id="blog-search" class="blog-search-input" placeholder="🔍 Search articles by title, tags, or content...">
-        </div>
+        <h1 class="blog-title"><i class="fas fa-folder"></i> {{ page.title }}</h1>
+        <p class="blog-description">All posts in {{ page.title }} category</p>
     </div>
 </section>
 
 <section class="blog-section">
     <div class="container">
-        <!-- Tag Cloud -->
-        <div class="tag-cloud-section">
-            <h3 class="tag-cloud-title"><i class="fas fa-tags"></i> Popular Topics</h3>
-            <div class="tag-cloud">
-                {% assign all_tags = site.posts | map: 'tags' | join: ',' | split: ',' | uniq | sort %}
-                {% for tag in all_tags %}
-                    {% assign tag_count = 0 %}
-                    {% for post in site.posts %}
-                        {% if post.tags contains tag %}
-                            {% assign tag_count = tag_count | plus: 1 %}
-                        {% endif %}
-                    {% endfor %}
-                    {% if tag_count > 0 %}
-                    <a href="#" class="tag-cloud-item" data-tag="{{ tag | slugify }}" data-count="{{ tag_count }}">
-                        {{ tag }} <span class="tag-count">({{ tag_count }})</span>
-                    </a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-        
-        <!-- Search Results (hidden by default) -->
-        <div id="search-results" style="display: none;"></div>
-        
-        <!-- Blog Grid -->
         <div class="blog-grid">
-            {% for post in site.posts %}
+            {% assign category_posts = site.posts | where_exp: "post", "post.categories contains page.category" %}
+            {% for post in category_posts %}
             <article class="blog-card glass-card">
                 {% if post.image %}
                 <div class="blog-card-image">
@@ -71,12 +41,6 @@ title: Blog
                                 {{ words | divided_by: 180 }} min read
                             {% endif %}
                         </span>
-                        <span class="post-view-count" data-url="{{ post.url }}">
-                            <i class="fas fa-eye"></i> ...
-                        </span>
-                        {% if post.categories %}
-                        <span class="blog-category">{{ post.categories | first }}</span>
-                        {% endif %}
                     </div>
                     
                     <h2 class="blog-card-title">
@@ -102,12 +66,12 @@ title: Blog
             </article>
             {% endfor %}
             
-            {% if site.posts.size == 0 %}
+            {% if category_posts.size == 0 %}
             <div class="no-posts">
-                <i class="fas fa-blog"></i>
-                <h3>No blog posts yet</h3>
-                <p>Check back soon for cybersecurity insights and tech articles!</p>
-                <a href="/admin" class="btn btn-primary">Write Your First Post</a>
+                <i class="fas fa-folder-open"></i>
+                <h3>No posts in this category yet</h3>
+                <p>Check back soon for new content!</p>
+                <a href="/blog" class="btn btn-primary">View All Posts</a>
             </div>
             {% endif %}
         </div>
