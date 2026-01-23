@@ -58,22 +58,36 @@
 
 /* Light Mode Variables */
 .light-mode {
-    --bg-primary: #fafafa;
-    --bg-secondary: #f0f0f0;
-    --bg-tertiary: #ffffff;
-    --text-primary: #1a1a1a;
-    --text-secondary: #5f5f5f;
-    --accent-primary: #007bff;
-    --accent-secondary: #0056b3;
-    --accent-active: #0056b3;
-    --accent-glow: rgba(0, 123, 255, 0.25);
-    --gradient-primary: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(240,240,240,0.82) 100%);
-    --gradient-dark: linear-gradient(135deg, #f0f0f0 0%, #e4e4e4 100%);
-    --success: #2ca02c;
-    --warning: #f7db91;
-    --danger: #d62728;
-    --shadow-glow: 0 0 20px rgba(0, 123, 255, 0.25);
+    /* Base Colors - Platinum & Slate Theme */
+    --bg-primary: #f2f5f8;       /* Cool platinum background */
+    --bg-secondary: #ffffff;      /* Pure white for sections */
+    --bg-tertiary: #e2e8f0;       /* Light border/divider color */
+    
+    /* Typography - High Contrast Slate */
+    --text-primary: #0f172a;      /* Slate 900 - Sharp main text */
+    --text-secondary: #475569;    /* Slate 600 - Readable secondary */
+    
+    /* Accents - Electric Blue */
+    --accent-primary: #2563eb;    /* Vivid Blue */
+    --accent-secondary: #1d4ed8;  /* Darker Blue */
+    --accent-active: #1e40af;     /* Deep Blue */
+    --accent-glow: rgba(37, 99, 235, 0.25);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+    --gradient-dark: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    
+    /* Semantic */
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    
+    /* Shadows */
+    --shadow-glow: 0 4px 20px rgba(37, 99, 235, 0.2);
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.1);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
 }
 
 /* ============================================
