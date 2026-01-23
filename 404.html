@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>404 - Page Not Found | Tharunaditya Anuganti</title>
+    <meta name="description" content="Oops! This page doesn't exist. Let's get you back on track.">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Orbitron:wght@500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .error-code {
+            font-family: var(--font-heading);
+            font-size: clamp(8rem, 20vw, 15rem);
+            font-weight: 900;
+            color: var(--accent-primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px var(--accent-glow);
+            animation: glitchError 3s infinite;
+        }
+
+        @keyframes glitchError {
+            0%, 90%, 100% { transform: translate(0); }
+            92% { transform: translate(-5px, 5px); }
+            94% { transform: translate(5px, -5px); }
+            96% { transform: translate(-5px, -5px); }
+        }
+
+        .error-title {
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .quick-link {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .quick-link i {
+            font-size: 2rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .quick-link h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-link p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .light-mode .quick-link {
+            background: #ffffff;
+            border: 1px solid var(--bg-tertiary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .light-mode .quick-link:hover {
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .ascii-art {
+            font-family: var(--font-code);
+            font-size: 0.6rem;
+            color: var(--text-secondary);
+            opacity: 0.3;
+            line-height: 1;
+            margin-top: 3rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .ascii-art {
+                display: none;
+            }
+        }
+    </style>
+    
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+</head>
+<body class="dark-mode">
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Error Container -->
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">// Page Not Found</h1>
+            <p class="error-message">
+                Looks like this page got lost in cyberspace. <br>
+                Don't worry, even the best hackers take wrong turns sometimes.
+            </p>
+
+            <div class="error-actions">
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home"></i>
+                    <span>Back to Home</span>
+                </a>
+                <a href="/#contact" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact Me</span>
+                </a>
+            </div>
+
+            <div class="quick-links">
+                <a href="/#about" class="quick-link">
+                    <i class="fas fa-user"></i>
+                    <h3>About Me</h3>
+                    <p>Learn about my background</p>
+                </a>
+                <a href="/#projects" class="quick-link">
+                    <i class="fas fa-code"></i>
+                    <h3>Projects</h3>
+                    <p>Check out my work</p>
+                </a>
+                <a href="/#skills" class="quick-link">
+                    <i class="fas fa-tools"></i>
+                    <h3>Skills</h3>
+                    <p>See my expertise</p>
+                </a>
+                <a href="/#certifications" class="quick-link">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Certifications</h3>
+                    <p>View my credentials</p>
+                </a>
+            </div>
+
+            <div class="ascii-art">
+    _____ ____  _____     _____ _____  _____   ____  _____  
+   |  |  |    ||  |  |   |   __|  |  ||  _  | |    ||  |  | 
+   |     |    ||  |  |   |   __| | | ||   __|  |    |  |  | 
+   |__|__|____||_____|   |_____|_|___||__|    |____||_____| 
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle (Hidden but functional) -->
+    <button id="theme-toggle" class="icon-btn" style="position: fixed; top: 2rem; right: 2rem; z-index: 1000;">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
