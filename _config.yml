@@ -6,12 +6,27 @@ email: tharunaditya.anuganti@gmail.com
 url: https://tharunaditya.github.io
 baseurl: ""
 theme: null
+lang: en-US
 
 # Social Media
 github_username: Tharunaditya
 linkedin_username: tharunaditya-anuganti
 twitter_username: Tharunaditya1
 instagram_username: adityaanuganti
+
+# SEO Settings
+logo: /assets/images/logo.png
+social:
+  name: Tharunaditya Anuganti
+  links:
+    - https://github.com/Tharunaditya
+    - https://linkedin.com/in/tharunaditya-anuganti
+    - https://twitter.com/Tharunaditya1
+    - https://instagram.com/adityaanuganti
+
+# Blog Settings
+paginate: 10
+paginate_path: "/blog/page:num/"
 
 # Build Settings
 markdown: kramdown

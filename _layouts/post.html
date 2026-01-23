@@ -2,9 +2,50 @@
 layout: default
 ---
 
-<article class="blog-post">
+<!-- JSON-LD Structured Data for Blog Post -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title }}",
+  "description": "{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}",
+  "image": {% if page.image %}"{{ page.image | absolute_url }}"{% else %}"{{ '/assets/images/og-image.jpg' | absolute_url }}"{% endif %},
+  "author": {
+    "@type": "Person",
+    "name": "{{ page.author | default: site.author }}",
+    "url": "{{ site.url }}",
+    "sameAs": [
+      "https://github.com/{{ site.github_username }}",
+      "https://linkedin.com/in/{{ site.linkedin_username }}",
+      "https://twitter.com/{{ site.twitter_username }}"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ '/assets/images/logo.png' | absolute_url }}"
+    }
+  },
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{% if page.last_modified_at %}{{ page.last_modified_at | date_to_xmlschema }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  },
+  "keywords": "{{ page.tags | join: ', ' }}",
+  "articleSection": "{{ page.categories | first }}",
+  "inLanguage": "en-US",
+  "wordCount": "{{ content | strip_html | number_of_words }}"
+}
+</script>
+
+<article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
     <header class="post-header">
         <div class="container">
+            <meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">
+            <meta itemprop="dateModified" content="{% if page.last_modified_at %}{{ page.last_modified_at | date_to_xmlschema }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}">
             <div class="post-meta">
                 <span class="post-date">
                     <i class="far fa-calendar"></i>
@@ -22,15 +63,15 @@ layout: default
                 {% endif %}
             </div>
             
-            <h1 class="post-title">{{ page.title }}</h1>
+            <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
             
             {% if page.excerpt %}
-            <p class="post-excerpt">{{ page.excerpt }}</p>
+            <p class="post-excerpt" itemprop="description">{{ page.excerpt }}</p>
             {% endif %}
             
             {% if page.image %}
             <div class="post-featured-image">
-                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" itemprop="image">
             </div>
             {% endif %}
             
@@ -46,7 +87,7 @@ layout: default
 
     <div class="post-content">
         <div class="container">
-            <div class="content-wrapper">
+            <div class="content-wrapper" itemprop="articleBody">
                 {{ content }}
             </div>
         </div>
