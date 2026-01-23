@@ -21,8 +21,8 @@
     --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
     
     /* Typography */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-heading: 'Orbitron', 'Rajdhani', sans-serif;
+    --font-primary: 'Fira Code', 'Share Tech Mono', 'Courier New', monospace;
+    --font-heading: 'Orbitron', 'Share Tech Mono', monospace;
     --font-code: 'Fira Code', 'Courier New', monospace;
     
     /* Spacing */
@@ -63,7 +63,9 @@
     --bg-tertiary: #fafafa;
     --text-primary: #0a0a0a;
     --text-secondary: #666666;
-    --accent-glow: rgba(0, 255, 65, 0.2);
+    --accent-primary: #00b32e;
+    --accent-secondary: #009926;
+    --accent-glow: rgba(0, 179, 46, 0.3);
 }
 
 /* ============================================
