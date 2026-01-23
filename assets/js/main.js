@@ -391,6 +391,9 @@ class SkillBars {
 // ============================================
 // PROJECT FILTERS
 // ============================================
+// ============================================
+// PROJECT FILTERS WITH ACCESSIBILITY
+// ============================================
 class ProjectFilters {
     constructor() {
         this.filterBtns = document.querySelectorAll('.filter-btn');
@@ -398,26 +401,49 @@ class ProjectFilters {
     }
 
     init() {
-        this.filterBtns.forEach(btn => {
+        // Keyboard navigation support
+        this.filterBtns.forEach((btn, index) => {
             btn.addEventListener('click', () => {
                 const filter = btn.getAttribute('data-filter');
                 this.filterProjects(filter);
                 this.setActiveButton(btn);
             });
+
+            // Keyboard support
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    btn.click();
+                }
+                // Arrow key navigation
+                else if (e.key === 'ArrowLeft' && index > 0) {
+                    e.preventDefault();
+                    this.filterBtns[index - 1].focus();
+                }
+                else if (e.key === 'ArrowRight' && index < this.filterBtns.length - 1) {
+                    e.preventDefault();
+                    this.filterBtns[index + 1].focus();
+                }
+            });
         });
     }
 
     filterProjects(filter) {
+        let visibleCount = 0;
+
         this.projectCards.forEach(card => {
             const category = card.getAttribute('data-category');
             
             if (filter === 'all' || category === filter) {
                 card.style.display = 'block';
+                card.setAttribute('aria-hidden', 'false');
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'scale(1)';
                 }, 10);
+                visibleCount++;
             } else {
+                card.setAttribute('aria-hidden', 'true');
                 card.style.opacity = '0';
                 card.style.transform = 'scale(0.8)';
                 setTimeout(() => {
@@ -425,13 +451,41 @@ class ProjectFilters {
                 }, 300);
             }
         });
+
+        // Announce to screen readers
+        this.announceFilterResults(filter, visibleCount);
+        
+        // Track filtering event
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'filter_projects', {
+                'event_category': 'projects',
+                'event_label': filter
+            });
+        }
     }
 
     setActiveButton(activeBtn) {
         this.filterBtns.forEach(btn => {
             btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
         });
         activeBtn.classList.add('active');
+        activeBtn.setAttribute('aria-selected', 'true');
+    }
+
+    announceFilterResults(filter, count) {
+        // Create or update live region for screen readers
+        let announcement = document.getElementById('filter-announcement');
+        if (!announcement) {
+            announcement = document.createElement('div');
+            announcement.id = 'filter-announcement';
+            announcement.setAttribute('role', 'status');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.className = 'sr-only';
+            document.body.appendChild(announcement);
+        }
+        const filterName = filter === 'all' ? 'all projects' : filter;
+        announcement.textContent = `Showing ${count} ${filterName} ${count === 1 ? 'project' : 'projects'}`;
     }
 }
 
@@ -567,19 +621,160 @@ class BackToTop {
 // ============================================
 // FORM HANDLING
 // ============================================
+// ============================================
+// CONTACT FORM WITH VALIDATION
+// ============================================
 class ContactForm {
     constructor() {
         this.form = document.getElementById('contact-form');
+        this.submitBtn = document.getElementById('submit-btn');
+        this.btnText = document.getElementById('btn-text');
+        this.btnIcon = document.getElementById('btn-icon');
+        this.btnSpinner = document.getElementById('btn-spinner');
+        this.formMessages = document.getElementById('form-messages');
     }
 
     init() {
-        if (this.form) {
-            this.form.addEventListener('submit', (e) => {
-                // Formspree will handle the submission
-                // You can add custom validation or success message here
-                console.log('Form submitted');
+        if (!this.form) return;
+
+        // Real-time validation
+        const inputs = this.form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => this.validateField(input));
+            input.addEventListener('input', () => {
+                if (input.classList.contains('error')) {
+                    this.validateField(input);
+                }
             });
+        });
+
+        // Form submission
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    validateField(field) {
+        const errorElement = document.getElementById(`${field.id}-error`);
+        let errorMessage = '';
+
+        // Clear previous errors
+        field.classList.remove('error');
+        if (errorElement) errorElement.textContent = '';
+
+        // Required field check
+        if (field.hasAttribute('required') && !field.value.trim()) {
+            errorMessage = 'This field is required';
         }
+        // Email validation
+        else if (field.type === 'email' && field.value) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(field.value)) {
+                errorMessage = 'Please enter a valid email address';
+            }
+        }
+        // Min length check
+        else if (field.hasAttribute('minlength')) {
+            const minLength = parseInt(field.getAttribute('minlength'));
+            if (field.value.length > 0 && field.value.length < minLength) {
+                errorMessage = `Minimum ${minLength} characters required`;
+            }
+        }
+
+        if (errorMessage) {
+            field.classList.add('error');
+            if (errorElement) errorElement.textContent = errorMessage;
+            return false;
+        }
+        return true;
+    }
+
+    validateForm() {
+        const inputs = this.form.querySelectorAll('input[required], textarea[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (!this.validateField(input)) {
+                isValid = false;
+            }
+        });
+
+        return isValid;
+    }
+
+    async handleSubmit(e) {
+        e.preventDefault();
+
+        // Validate form
+        if (!this.validateForm()) {
+            this.showMessage('Please fix the errors above', 'error');
+            return;
+        }
+
+        // Show loading state
+        this.setLoading(true);
+
+        try {
+            const formData = new FormData(this.form);
+            const response = await fetch(this.form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                this.showMessage('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
+                this.form.reset();
+                
+                // Track event in Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        'event_category': 'contact',
+                        'event_label': 'Contact Form'
+                    });
+                }
+            } else {
+                const data = await response.json();
+                if (data.errors) {
+                    this.showMessage(data.errors.map(error => error.message).join(', '), 'error');
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            }
+        } catch (error) {
+            this.showMessage('✗ Oops! Something went wrong. Please try again or email me directly.', 'error');
+            console.error('Form submission error:', error);
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    setLoading(loading) {
+        if (loading) {
+            this.submitBtn.disabled = true;
+            this.btnText.style.display = 'none';
+            this.btnIcon.style.display = 'none';
+            this.btnSpinner.style.display = 'inline-block';
+        } else {
+            this.submitBtn.disabled = false;
+            this.btnText.style.display = 'inline';
+            this.btnIcon.style.display = 'inline';
+            this.btnSpinner.style.display = 'none';
+        }
+    }
+
+    showMessage(message, type) {
+        this.formMessages.textContent = message;
+        this.formMessages.className = `form-messages ${type}`;
+        this.formMessages.style.display = 'block';
+
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            this.formMessages.style.display = 'none';
+        }, 5000);
+
+        // Scroll to message
+        this.formMessages.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 }
 
