@@ -1,0 +1,30 @@
+# robots.txt for tharunaditya.github.io
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://tharunaditya.github.io/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Disallow admin and config files
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /assets/js/*.map
+
+# Allow all blog content
+Allow: /blog/
+Allow: /assets/
+
+# SEO Optimization
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /

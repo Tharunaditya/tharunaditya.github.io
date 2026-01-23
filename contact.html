@@ -1,0 +1,404 @@
+---
+layout: default
+title: Contact Me
+---
+
+<div class="contact-container">
+    <div class="container">
+        <div class="contact-header">
+            <h1 class="contact-title">Get In Touch</h1>
+            <p class="contact-subtitle">Have a question, collaboration idea, or just want to say hi? I'd love to hear from you!</p>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-info-section">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:tharunaditya.anuganti@gmail.com">tharunaditya.anuganti@gmail.com</a></p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub</h3>
+                    <p><a href="https://github.com/Tharunaditya" target="_blank" rel="noopener">@Tharunaditya</a></p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <p><a href="https://linkedin.com/in/tharunaditya-anuganti" target="_blank" rel="noopener">Tharunaditya Anuganti</a></p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h3>Twitter</h3>
+                    <p><a href="https://twitter.com/Tharunaditya1" target="_blank" rel="noopener">@Tharunaditya1</a></p>
+                </div>
+            </div>
+
+            <div class="contact-form-section">
+                <h2>Send Me a Message</h2>
+                <form id="contact-form" action="https://formspree.io/f/xdkkzzgp" method="POST">
+                    <div class="form-group">
+                        <label for="name">
+                            <i class="fas fa-user"></i> Your Name
+                        </label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Your Email
+                        </label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">
+                            <i class="fas fa-tag"></i> Subject
+                        </label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a topic...</option>
+                            <option value="collaboration">Collaboration Opportunity</option>
+                            <option value="security">Security Question</option>
+                            <option value="blog">Blog Feedback</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">
+                            <i class="fas fa-comment"></i> Message
+                        </label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Your message here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </div>
+
+                    <div id="form-status" class="form-status"></div>
+                </form>
+            </div>
+        </div>
+
+        <div class="contact-footer">
+            <p><i class="fas fa-shield-alt"></i> Your information is secure and will never be shared with third parties.</p>
+            <p>Average response time: <strong>24-48 hours</strong></p>
+        </div>
+    </div>
+</div>
+
+<style>
+.contact-container {
+    min-height: 100vh;
+    padding: 150px 0 80px;
+    background: var(--bg-primary);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.contact-title {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.contact-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.contact-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: all var(--transition-normal);
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.2);
+}
+
+.info-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.info-icon i {
+    font-size: 1.8rem;
+    color: var(--bg-primary);
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.info-card p {
+    color: var(--text-secondary);
+}
+
+.info-card a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.info-card a:hover {
+    color: var(--accent-secondary);
+}
+
+.contact-form-section {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+}
+
+.contact-form-section h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--accent-primary);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group label i {
+    color: var(--accent-primary);
+    margin-right: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    transition: all var(--transition-normal);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(0, 255, 65, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.form-status {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: 600;
+    display: none;
+}
+
+.form-status.success {
+    background: rgba(0, 255, 65, 0.1);
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    display: block;
+}
+
+.form-status.error {
+    background: rgba(255, 0, 85, 0.1);
+    border: 2px solid var(--danger);
+    color: var(--danger);
+    display: block;
+}
+
+.contact-footer {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(0, 255, 65, 0.05);
+    border: 2px solid rgba(0, 255, 65, 0.2);
+    border-radius: var(--radius-lg);
+}
+
+.contact-footer p {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+}
+
+.contact-footer i {
+    color: var(--accent-primary);
+    margin-right: 0.5rem;
+}
+
+.contact-footer strong {
+    color: var(--accent-primary);
+}
+
+/* Light Mode */
+.light-mode .contact-form-section,
+.light-mode .info-card {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.light-mode .form-group input,
+.light-mode .form-group select,
+.light-mode .form-group textarea {
+    background: #f8f9fa;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .form-group input:focus,
+.light-mode .form-group select:focus,
+.light-mode .form-group textarea:focus {
+    background: #ffffff;
+    border-color: var(--accent-primary);
+}
+
+@media (max-width: 968px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-title {
+        font-size: 2.5rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contact-form');
+    const statusDiv = document.getElementById('form-status');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalBtnText = submitBtn.innerHTML;
+        
+        // Disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                statusDiv.className = 'form-status success';
+                statusDiv.innerHTML = '<i class="fas fa-check-circle"></i> Message sent successfully! I\'ll get back to you soon.';
+                form.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            statusDiv.className = 'form-status error';
+            statusDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Oops! Something went wrong. Please try again or email me directly.';
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+            
+            // Hide status after 5 seconds
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 5000);
+        });
+    });
+});
+</script>

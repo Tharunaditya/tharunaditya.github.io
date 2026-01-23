@@ -73,6 +73,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Prism.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
@@ -90,11 +94,11 @@
             </div>
             <div class="nav-links">
                 <a href="{{ '/' | relative_url }}#home" class="nav-link">Home</a>
-                <a href="{{ '/' | relative_url }}#about" class="nav-link">About</a>
+                <a href="{{ '/about' | relative_url }}" class="nav-link">About</a>
                 <a href="{{ '/' | relative_url }}#skills" class="nav-link">Skills</a>
                 <a href="{{ '/' | relative_url }}#projects" class="nav-link">Projects</a>
-                <a href="{{ '/blog' | relative_url }}" class="nav-link active">Blog</a>
-                <a href="{{ '/' | relative_url }}#contact" class="nav-link">Contact</a>
+                <a href="{{ '/blog' | relative_url }}" class="nav-link">Blog</a>
+                <a href="{{ '/contact' | relative_url }}" class="nav-link">Contact</a>
             </div>
             <div class="nav-controls">
                 <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
@@ -124,9 +128,11 @@
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="{{ '/' | relative_url }}">Home</a></li>
-                        <li><a href="{{ '/' | relative_url }}#about">About</a></li>
+                        <li><a href="{{ '/about' | relative_url }}">About</a></li>
                         <li><a href="{{ '/' | relative_url }}#projects">Projects</a></li>
                         <li><a href="{{ '/blog' | relative_url }}">Blog</a></li>
+                        <li><a href="{{ '/contact' | relative_url }}">Contact</a></li>
+                        <li><a href="{{ '/privacy' | relative_url }}">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -168,5 +174,11 @@
     <!-- JavaScript -->
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/blog.js' | relative_url }}"></script>
+    
+    <!-- Prism.js for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 </body>
 </html>

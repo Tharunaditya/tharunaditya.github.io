@@ -99,7 +99,7 @@ layout: default
             
             {% if page.image %}
             <div class="post-featured-image">
-                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" itemprop="image">
+                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" loading="lazy" itemprop="image">
             </div>
             {% endif %}
             
@@ -153,7 +153,7 @@ layout: default
         <div class="container">
             <!-- Author Bio -->
             <div class="author-bio">
-                <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="{{ site.author }}" class="author-avatar">
+                <img src="{{ '/assets/images/profile.jpg' | relative_url }}" alt="{{ site.author }}" class="author-avatar" loading="lazy">
                 <div class="author-info">
                     <h4>{{ site.author }}</h4>
                     <p class="author-role">Security Researcher | Cybersecurity Enthusiast | AI & UI/UX Specialist</p>
@@ -180,7 +180,7 @@ layout: default
                     {% for post in site.related_posts limit:3 %}
                     <a href="{{ post.url | relative_url }}" class="related-post-card">
                         {% if post.image %}
-                        <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="related-post-image">
+                        <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="related-post-image" loading="lazy">
                         {% endif %}
                         <div class="related-post-content">
                             <h4 class="related-post-title">{{ post.title }}</h4>

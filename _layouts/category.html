@@ -17,7 +17,7 @@ layout: default
             <article class="blog-card glass-card">
                 {% if post.image %}
                 <div class="blog-card-image">
-                    <img src="{{ post.image | relative_url }}" alt="{{ post.title }}">
+                    <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
                     <div class="blog-overlay">
                         <a href="{{ post.url | relative_url }}" class="read-more-btn">
                             Read Article <i class="fas fa-arrow-right"></i>
