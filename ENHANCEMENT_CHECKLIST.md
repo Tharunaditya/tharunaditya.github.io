@@ -39,9 +39,11 @@
 ---
 
 ## 🎨 Design & Styling
-- [ ] **8. Choose Color Scheme**
-  - Current: Cyberpunk green (#00ff41)
-  - Customize accent colors in `assets/css/style.css` (`:root` variables)
+- [x] **8. Choose Color Scheme** ✅
+  - Dark Mode: Cyberpunk green (#00ff41)
+  - Light Mode: Platinum & Slate theme (#2563eb blue, #f2f5f8 background)
+  - Customized accent colors in `assets/css/style.css` (`:root` variables)
+  - Enhanced shadows, borders, and interactive elements
 
 - [ ] **9. Adjust Typography**
   - Modify font families (currently: Orbitron, Rajdhani, Inter)
@@ -83,9 +85,11 @@
   - Filter by project type (web, mobile, etc.)
   - Add search functionality
 
-- [ ] **17. Add Dark/Light Mode Persistence**
-  - Save theme preference to localStorage
-  - Add smooth transition between themes
+- [x] **17. Add Dark/Light Mode Persistence** ✅
+  - Theme preference saved to localStorage
+  - Smooth transitions between themes
+  - Theme toggle with icon indicator
+  - Particles re-render on theme change
 
 - [ ] **18. Add Reading Time for Blogs**
   - Calculate estimated reading time
@@ -449,6 +453,6 @@
 ---
 
 **Total Items:** 80 enhancements
-**Current Status:** 5/80 completed (6% done) 🎉
+**Current Status:** 8/80 completed (10% done) 🎉
 
 **Tell me which item number you want to start with!** 🚀
