@@ -1,19 +1,12 @@
 backend:
-  name: github
-  repo: Tharunaditya/tharunaditya.github.io # Change to your repo
-  branch: main # Branch to update (main or master)
-  base_url: https://api.netlify.com # For GitHub OAuth
-  auth_endpoint: auth
-
-# Optional: Use local backend for testing
-# backend:
-#   name: git-gateway
+  name: git-gateway
+  branch: main
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
 # Site URL
-site_url: https://tharunaditya.github.io/version_2
+site_url: https://tharunaditya.github.io
 
 # Collections
 collections:
