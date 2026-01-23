@@ -1,0 +1,53 @@
+backend:
+  name: github
+  repo: Tharunaditya/tharunaditya.github.io # Change to your repo
+  branch: main # Branch to update (main or master)
+  base_url: https://api.netlify.com # For GitHub OAuth
+  auth_endpoint: auth
+
+# Optional: Use local backend for testing
+# backend:
+#   name: git-gateway
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+# Site URL
+site_url: https://tharunaditya.github.io/version_2
+
+# Collections
+collections:
+  # Blog Posts
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "Tharunaditya Anuganti" }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Projects (Optional - for managing portfolio items)
+  - name: "projects"
+    label: "Projects"
+    folder: "_projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Security", "Design", "Development", "AI"] }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Technologies", name: "technologies", widget: "list" }
+      - { label: "GitHub Link", name: "github", widget: "string", required: false }
+      - { label: "Live Demo", name: "demo", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }

@@ -1,0 +1,89 @@
+---
+layout: default
+---
+
+<article class="blog-post">
+    <header class="post-header">
+        <div class="container">
+            <div class="post-meta">
+                <span class="post-date">
+                    <i class="far fa-calendar"></i>
+                    {{ page.date | date: "%B %d, %Y" }}
+                </span>
+                <span class="post-author">
+                    <i class="far fa-user"></i>
+                    {{ page.author | default: site.author }}
+                </span>
+                {% if page.categories %}
+                <span class="post-category">
+                    <i class="far fa-folder"></i>
+                    {{ page.categories | join: ', ' }}
+                </span>
+                {% endif %}
+            </div>
+            
+            <h1 class="post-title">{{ page.title }}</h1>
+            
+            {% if page.excerpt %}
+            <p class="post-excerpt">{{ page.excerpt }}</p>
+            {% endif %}
+            
+            {% if page.image %}
+            <div class="post-featured-image">
+                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+            </div>
+            {% endif %}
+            
+            {% if page.tags %}
+            <div class="post-tags">
+                {% for tag in page.tags %}
+                <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="post-content">
+        <div class="container">
+            <div class="content-wrapper">
+                {{ content }}
+            </div>
+        </div>
+    </div>
+
+    <footer class="post-footer">
+        <div class="container">
+            <div class="post-share">
+                <h3>Share this post</h3>
+                <div class="share-buttons">
+                    <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}" target="_blank" class="share-btn twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}&title={{ page.title | url_encode }}" target="_blank" class="share-btn linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" target="_blank" class="share-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="post-navigation">
+                {% if page.previous.url %}
+                <a href="{{ page.previous.url | relative_url }}" class="prev-post">
+                    <span class="nav-label"><i class="fas fa-arrow-left"></i> Previous</span>
+                    <span class="nav-title">{{ page.previous.title }}</span>
+                </a>
+                {% endif %}
+                
+                {% if page.next.url %}
+                <a href="{{ page.next.url | relative_url }}" class="next-post">
+                    <span class="nav-label">Next <i class="fas fa-arrow-right"></i></span>
+                    <span class="nav-title">{{ page.next.title }}</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+</article>

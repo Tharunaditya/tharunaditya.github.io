@@ -1,0 +1,47 @@
+# Jekyll Configuration for Enhanced Portfolio
+title: Tharunaditya Anuganti
+description: Security Researcher | Cybersecurity Enthusiast | AI & UI/UX Specialist
+author: Tharunaditya Anuganti
+email: tharunaditya.anuganti@gmail.com
+url: https://tharunaditya.github.io
+baseurl: /version_2
+
+# Social Media
+github_username: Tharunaditya
+linkedin_username: tharunaditya-anuganti
+twitter_username: Tharunaditya1
+instagram_username: adityaanuganti
+
+# Build Settings
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+timezone: Asia/Kolkata
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Tharunaditya Anuganti"
