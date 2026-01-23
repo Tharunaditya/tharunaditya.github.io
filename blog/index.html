@@ -7,11 +7,20 @@ title: Blog
     <div class="container">
         <h1 class="blog-title">Blog</h1>
         <p class="blog-description">Insights on Cybersecurity, AI, Design, and Development</p>
+        
+        <!-- Search Bar -->
+        <div class="blog-search-wrapper">
+            <input type="text" id="blog-search" class="blog-search-input" placeholder="🔍 Search articles by title, tags, or content...">
+        </div>
     </div>
 </section>
 
 <section class="blog-section">
     <div class="container">
+        <!-- Search Results (hidden by default) -->
+        <div id="search-results" style="display: none;"></div>
+        
+        <!-- Blog Grid -->
         <div class="blog-grid">
             {% for post in site.posts %}
             <article class="blog-card glass-card">
@@ -31,6 +40,15 @@ title: Blog
                         <span class="blog-date">
                             <i class="far fa-calendar"></i>
                             {{ post.date | date: "%b %d, %Y" }}
+                        </span>
+                        <span class="blog-reading-time">
+                            <i class="far fa-clock"></i>
+                            {% assign words = post.content | number_of_words %}
+                            {% if words < 360 %}
+                                1 min read
+                            {% else %}
+                                {{ words | divided_by: 180 }} min read
+                            {% endif %}
                         </span>
                         {% if post.categories %}
                         <span class="blog-category">{{ post.categories | first }}</span>
