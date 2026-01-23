@@ -1,16 +1,13 @@
 source "https://rubygems.org"
 
-# Jekyll version
-gem "jekyll", "~> 4.3.2"
+# Use GitHub Pages gem for compatibility
+gem "github-pages", group: :jekyll_plugins
 
-# Theme
-gem "minima", "~> 2.5"
-
-# Jekyll plugins
+# Jekyll plugins (already included in github-pages, but listed for reference)
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.12"
-  gem "jekyll-seo-tag", "~> 2.8"
-  gem "jekyll-sitemap", "~> 1.4"
+  gem "jekyll-feed"
+  gem "jekyll-seo-tag"
+  gem "jekyll-sitemap"
 end
 
 # Windows and JRuby does not include zoneinfo files

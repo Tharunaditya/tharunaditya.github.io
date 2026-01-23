@@ -4,7 +4,8 @@ description: Security Researcher | Cybersecurity Enthusiast | AI & UI/UX Special
 author: Tharunaditya Anuganti
 email: tharunaditya.anuganti@gmail.com
 url: https://tharunaditya.github.io
-baseurl: /version_2
+baseurl: ""
+theme: null
 
 # Social Media
 github_username: Tharunaditya
