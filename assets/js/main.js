@@ -221,6 +221,9 @@ class ThemeToggle {
         }
         localStorage.setItem('theme', theme);
         this.currentTheme = theme;
+
+        // Broadcast theme change so other modules (particles, etc.) can react.
+        this.body.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme } }));
     }
 
     switchTheme() {
@@ -437,75 +440,101 @@ class ProjectFilters {
 // ============================================
 class ParticlesBackground {
     init() {
-        if (typeof particlesJS !== 'undefined') {
-            particlesJS('particles-js', {
-                particles: {
-                    number: {
-                        value: 80,
-                        density: {
-                            enable: true,
-                            value_area: 800
-                        }
-                    },
-                    color: {
-                        value: '#00ff41'
-                    },
-                    shape: {
-                        type: 'circle'
-                    },
-                    opacity: {
-                        value: 0.3,
-                        random: true
-                    },
-                    size: {
-                        value: 3,
-                        random: true
-                    },
-                    line_linked: {
-                        enable: true,
-                        distance: 150,
-                        color: '#00ff41',
-                        opacity: 0.2,
-                        width: 1
-                    },
-                    move: {
-                        enable: true,
-                        speed: 2,
-                        direction: 'none',
-                        random: true,
-                        straight: false,
-                        out_mode: 'out',
-                        bounce: false
-                    }
-                },
-                interactivity: {
-                    detect_on: 'canvas',
-                    events: {
-                        onhover: {
-                            enable: true,
-                            mode: 'grab'
-                        },
-                        onclick: {
-                            enable: true,
-                            mode: 'push'
-                        },
-                        resize: true
-                    },
-                    modes: {
-                        grab: {
-                            distance: 140,
-                            line_linked: {
-                                opacity: 0.5
-                            }
-                        },
-                        push: {
-                            particles_nb: 4
-                        }
-                    }
-                },
-                retina_detect: true
-            });
+        this.render();
+
+        // Re-render particles when theme changes to keep visibility in both modes.
+        document.body.addEventListener('theme-changed', () => {
+            this.render();
+        });
+    }
+
+    destroy() {
+        if (window.pJSDom && window.pJSDom.length) {
+            window.pJSDom.forEach(instance => instance.pJS.fn.vendors.destroypJS());
+            window.pJSDom = [];
         }
+    }
+
+    getAccentColors() {
+        const styles = getComputedStyle(document.documentElement);
+        const primary = styles.getPropertyValue('--accent-primary').trim() || '#00ff41';
+        const active = styles.getPropertyValue('--accent-active').trim() || primary;
+        return { primary, active };
+    }
+
+    render() {
+        if (typeof particlesJS === 'undefined') return;
+
+        this.destroy();
+        const { active } = this.getAccentColors();
+
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: active
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.25,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: active,
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.5
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
     }
 }
 
