@@ -142,9 +142,18 @@
 }
 
 .blog-card-excerpt {
-    color: var(--text-secondary);
+    font-family: var(--font-primary);
+    color: var(--text-primary);
+    font-weight: 500;
     line-height: 1.7;
     margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.light-mode .blog-card-excerpt {
+    color: var(--text-primary);
+    font-weight: 600;
+    opacity: 1;
 }
 
 .blog-tags {

@@ -1124,6 +1124,41 @@ a:focus-visible {
     gap: 0.75rem;
 }
 
+.cert-logo.tryhackme-badge {
+    height: auto;
+    min-height: 280px;
+    background: transparent;
+    padding: 0;
+}
+
+.cert-logo.tryhackme-badge iframe {
+    border-radius: var(--radius-md);
+}
+
+.tryhackme-badge-section {
+    margin: 1rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    line-height: 0;
+    width: 100%;
+}
+
+.tryhackme-badge-section iframe {
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.light-mode .tryhackme-badge-section iframe {
+    box-shadow: none;
+    background: transparent;
+}
+
 /* ============================================
    PROJECTS SECTION
 ============================================ */
