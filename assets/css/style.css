@@ -63,11 +63,13 @@
     --bg-tertiary: #fafafa;
     --text-primary: #0a0a0a;
     --text-secondary: #666666;
-    --accent-primary: #0066cc;
-    --accent-secondary: #0052a3;
-    --accent-glow: rgba(0, 102, 204, 0.3);
-    --gradient-primary: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
-    --success: #0066cc;
+    --accent-primary: #7c3aed;
+    --accent-secondary: #6d28d9;
+    --accent-glow: rgba(124, 58, 237, 0.3);
+    --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.02) 100%);
+    --success: #7c3aed;
+    --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
 }
 
 /* ============================================
