@@ -232,7 +232,7 @@ body {
 }
 
 .logo-text {
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 .nav-links {
@@ -914,6 +914,16 @@ body {
     object-fit: contain;
     filter: brightness(0.9);
     transition: filter var(--transition-fast);
+}
+
+.light-mode .cert-logo img {
+    filter: brightness(0.8) contrast(1.2);
+}
+
+.light-mode .cert-logo {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    border-radius: var(--radius-md);
 }
 
 .cert-card:hover .cert-logo img {
