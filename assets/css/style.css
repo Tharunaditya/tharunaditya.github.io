@@ -66,6 +66,8 @@
     --accent-primary: #0066cc;
     --accent-secondary: #0052a3;
     --accent-glow: rgba(0, 102, 204, 0.3);
+    --gradient-primary: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+    --success: #0066cc;
 }
 
 /* ============================================
