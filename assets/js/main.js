@@ -459,14 +459,16 @@ class ParticlesBackground {
         const styles = getComputedStyle(document.documentElement);
         const primary = styles.getPropertyValue('--accent-primary').trim() || '#00ff41';
         const active = styles.getPropertyValue('--accent-active').trim() || primary;
-        return { primary, active };
+        const particleColor = styles.getPropertyValue('--particle-color').trim() || active;
+        const lineColor = styles.getPropertyValue('--particle-line-color').trim() || active;
+        return { primary, active, particleColor, lineColor };
     }
 
     render() {
         if (typeof particlesJS === 'undefined') return;
 
         this.destroy();
-        const { active } = this.getAccentColors();
+        const { active, particleColor, lineColor } = this.getAccentColors();
 
         particlesJS('particles-js', {
             particles: {
@@ -478,13 +480,13 @@ class ParticlesBackground {
                     }
                 },
                 color: {
-                    value: active
+                    value: particleColor || active
                 },
                 shape: {
                     type: 'circle'
                 },
                 opacity: {
-                    value: 0.25,
+                    value: 0.50,
                     random: true
                 },
                 size: {
@@ -494,8 +496,8 @@ class ParticlesBackground {
                 line_linked: {
                     enable: true,
                     distance: 150,
-                    color: active,
-                    opacity: 0.2,
+                    color: lineColor || active,
+                    opacity: 0.50,
                     width: 1
                 },
                 move: {
