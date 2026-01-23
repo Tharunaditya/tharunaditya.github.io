@@ -915,6 +915,10 @@ body {
     overflow: hidden;
 }
 
+.light-mode .skill-bar {
+    background: rgba(0, 0, 0, 0.08);
+}
+
 .skill-progress {
     height: 100%;
     background: var(--gradient-primary);
@@ -1041,6 +1045,21 @@ body {
     background: var(--accent-primary);
     color: var(--bg-primary);
     border-color: var(--accent-primary);
+}
+
+.light-mode .filter-btn {
+    background: #ffffff;
+    border: 1px solid var(--bg-tertiary);
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-mode .filter-btn:hover,
+.light-mode .filter-btn.active {
+    background: var(--accent-primary);
+    color: #ffffff;
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
 }
 
 .projects-grid {
@@ -1173,6 +1192,13 @@ body {
     color: var(--text-secondary);
 }
 
+.light-mode .project-tech span {
+    background: #f1f5f9;
+    border: 1px solid var(--bg-tertiary);
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
 /* ============================================
    CONTACT SECTION
 ============================================ */
@@ -1260,6 +1286,20 @@ body {
     color: var(--bg-primary);
     border-color: var(--accent-primary);
     transform: translateY(-3px);
+}
+
+.light-mode .social-links-contact a {
+    background: #ffffff;
+    border: 1px solid var(--bg-tertiary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-mode .social-links-contact a:hover {
+    background: var(--accent-primary);
+    color: #ffffff;
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
 }
 
 .contact-form {
