@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-cms",
+  "version": "1.0.0",
+  "description": "Portfolio with CMS",
+  "dependencies": {
+    "@octokit/rest": "^19.0.11",
+    "randomstring": "^1.3.0"
+  }
+}
