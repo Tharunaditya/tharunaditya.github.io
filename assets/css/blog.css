@@ -144,15 +144,15 @@
 .blog-card-excerpt {
     font-family: var(--font-primary);
     color: var(--text-primary);
-    font-weight: 500;
+    font-weight: 700;
     line-height: 1.7;
     margin-bottom: 1rem;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .light-mode .blog-card-excerpt {
     color: var(--text-primary);
-    font-weight: 600;
+    font-weight: 700;
     opacity: 1;
 }
 
@@ -305,10 +305,12 @@
 }
 
 .post-content p {
-    color: var(--text-secondary);
+    font-family: var(--font-primary);
+    color: var(--text-primary);
     line-height: 1.8;
     margin-bottom: 1.5rem;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .post-content a {
@@ -329,9 +331,11 @@
 }
 
 .post-content li {
-    color: var(--text-secondary);
+    font-family: var(--font-primary);
+    color: var(--text-primary);
     line-height: 1.8;
     margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
 .post-content blockquote {
