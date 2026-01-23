@@ -672,15 +672,15 @@ body {
 
 /* Light Mode Card Styling */
 .light-mode .glass-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(240,240,240,0.9) 100%);
+    background: #ffffff;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 123, 255, 0.18);
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--bg-tertiary);
+    box-shadow: var(--shadow-md);
 }
 
 .light-mode .glass-card:hover {
-    border-color: #26E3E0;
-    box-shadow: 0 8px 24px rgba(38, 227, 224, 0.2), 0 4px 12px rgba(0, 81, 154, 0.1);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg);
 }
 
 /* ============================================
@@ -878,9 +878,9 @@ body {
 }
 
 .light-mode .skill-category {
-    background: linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(244,244,244,0.9) 100%);
-    border: 1px solid rgba(0, 123, 255, 0.16);
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    background: #ffffff;
+    border: 1px solid var(--bg-tertiary);
+    box-shadow: var(--shadow-md);
 }
 
 .skill-category h3 {
@@ -1064,14 +1064,14 @@ body {
 }
 
 .light-mode .project-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(244,244,244,0.92) 100%);
-    border: 1px solid rgba(0, 123, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    background: #ffffff;
+    border: 1px solid var(--bg-tertiary);
+    box-shadow: var(--shadow-md);
 }
 
 .light-mode .project-card:hover {
-    border-color: #26E3E0;
-    box-shadow: 0 12px 32px rgba(38, 227, 224, 0.15), 0 6px 16px rgba(0, 81, 154, 0.1);
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-lg);
 }
 
 .project-image {
@@ -1270,9 +1270,9 @@ body {
 }
 
 .light-mode .contact-form {
-    background: linear-gradient(135deg, rgba(255,255,255,0.96) 0%, rgba(244,244,244,0.92) 100%);
-    border: 1px solid rgba(0, 123, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    background: #ffffff;
+    border: 1px solid var(--bg-tertiary);
+    box-shadow: var(--shadow-md);
 }
 
 .form-group {
