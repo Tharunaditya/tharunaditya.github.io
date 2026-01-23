@@ -672,6 +672,7 @@ body {
     color: var(--text-secondary);
     line-height: 1.8;
     margin-bottom: 2rem;
+    text-align: justify;
 }
 
 .education-timeline {
