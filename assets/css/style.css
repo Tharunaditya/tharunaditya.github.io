@@ -329,6 +329,20 @@ body {
     transform: translateY(-2px);
 }
 
+.light-mode .icon-btn {
+    background: #ffffff;
+    border: 1px solid var(--bg-tertiary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-mode .icon-btn:hover {
+    background: var(--accent-primary);
+    color: #ffffff;
+    border-color: var(--accent-primary);
+    box-shadow: var(--shadow-md);
+}
+
 .mobile-only {
     display: none;
 }
@@ -585,6 +599,29 @@ body {
     transform: translateY(-3px);
 }
 
+.light-mode .btn-primary {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
+}
+
+.light-mode .btn-primary:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.light-mode .btn-secondary {
+    background: #ffffff;
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-mode .btn-secondary:hover {
+    background: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
+}
+
 .stats-row {
     display: flex;
     gap: 4rem;
@@ -787,6 +824,19 @@ body {
     transform: translateY(-2px);
 }
 
+.light-mode .expertise-tags .tag {
+    background: #ffffff;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-mode .expertise-tags .tag:hover {
+    background: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
+}
+
 .timeline-item {
     display: flex;
     gap: 1.5rem;
@@ -948,6 +998,19 @@ body {
     background: var(--accent-primary);
     color: var(--bg-primary);
     transform: translateY(-2px);
+}
+
+.light-mode .tech-badge {
+    background: #ffffff;
+    border: 2px solid var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.light-mode .tech-badge:hover {
+    background: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-md);
 }
 
 /* ============================================
@@ -1163,6 +1226,13 @@ body {
     border-radius: var(--radius-sm);
     font-size: 0.8rem;
     font-weight: 500;
+}
+
+.light-mode .tag {
+    background: #e0f2fe;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+    font-weight: 600;
 }
 
 .project-content h3 {
