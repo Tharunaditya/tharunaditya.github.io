@@ -112,6 +112,7 @@ body {
     overflow-x: hidden;
     transition: background-color var(--transition-normal);
     font-weight: 500;
+    zoom: 0.9;
 }
 
 ::selection {
