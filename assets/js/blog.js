@@ -14,7 +14,7 @@ class BlogEnhancements {
         this.initBackToTop();
         this.initCopyCode();
         this.initSearch();
-        this.initGiscusTheme();
+        this.initUtterancesTheme();
         this.initTagCloud();
         this.initViewCount();
     }
@@ -275,19 +275,20 @@ class BlogEnhancements {
     }
 
     /**
-     * Update Giscus theme based on site theme
+     * Update Utterances theme based on site theme
      */
-    initGiscusTheme() {
+    initUtterancesTheme() {
         const observer = new MutationObserver(() => {
             const isDark = document.body.classList.contains('dark-mode');
-            const giscusFrame = document.querySelector('iframe.giscus-frame');
+            const utterancesFrame = document.querySelector('.utterances-frame');
             
-            if (giscusFrame) {
-                const theme = isDark ? 'dark' : 'light';
-                giscusFrame.contentWindow.postMessage(
-                    { giscus: { setConfig: { theme } } },
-                    'https://giscus.app'
-                );
+            if (utterancesFrame) {
+                const theme = isDark ? 'github-dark' : 'github-light';
+                const message = {
+                    type: 'set-theme',
+                    theme: theme
+                };
+                utterancesFrame.contentWindow.postMessage(message, 'https://utteranc.es');
             }
         });
 

@@ -188,19 +188,23 @@ layout: default
             <!-- Comments Section (Giscus) -->
             <div class="comments-section">
                 <h3>💬 Comments</h3>
-                <script src="https://giscus.app/client.js"
-                        data-repo="{{ site.github_username }}/{{ site.github_username }}.github.io"
-                        data-repo-id="R_kgDONh2Jng"
-                        data-category="Blog Comments"
-                        data-category-id="DIC_kwDONh2Jns4Cle3G"
-                        data-mapping="pathname"
-                        data-strict="0"
-                        data-reactions-enabled="1"
-                        data-emit-metadata="0"
-                        data-input-position="top"
-                        data-theme="dark"
-                        data-lang="en"
-                        data-loading="lazy"
+                <!-- 
+                To enable comments, follow these steps:
+                1. Go to https://github.com/Tharunaditya/tharunaditya.github.io/settings
+                2. Enable "Discussions" in the Features section
+                3. Go to https://giscus.app
+                4. Enter your repo: Tharunaditya/tharunaditya.github.io
+                5. Copy the generated script and replace the one below
+                
+                Alternative: Use Utterances (simpler, uses Issues instead of Discussions)
+                Visit: https://utteranc.es
+                -->
+                
+                <!-- Utterances Comments (Simple Alternative) -->
+                <script src="https://utteranc.es/client.js"
+                        repo="Tharunaditya/tharunaditya.github.io"
+                        issue-term="pathname"
+                        theme="github-dark"
                         crossorigin="anonymous"
                         async>
                 </script>
