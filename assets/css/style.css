@@ -1281,9 +1281,9 @@ body {
 
 .light-mode .form-group input,
 .light-mode .form-group textarea {
-    background: #f8f9fa;
-    border: 1px solid rgba(0, 123, 255, 0.2);
-    color: var(--text-primary);
+    background: #f8f9fa !important;
+    border: 1px solid rgba(0, 123, 255, 0.2) !important;
+    color: var(--text-primary) !important;
 }
 
 .form-group input:focus,
@@ -1295,9 +1295,9 @@ body {
 
 .light-mode .form-group input:focus,
 .light-mode .form-group textarea:focus {
-    background: #ffffff;
-    border-color: #26E3E0;
-    box-shadow: 0 0 0 3px rgba(38, 227, 224, 0.1);
+    background: #ffffff !important;
+    border-color: #26E3E0 !important;
+    box-shadow: 0 0 0 3px rgba(38, 227, 224, 0.1) !important;
 }
 
 .form-group label {
