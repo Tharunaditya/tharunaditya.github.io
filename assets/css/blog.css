@@ -1062,6 +1062,156 @@
     border-color: var(--accent-primary);
 }
 
+/* ============================================
+   PUSH NOTIFICATION POPUP
+============================================ */
+.notification-popup {
+    position: fixed;
+    bottom: -500px;
+    right: 2rem;
+    max-width: 400px;
+    width: calc(100% - 4rem);
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.98) 0%, rgba(26, 26, 26, 0.98) 100%);
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 255, 65, 0.3);
+    z-index: 10000;
+    transition: bottom var(--transition-slow);
+    backdrop-filter: blur(10px);
+}
+
+.notification-popup.show {
+    bottom: 2rem;
+}
+
+.notification-popup-content {
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.notification-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all var(--transition-fast);
+}
+
+.notification-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.notification-icon {
+    font-size: 3rem;
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    animation: bellRing 2s ease-in-out infinite;
+}
+
+@keyframes bellRing {
+    0%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(-10deg); }
+    20%, 40% { transform: rotate(10deg); }
+}
+
+.notification-popup h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.notification-popup p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.notification-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.notification-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+    font-size: 0.95rem;
+}
+
+.notification-btn.primary {
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    box-shadow: 0 4px 12px rgba(0, 255, 65, 0.3);
+}
+
+.notification-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 65, 0.4);
+}
+
+.notification-btn.secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.notification-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Light Mode */
+.light-mode .notification-popup {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 249, 250, 0.98) 100%);
+    border-color: var(--accent-primary);
+    box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
+}
+
+.light-mode .notification-btn.secondary {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.light-mode .notification-btn.secondary:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .notification-popup {
+        right: 1rem;
+        width: calc(100% - 2rem);
+        max-width: none;
+    }
+    
+    .notification-popup.show {
+        bottom: 1rem;
+    }
+    
+    .notification-buttons {
+        flex-direction: column;
+    }
+    
+    .notification-btn {
+        width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     .author-bio {
         flex-direction: column;

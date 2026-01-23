@@ -40,6 +40,18 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}" type="image/x-icon">
     
+    <!-- OneSignal Push Notifications -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "9cb99413-dbda-4108-ac45-7b5986b29d75",
+          allowLocalhostAsSecureOrigin: true
+        });
+      });
+    </script>
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,6 +135,22 @@
     <button id="back-to-top" class="back-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Custom Notification Popup -->
+    <div id="notification-popup" class="notification-popup">
+        <div class="notification-popup-content">
+            <button class="notification-close" aria-label="Close">×</button>
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+            <h3>🔔 Never Miss a New Post!</h3>
+            <p>Get instant notifications when I publish new cybersecurity insights, tutorials, and tech articles.</p>
+            <div class="notification-buttons">
+                <button class="notification-btn secondary" id="notification-later">Maybe Later</button>
+                <button class="notification-btn primary" id="notification-enable">Enable Notifications</button>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>

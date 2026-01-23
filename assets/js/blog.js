@@ -17,6 +17,7 @@ class BlogEnhancements {
         this.initGiscusTheme();
         this.initTagCloud();
         this.initViewCount();
+        this.initNotificationPopup();
     }
 
     /**
@@ -372,6 +373,73 @@ class BlogEnhancements {
             
             // Display count
             element.innerHTML = `<i class="fas fa-eye"></i> ${viewCount} ${viewCount === 1 ? 'view' : 'views'}`;
+        });
+    }
+
+    /**
+     * Notification Popup - Smart timing for push notification opt-in
+     * Shows after user reads 30% of blog post
+     */
+    initNotificationPopup() {
+        // Only show on blog posts
+        const isPostPage = document.body.classList.contains('post-page') || 
+                          document.querySelector('.post-content');
+        if (!isPostPage) return;
+
+        const popup = document.getElementById('notification-popup');
+        if (!popup) return;
+
+        const closeBtn = popup.querySelector('.notification-close');
+        const laterBtn = popup.querySelector('.notification-btn.secondary');
+        const enableBtn = popup.querySelector('.notification-btn.primary');
+
+        // Check if user already interacted with the popup
+        const popupDismissed = localStorage.getItem('notificationPopupDismissed');
+        const popupEnabled = localStorage.getItem('notificationPopupEnabled');
+
+        if (popupDismissed || popupEnabled) {
+            return; // Don't show popup again
+        }
+
+        // Show popup after reading 30% of the post
+        let shown = false;
+        const showPopupOnScroll = () => {
+            if (shown) return;
+
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            
+            if (scrollPercent >= 30) {
+                setTimeout(() => {
+                    popup.classList.add('show');
+                    shown = true;
+                }, 500);
+                window.removeEventListener('scroll', showPopupOnScroll);
+            }
+        };
+
+        window.addEventListener('scroll', showPopupOnScroll);
+
+        // Close button handler
+        const hidePopup = () => {
+            popup.classList.remove('show');
+            localStorage.setItem('notificationPopupDismissed', 'true');
+        };
+
+        closeBtn.addEventListener('click', hidePopup);
+        laterBtn.addEventListener('click', hidePopup);
+
+        // Enable notifications button
+        enableBtn.addEventListener('click', async () => {
+            try {
+                // Request notification permission using OneSignal
+                if (window.OneSignal) {
+                    await window.OneSignal.Slidedown.promptPush();
+                    localStorage.setItem('notificationPopupEnabled', 'true');
+                    popup.classList.remove('show');
+                }
+            } catch (error) {
+                console.error('Error enabling notifications:', error);
+            }
         });
     }
 }
