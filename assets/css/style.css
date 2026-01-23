@@ -658,7 +658,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    align-items: center;
+    align-items: start;
     margin-top: 4rem;
 }
 
@@ -679,6 +679,49 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+.education-timeline h4,
+.specializations h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--accent-primary);
+    padding-bottom: 0.5rem;
+}
+
+.timeline-content h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.specializations {
+    display: flex;
+    flex-direction: column;
+}
+
+.expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.expertise-tags .tag {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.expertise-tags .tag:hover {
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
 }
 
 .timeline-item {
@@ -712,13 +755,15 @@ body {
 
 .bio-image {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .profile-wrapper {
     position: relative;
     width: 350px;
     height: 350px;
+    margin: 0 auto;
 }
 
 .profile-img {
