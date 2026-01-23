@@ -2,8 +2,8 @@ backend:
   name: github
   repo: Tharunaditya/tharunaditya.github.io
   branch: main
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+  base_url: https://charming-tapioca-e0cdf9.netlify.app
+  auth_endpoint: /.netlify/functions/auth
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
