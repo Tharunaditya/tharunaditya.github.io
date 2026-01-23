@@ -1,489 +1,640 @@
 <!DOCTYPE html>
-
 <html lang="en">
-	<head>
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta property="og:site_name" content="Tharunaditya Anuganti"/>
-		<title>Tharunaditya Anuganti</title>
-	
-		<!-- Linkedin Details -->
-		<meta name="description" content="Tharunaditya Anuganti Personal Website" />
-		<meta name="title" property="og:title" content="Tharunaditya Anuganti" />
-		<meta property="og:type" content="Website" />
-		<meta name="description" property="og:description" content="Tharunaditya Anuganti Personal Website" />
-		<meta name="author" content="Tharunaditya Anuganti" />
-		<!-- End Linkedin Details -->
-		<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-		<!-- animate -->
-		<link rel="stylesheet" href="css/animate.min.css">
-		<!-- bootstrap -->
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<!-- font-awesome -->
-		<link rel="stylesheet" href="css/font-awesome.min.css">
-		<!-- google font -->
-		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700,800' rel='stylesheet' type='text/css'>
-		<!-- fullpage -->
-		<link rel="stylesheet" href="css/jquery.fullPage.css">
-		<!-- custom -->
-		<link rel="stylesheet" href="css/templatemo-style.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Tharunaditya Anuganti | Security Researcher & Cybersecurity Expert</title>
+    <meta name="description" content="Security Researcher Intern at Intel Corporation. Cybersecurity enthusiast, AI specialist, and UI/UX designer. Explore my portfolio, projects, and blog.">
+    <meta name="author" content="Tharunaditya Anuganti">
+    <meta name="keywords" content="cybersecurity, security researcher, penetration testing, AI, machine learning, UI/UX design, Intel">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tharunaditya.github.io/">
+    <meta property="og:title" content="Tharunaditya Anuganti | Security Researcher">
+    <meta property="og:description" content="Security Researcher Intern at Intel Corporation. Cybersecurity Systems & Networks Expert.">
+    <meta property="og:image" content="assets/images/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@Tharunaditya1">
+    <meta name="twitter:title" content="Tharunaditya Anuganti | Security Researcher">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Particles.js for background -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
+</head>
+<body class="dark-mode">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="cyber-box">
+                <span class="loading-text">T</span>
+                <span class="loading-text">A</span>
+            </div>
+            <div class="loading-bar"></div>
+        </div>
+    </div>
 
-	</head>
-	<!-------------------Style sheet for Social Icons -------------------------------------->
-	<style>
-body {
-	margin:0px;
-	height:2000px;
-	}
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
 
-.icon-bar {
-  position:absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-bracket">&lt;</span>
+                <span class="logo-text">Tharunaditya</span>
+                <span class="logo-bracket">/&gt;</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="blog/index.html" class="nav-link">Blog</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="menu-toggle" class="icon-btn mobile-only" aria-label="Toggle menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
 
-.icon-bar a {
-  display: block;
-  text-align: center;
-  padding:11px;
-  transition: all 0.3s ease;
-  color: rgb(0, 249, 29);
-  font-size: 20px;
-}
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
 
-.icon-bar a:hover {
-  background-color:#66ff66;
-  color:Black;
-}
+    <!-- Social Sidebar -->
+    <div class="social-sidebar">
+        <a href="https://github.com/Tharunaditya" target="_blank" class="social-link" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/tharunaditya-anuganti" target="_blank" class="social-link" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://twitter.com/Tharunaditya1" target="_blank" class="social-link" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com/adityaanuganti/" target="_blank" class="social-link" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="mailto:tharunaditya.anuganti@gmail.com" class="social-link" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <div class="social-line"></div>
+    </div>
 
-.facebook {
-  background: #000000;
-  color: white;
-}
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="glitch-wrapper">
+                        <h1 class="hero-title glitch" data-text="THARUNADITYA ANUGANTI">THARUNADITYA ANUGANTI</h1>
+                    </div>
+                    <div class="typing-container">
+                        <h2 class="hero-subtitle">
+                            <span class="typing-text"></span>
+                            <span class="cursor">|</span>
+                        </h2>
+                    </div>
+                    <p class="hero-description">Security Researcher Intern @ Intel Corporation | M.Tech in Cybersecurity Systems & Networks</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <span>View My Work</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="assets/files/Tharunaditya.pdf" download class="btn btn-secondary">
+                            <i class="fas fa-download"></i>
+                            <span>Download Resume</span>
+                        </a>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="15">0</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="github-repos">0</div>
+                            <div class="stat-label">GitHub Projects</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="2">0</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <p>Scroll Down</p>
+            </div>
+        </section>
 
-.twitter {
-  background: #000000;
-  color: white;
-}
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">// Who Am I</span>
+                    <h2 class="section-title">About Me</h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card glass-card">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                        <h3>Cybersecurity Enthusiast</h3>
+                        <p>Pursuing M.Tech in Cybersecurity Systems and Networks, dedicated to continuous learning. Proficient in Nmap, Nessus, Metasploit, Burp Suite, Wireshark, and Splunk for enhanced digital security.</p>
+                    </div>
+                    <div class="about-card glass-card">
+                        <div class="card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI Enthusiast</h3>
+                        <p>Specializing in prompt engineering with OpenAI's GPT-3, LLMs, and Gemini AI. Applying innovative AI solutions to enhance cybersecurity through creative technology integration.</p>
+                    </div>
+                    <div class="about-card glass-card">
+                        <div class="card-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Creative Designer</h3>
+                        <p>Blending aesthetics with cybersecurity using Figma and Sketch. Crafting security-focused UI/UX interfaces with innovative and visually stunning designs.</p>
+                    </div>
+                </div>
 
-.instagram {
-  background: #000000;
-  color: white;
-}
+                <div class="bio-section">
+                    <div class="bio-content">
+                        <h3>Background</h3>
+                        <p>Motivated cybersecurity graduate with expertise in penetration testing, threat intelligence, and vulnerability management. Skilled in using tools like Wireshark, Metasploit, and Splunk to enhance threat detection and system security.</p>
+                        
+                        <div class="education-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="timeline-content">
+                                    <h4>M.Tech in Cybersecurity Systems & Networks</h4>
+                                    <p class="timeline-date">2024 - Present</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="timeline-content">
+                                    <h4>B.Tech Computer Science Engineering (Cybersecurity)</h4>
+                                    <p class="timeline-date">2020 - 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bio-image">
+                        <div class="profile-wrapper">
+                            <img src="assets/images/profile.jpg" alt="Tharunaditya Anuganti" class="profile-img">
+                            <div class="profile-border"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-.linkedin {
-  background:#000000;
-  color: white;
-}
-.whatsapp {
-	background:#000000;
-	color: white;
-  }
+        <!-- Skills Section -->
+        <section id="skills" class="section dark-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">// Technical Proficiency</span>
+                    <h2 class="section-title">Skills & Expertise</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-code"></i> Programming</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Python</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>JavaScript</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>C/C++</span>
+                                <span>50%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="50"></div>
+                            </div>
+                        </div>
+                    </div>
 
-.github {
-  background: #000000;
-  color: white;
-}
+                    <div class="skill-category">
+                        <h3><i class="fas fa-lock"></i> Security Tools</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Penetration Testing</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Network Security</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Threat Intelligence</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="75"></div>
+                            </div>
+                        </div>
+                    </div>
 
-.content {
-  margin-left: 75px;
-  font-size: 30px;
-}
-</style>
-<!-------------------Style sheet for Social Icons -------------------------------------->
+                    <div class="skill-category">
+                        <h3><i class="fas fa-laptop-code"></i> Web Development</h3>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>HTML/CSS</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>UI/UX Design</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Responsive Design</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-progress="85"></div>
+                            </div>
+                        </div>
+                    </div>
 
-	<body>
-	<div id="fullpage">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-toolbox"></i> Tools & Software</h3>
+                        <div class="tech-badges">
+                            <span class="tech-badge">Nmap</span>
+                            <span class="tech-badge">Metasploit</span>
+                            <span class="tech-badge">Burp Suite</span>
+                            <span class="tech-badge">Wireshark</span>
+                            <span class="tech-badge">Splunk</span>
+                            <span class="tech-badge">Figma</span>
+                            <span class="tech-badge">Adobe XD</span>
+                            <span class="tech-badge">Git</span>
+                            <span class="tech-badge">Docker</span>
+                            <span class="tech-badge">Linux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		<!-- start home -->
-		<div id="home" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8 wow fadeIn" data-wow-delay="0.9s">
-						<h3></h3>
-						<br>
-						<h1>THARUNADITYA <br> ANUGANTI <br> Security Researcher Intern <br> @ Intel Corportaion</h1>
-						<h2 class="rotate">DESIGNER &AMP; DEVELOPER, UI &AMP; UX SPECIALIST, PROJECT LEADER, MENTOR, CYBER SECURITY ENTHUSIAST, AI ENTHUSIAST , SECURITY ANALYST</h2>
-						<!--<p>Mater of Cybersecurity Systems and Networks,web developer, Designee , UI developer, likes to do projects and collaborate with the information technology professionals. Motivated to learn, grow and excel in the IT Industry</p> -->
-						<a href="#work" class="btn btn-default smoothScroll wow fadeInUp" data-wow-delay="1s">Get started</a>
-						<a href="files/Tharunaditya.pdf" class="btn btn-default smoothScroll wow fadeInUp" data-wow-delay="1s">Download         Resume</a>
-				<br>
-				<br>
-						<br>
-					</div>
-					
-					<div class="col-md-2"></div>
-				</div>
-			</div>
-		</div>
-		<!-- end home -->
+        <!-- Certifications Section -->
+        <section id="certifications" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">// Achievements</span>
+                    <h2 class="section-title">Certifications</h2>
+                </div>
+                <div class="cert-grid">
+                    <div class="cert-card glass-card">
+                        <div class="cert-logo">
+                            <img src="assets/images/microsoft.webp" alt="Microsoft">
+                        </div>
+                        <h4>Career Essentials in Generative AI</h4>
+                        <p>Microsoft & LinkedIn</p>
+                        <a href="https://www.linkedin.com/learning/certificates/abe5321f0543daebf66abed5fb1339ea4e66ddb0001f313c17f2381a433afe20" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="cert-card glass-card">
+                        <div class="cert-logo">
+                            <img src="assets/images/google.png" alt="Google">
+                        </div>
+                        <h4>Google Cybersecurity Professional</h4>
+                        <p>Coursera - 5 Course Specialization</p>
+                        <a href="https://www.coursera.org/" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="cert-card glass-card">
+                        <div class="cert-logo">
+                            <img src="assets/images/cisco.png" alt="Cisco">
+                        </div>
+                        <h4>Cybersecurity Essentials</h4>
+                        <p>Cisco Networking Academy</p>
+                        <a href="#" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                    <div class="cert-card glass-card">
+                        <div class="cert-logo">
+                            <img src="assets/images/paloalto.png" alt="Palo Alto">
+                        </div>
+                        <h4>Cybersecurity Academy Internship</h4>
+                        <p>Palo Alto Networks</p>
+                        <a href="https://www.linkedin.com/in/tharunaditya-anuganti" target="_blank" class="cert-link">View Certificate <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-		<!-- start work -->
-		<div id="work" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 wow bounce">
-						<h2>WHO AM I ?</h2>
-					</div>
-                </div>  
+        <!-- Projects Section -->
+        <section id="projects" class="section dark-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">// My Work</span>
+                    <h2 class="section-title">Featured Projects</h2>
+                </div>
                 
-                <div class="row">
-					<div class="col-md-4 col-xs-11 wow fadeInUp" data-wow-delay="0.3s">
-						<div class="media">
-							
-							<div class="media-body">
-								<div class="media-object media-left">
-									<i class="fa fa-laptop"></i>
-								</div>
-								<br>
-								<h3 class="media-heading">CYBERSECURITY ENTHUSIAST</h3>
-							<p style="text-align:justify" >
-							Pursuing M.Tech in Cybersecurity Systems and Networks, I am dedicated to continuous learning, actively engaging in extracurricular activities to stay at the forefront of the industry. Proficient in leading tools like Nmap, Nessus, Metasploit, and Burp Suite, I bring hands-on experience to enhance digital security measures.							</p>	
-							</div>
-						</div>
-					</div>
-                    
-					<div class="col-md-4 col-xs-11 wow fadeInUp" data-wow-delay="0.3s">
-						<div class="media">
-							
-							<div class="media-body">
-								<div class="media-object media-left">
-									<i class="fa fa-link"></i>
-								</div>
-								<br>
-								<h3 class="media-heading">AI ENTHUSIAST</h3>
-								<p style="text-align:justify">
-									As an AI enthusiast, I specialize in prompt engineering, leveraging tools like OpenAI's GPT-3, LLMs, and Gemini AI. My dedication lies in applying innovative AI solutions to enhance cybersecurity and, with a creative bard's spirit, crafting a harmonious blend of technology and security narratives.</p>
-							</div>
-						</div>
-					</div>
-                    
-					<div class="col-md-4 col-xs-11 wow fadeInUp" data-wow-delay="0.3s">
-						<div class="media">
-							
-							<div class="media-body">
-								<div class="media-object media-left">
-									<i class="fa fa-paper-plane"></i>
-								</div>
-								<br>
-								<h3 class="media-heading">CREATIVE DESIGNER</h3>
-								<p style="text-align:justify">
-									As a Creative Designer, I blend aesthetics with cybersecurity acumen using tools like Figma and Sketch. Crafting UI/UX interfaces that prioritize security, I bring innovative and visually stunning designs to elevate user experiences. Let's collaborate to merge creativity with robust cybersecurity in design.
-								</p>
-							</div>
-						</div>
-					</div>
-                    
-				</div>
-			</div>
-		</div>
-		<!-- end work -->
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="security">Security</button>
+                    <button class="filter-btn" data-filter="design">Design</button>
+                    <button class="filter-btn" data-filter="development">Development</button>
+                </div>
 
-		<!-- start about -->
-		<div id="about" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-xs-11 wow fadeInLeft" data-wow-delay="0.6s">
-						<br><br><br><br><br>
-						<h2>ABOUT ME</h2>
-						<h4> DESIGNER | DEVELOPER | SECURITY PROVIDER</h4>
-						<p style= "text-align: justify;"> 					
-							Motivated cybersecurity graduate with expertise in penetration testing, threat intelligence, and vulnerability management. Skilled 
-							in using tools like Wireshark, Metasploit, and Splunk to enhance threat detection and system security. Seeking an entry-level 
-							cybersecurity analyst role to contribute to proactive defense strategies.
-							<br>
-							<br>
-							<b>Education: </b>
-							<br>
-							 Currently enrolled in M.Tech with specialization in Cybersecurity Systems and Networks. <br>
-							 Pursued B.Tech Computer Science Engineering with specialization in Cybersecurity.
-							<br>
-							<br>
-							<b>Technical Proficiency: </b>
-							<br>
-							<br>
-							<b>Web Development: </b> Proficient in HTML, CSS, JavaScript, and Python for responsive web design.
-							<br> <b>Programming: </b>Primary expertise in Python for versatile software development.
-							<br>
-							<b>Design Skills:</b>
-							I possess strong UI/UX design skills, utilizing tools such as Figma, Sketch, Framer, Adobe Photoshop, Artboard, and Vectary. This proficiency allows me to create visually appealing and user-friendly interfaces.
-							
-					
-					</div>
-					
-					<div class="col-md-6 col-xs-11 wow fadeInRight" data-wow-delay=".9s">
-						<div > 
-							<br>
-							<br>
-							<img class="mypic" src="images/Tharunaditya.jpg" alt="Tharunaditya Anuganti" width="250" height="250">
-						</div>
-						<span class="text-top">Cyber Security<small>80%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-							</div>
-						<span>Web Designing<small>70%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-							</div>
-						<span>SEO Stuffs <small>70%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-							</div>
-						<span>HTLM5 &AMP; CSS3 , JAVASCRIPT <small>80%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-							</div>
-						<span>ADOBE PHOTOSHOP AND EDITING TOOLS<small>70%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;"></div>
-							</div>
-						<span>AUTO CAD<small>65%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
-							</div>
-						<span>MS OFFICE<small>85%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
-							</div>
-						<span>C &AMP; PYTHON <small>50%</small></span>
-							<div class="progress">
-								<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
-							</div>
-					</div>
-			    
+                <div class="projects-grid">
+                    <div class="project-card" data-category="security">
+                        <div class="project-image">
+                            <img src="assets/images/nexgensiem.png" alt="NexGen SIEM">
+                            <div class="project-overlay">
+                                <a href="https://github.com/Tharunaditya/NexGenSIEM_OpenSource_SOC" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Security</span>
+                                <span class="tag">SIEM</span>
+                            </div>
+                            <h3>NexGen SIEM OpenSource SOC</h3>
+                            <p>Open-source Security Operations Center implementation with advanced threat detection and monitoring capabilities.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>ELK Stack</span>
+                                <span>Docker</span>
+                            </div>
+                        </div>
+                    </div>
 
-<style>
-  .center-container {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 10vh; /* Full viewport height */
-  }
-</style>
-				</div>
-				 <div class ="center-container">
-				 <a href="files/Tharunaditya.pdf" 
-   				 class="btn btn-default smoothScroll wow fadeInUp" 
-  				 data-wow-delay="1s" 
-  				 style="background-color: #000000; color: rgb(94, 255, 0); padding: 10px 20px; border-radius: 5px; border-color: rgb(94, 255, 0); text-decoration: bold; display: inline-block; transition: 0.3s;" 
-   				 onmouseover="this.style.backgroundColor='rgb(94, 255, 0)'; this.style.color='#000000';" 
-   				 onmouseout="this.style.backgroundColor='#000000'; this.style.color='rgb(94, 255, 0)';">
-   				 Want to know more? Just click here to download my resume</a>
-			    </div>
-			</div>
-		</div>
-		<!-- end about -->
-		<!-- start of Certifications -->
-		<div id="about" class="section">
-			<div class="container">
-				<div class="row" style="padding-bottom=-10px">
-					<div class="col-md-6 col-xs-11 wow fadeInLeft" data-wow-delay="0.6s">
-						<h2>CERTIFICATIONS</h2>
-						<a href="https://www.linkedin.com/learning/certificates/abe5321f0543daebf66abed5fb1339ea4e66ddb0001f313c17f2381a433afe20" style="color:aliceblue"><b>Career Essentials in Generative AI by Microsoft and LinkedIn</b></a>
-						<br>
-							<a href="https://www.coursera.org/account/accomplishments/certificate/B2UQJJTR762X" style="color:aliceblue"><b>GCP: Tools of the Trade: Linux and SQL</b></a>
-							<br><a href="https://www.coursera.org/account/accomplishments/certificate/467ASB2H76F4" style="color:aliceblue"><b>GCP: Connect and Protect: Networks and Network Security</b></a>
-							<br><a href="https://www.coursera.org/account/accomplishments/certificate/68FPL8NNAFXR" style="color:aliceblue"><b>GCP: Play It Safe: Manage Security Risks</b></a>
-							<br><a href="https://www.coursera.org/account/accomplishments/certificate/ENF73S3PPCAB" style="color:aliceblue"><b>GCP: Foundations of Cybersecurity</b></a>
-							<br><a href="https://drive.google.com/file/d/1ghQ3GV2Xs65ZWydmwYHFWQYpXv9GCUUt/view?usp=share_link" style="color:aliceblue"><b>Cybersecurity Essentials</b></a>
-							<br><a href="https://www.credly.com/badges/b0ce7ead-d1e8-4500-abd6-81164c515151/public_url" style="color:aliceblue"><b>IT Academy: Network Virtualization Concepts</b></a>
-							<br><a href="https://drive.google.com/file/d/1MKNtPahPYpGXk-zQx3wpKfIIjOOP2oBV/view?usp=share_link" style="color:aliceblue"><b>AWS Academy Graduate - AWS Academy Cloud Foundations</b></a>
-							<br><a href="https://drive.google.com/file/d/1jKb6focFY94p8d3rGTOGtneVbgKwO2GP/view?usp=share_link" style="color:aliceblue"><b>AWS Academy Graduate - AWS Academy Machine Learning Foundations</b></a>
-							<br><a href="https://www.linkedin.com/in/tharunaditya-anuganti/overlay/1635528245984/single-media-viewer/?profileId=ACoAABQKASIBO9OfUec_4rBOLFTl5z7TX3H3Yss" style="color:aliceblue"><b>Palo Alto Networks Cybersecurity Academy · Internship</b></a>
-							<br><a href="https://www.linkedin.com/in/tharunaditya-anuganti/overlay/1635528252687/single-media-viewer/?profileId=ACoAABQKASIBO9OfUec_4rBOLFTl5z7TX3H3Yss" style="color:aliceblue"><b>Salesforce Developer Internship</b></a>
-						
+                    <div class="project-card" data-category="security">
+                        <div class="project-image">
+                            <img src="assets/images/watchdog.jpg" alt="WatchDog">
+                            <div class="project-overlay">
+                                <a href="https://github.com/Tharunaditya/watch-dog" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Network Security</span>
+                            </div>
+                            <h3>WatchDog Packet Analyzer</h3>
+                            <p>Advanced network packet analysis tool for monitoring and detecting suspicious network activities.</p>
+                            <div class="project-tech">
+                                <span>Python</span>
+                                <span>Scapy</span>
+                                <span>Wireshark</span>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="project-card" data-category="design">
+                        <div class="project-image">
+                            <img src="assets/images/buggy.png" alt="Buggy App">
+                            <div class="project-overlay">
+                                <a href="https://www.linkedin.com/pulse/indulge-purple-paradise-elevate-user-experience-buggy-anuganti/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">UI/UX</span>
+                            </div>
+                            <h3>Purple Paradise: Buggy Food App</h3>
+                            <p>Modern food delivery app UI design with stunning purple gradient theme and user-centric interface.</p>
+                            <div class="project-tech">
+                                <span>Figma</span>
+                                <span>UI Design</span>
+                                <span>Prototyping</span>
+                            </div>
+                        </div>
+                    </div>
 
-	
-					</div>
-					
-					<div class="col-md-6 col-xs-11 wow fadeInRight" data-wow-delay=".9s">
-						<h3>Accredited by</h3>
-						<img class="mypic2" src="images/microsoft.webp" alt="Microsoft" width="250px" height="50"  style="padding-right:2em;">
-						
-						<img class="mypic2" src="images/linkedin.png" alt="Microsoft" width="200px" height="50" style="padding-right:2em;">
-						
-						<img class="mypic2" src="images/coursera.png" alt="Microsoft" width="200px" height="30" style="padding-right:2em;">
-						
-						<img class="mypic2" src="images/google.png" alt="Microsoft" width="200px" height="60" style="padding-right:2em;">
-						
-						<img class="mypic2" src="images/paloalto.png" alt="Microsoft" width="200px" height="40" style="padding-right:2em;">
-					    <img class="mypic2" src="images/salesforce.png" alt="Microsoft" width="200px" height="83" style="padding-right:2em;">
-						<img class="mypic2" src="images/smartinternz.png" alt="Microsoft" width="160px" height="45" style="padding-right:2em;">
-						<img class="mypic2" src="images/aicte.png" alt="Microsoft" width="125px" height="110px"style="padding-top:1em;padding-right:2em;" >
+                    <div class="project-card" data-category="design">
+                        <div class="project-image">
+                            <img src="assets/images/redesign.png" alt="Dashboard Redesign">
+                            <div class="project-overlay">
+                                <a href="https://www.linkedin.com/pulse/unforgettable-journey-tale-boring-dashboard-intern-anuganti/" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Redesign</span>
+                            </div>
+                            <h3>Dashboard Transformation</h3>
+                            <p>Complete redesign journey from a boring dashboard to an astonishing, user-friendly interface.</p>
+                            <div class="project-tech">
+                                <span>Figma</span>
+                                <span>Adobe XD</span>
+                                <span>UI/UX</span>
+                            </div>
+                        </div>
+                    </div>
 
-						<img class="mypic2" src="images/cisco.png" alt="Microsoft" width="280px" height="83" style="padding-right:2em;padding-top:1em;">
+                    <div class="project-card" data-category="security">
+                        <div class="project-image">
+                            <img src="assets/images/cti.jpg" alt="CTI Research">
+                            <div class="project-overlay">
+                                <a href="https://github.com/Tharunaditya/Enhancing-Cyber-Resilience-The-Role-of-Threat-Intelligence-in-Risk-Management" target="_blank" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Research</span>
+                            </div>
+                            <h3>Cyber Threat Intelligence in Risk Management</h3>
+                            <p>Research paper on enhancing cyber resilience through effective threat intelligence integration.</p>
+                            <div class="project-tech">
+                                <span>CTI</span>
+                                <span>Risk Management</span>
+                                <span>Research</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-					</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end of Certifications -->
-		<!-- start portfolio -->
-		<div id="portfolio" class="section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2 class="wow bounce">BLOGS AND PROJECTS </h2> 
-					<p class="wow bounce" style="color: rgb(0, 255, 17); font-weight: bold; font-size:medium;">(You can always explore more by clicking on titles)</p>
-					<br><br>
-				</div>
-				
-				<div class="col-md-4 col-xs-6 wow fadeIn" data-wow-delay="0.3s">
-					<div class="portfolio-thumb">
-						<img src="images/buggy.png" class="img-responsive" alt="portfolio img">
-							<div class="portfolio-overlay">
-								<br>
-								<p class="labeltext"><a href="https://www.linkedin.com/pulse/indulge-purple-paradise-elevate-user-experience-buggy-anuganti/" style="color:rgb(255, 255, 255);"><b>Purple Paradise: Buggy food delivery app UI</b></a></p>
-							</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-xs-6 wow fadeIn" data-wow-delay="0.4s">
-					<div class="portfolio-thumb">
-						<img src="images/redesign.png" class="img-responsive" alt="portfolio img">
-							<div class="portfolio-overlay">
-								<br>
-								<p class="labeltext">
-									<a href="https://www.linkedin.com/pulse/unforgettable-journey-tale-boring-dashboard-intern-anuganti/" style="color:rgb(255, 255, 255);"><b>BORING DASHBOARD TO ASTONISHING REDESIGN</b></a>
-								</p>
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">// Get In Touch</span>
+                    <h2 class="section-title">Contact Me</h2>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Let's Connect</h3>
+                        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                        
+                        <div class="contact-items">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Email</h4>
+                                    <a href="mailto:tharunaditya.anuganti@gmail.com">tharunaditya.anuganti@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Phone</h4>
+                                    <a href="tel:+917989056568">+91 79890 56568</a>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Location</h4>
+                                    <p>India</p>
+                                </div>
+                            </div>
+                        </div>
 
-							</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-xs-6 wow fadeIn" data-wow-delay="0.5s">
-					<div class="portfolio-thumb">
-						<img src="images/CTI.jpg" class="img-responsive" alt="portfolio img">
-							<div class="portfolio-overlay">
-								<br>
-								<br>
-								<p class="labeltext">
-									<a href="https://github.com/Tharunaditya/Enhancing-Cyber-Resilience-The-Role-of-Threat-Intelligence-in-Risk-Management" style="color:rgb(255, 255, 255);"><b>The Role of CTI in Risk Management</b></a>
-									</p>
+                        <div class="social-links-contact">
+                            <a href="https://github.com/Tharunaditya" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/tharunaditya-anuganti" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://twitter.com/Tharunaditya1" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/adityaanuganti/" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
 
-							</div>
-					</div>
-				</div>
-				<br>
-				<div class="col-md-4 col-xs-6 wow fadeIn" data-wow-delay="0.6s">
-					<div class="portfolio-thumb">
-						<img src="images/watchdog.jpg" class="img-responsive" alt="portfolio img">
-							<div class="portfolio-overlay">
-								<br>
-                            
-								<br>
-								<p class="labeltext">
-									<a href="https://github.com/Tharunaditya/watch-dog" style="color:rgb(255, 255, 255);"><b>WatchDog Packet Analyzer</b></a>
-									</p>
+                    <form id="contact-form" class="contact-form" action="https://formspree.io/f/mleyzrya" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" id="name" required placeholder=" ">
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" required placeholder=" ">
+                            <label for="email">Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" id="subject" placeholder=" ">
+                            <label for="subject">Subject</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" id="message" rows="5" required placeholder=" "></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
-							</div>
-					</div>
-				</div>
-				<br>
-				<div class="col-md-4 col-xs-6 wow fadeIn" data-wow-delay="0.7s">
-					<div class="portfolio-thumb">
-						<img src="images/Architecturelight.png" class="img-responsive" alt="portfolio img">
-							<div class="portfolio-overlay">
-								<br>
-                            
-								<br>
-								<p class="labeltext">
-									<a href="https://github.com/Tharunaditya/NexGenSIEM_OpenSource_SOC" style="color:rgb(255, 255, 255);"><b>NexGen SIEM <br>OpenSource_SOC</b></a>
-									</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tharunaditya Anuganti</h3>
+                    <p>Security Researcher | Cybersecurity Enthusiast | Creative Designer</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="blog/index.html">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Admin</h4>
+                    <ul>
+                        <li><a href="admin/index.html">Blog Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Tharunaditya Anuganti. All rights reserved.</p>
+                <p>Crafted with <i class="fas fa-heart"></i> and <i class="fas fa-code"></i></p>
+            </div>
+        </div>
+    </footer>
 
-							</div>
-					</div>
-				</div>
-				
-			
-				
-			</div>
-		</div>
-	</div>
-	<!-- end portfolio -->
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-		<!-- start contact -->
-		<div id="contact" class="section">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-5 col-lg-offset-1 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-						<address >
-							<p class="contact-title" style="text-align:center;" >Direct Contact</p>
-							<p style="text-align:center;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" ><i class="fa fa-phone"></i> <br><br>+91 7989056568</p>
-							<p style="text-align:center;"><i class="fa fa-envelope-o"></i><br><br>anuganti9@gmail.com    tharunaditya.anuganti@gmail.com</p>
-						
-						</address>
-					</div>
-				<div class="col-lg-6 col-md-6 col-xs-10 wow fadeInUp" data-wow-delay="0.6s">
-						<form role="form" method="post" action="https://formspree.io/f/mleyzrya" style="display:block; margin-left:60px; margin-right:30px;">
-							<input name="name" type="text" class="form-control" id="name" placeholder="Your Name">
-							<input name="email" type="email" class="form-control" id="email" placeholder="Your Email">
-							<textarea name="message" rows="5" class="form-control" id="message" placeholder="Your Message"></textarea>
-							<input name="send" type="submit" class="form-control" id="send" value="SEND">
-					        </form>
-					</div>  
-					
-					<div class="col-md-1 col-sm-1"></div>
-				</div>
-			</div>
-		</div>
-		<!-- end contact -->
-
-		<!-- start footer -->
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 wow fadeIn" data-wow-delay="0.9s">
-											<p class="copyrights">&nbsp; &nbsp;Copyright &copy; 2023 Thaunaditya Anuganti 
-                        </p>
-						<br>
-						
-						<div class="icon-bar-bottom">
-							<a href="https://www.facebook.com/tharunaditya.ata" class="facebook"><i class="fa fa-facebook"></i></a> 
-							<a href="https://twitter.com/Tharunaditya1" class="twitter"><i class="fa fa-twitter"></i></a> 
-							<a href="https://www.instagram.com/adityaanuganti/" class="instagram"><i class="fa fa-instagram"></i></a> 
-							<a href="https://www.linkedin.com/in/tharunaditya-anuganti" class="linkedin"><i class="fa fa-linkedin"></i></a>
-							<a href="https://github.com/Tharunaditya" class="github"><i class="fa fa-github"></i></a> 
-							<a href="https://wa.me/7989056568?text=Hi Mr.Tharunadity, Just now I have gone through your profile , I would like to connect with you" class="whatsapp"><i class="fa fa-whatsapp"></i></a> 
-					  
-						 </div>
-					</div>
-				</div>
-			</div>
-		</footer>
-		<!-- end footer -->
-
-	</div>
-
-		<!-- jQuery -->
-		<script src="js/jquery.js"></script>
-		<!-- bootstrap -->
-		<script src="js/bootstrap.min.js"></script>
-		<!-- fullpage -->
-		<script src="js/jquery.fullPage.js"></script>
-		<!-- smoothScroll -->
-		<script src="js/smoothscroll.js"></script>
-		<!-- wow -->
-		<script src="js/wow.min.js"></script>
-		<!-- text rotater -->
-		<script src="js/jquery.simple-text-rotator.js"></script>
-		<!-- custom -->
-		<script src="js/custom.js"></script>
-
-	</body>
-<body>
-	   <div class="icon-bar">
-       <a href="https://www.facebook.com/tharunaditya.ata" class="facebook"><i class="fa fa-facebook"></i></a> 
-       <a href="https://twitter.com/Tharunaditya1" class="twitter"><i class="fa fa-twitter"></i></a> 
-       <a href="https://www.instagram.com/adityaanuganti/" class="instagram"><i class="fa fa-instagram"></i></a> 
-       <a href="https://www.linkedin.com/in/tharunaditya-anuganti" class="linkedin"><i class="fa fa-linkedin"></i></a>
-       <a href="https://github.com/Tharunaditya" class="github"><i class="fa fa-github"></i></a> 
-	   <a href="https://wa.me/7989056568?text=Hi Mr.Tharunadity, Just now I have gone through your profile , I would like to connect with you" class="whatsapp"><i class="fa fa-whatsapp"></i></a> 
-
-	</div>
+    <!-- Custom JavaScript -->
+    <script src="assets/js/main.js"></script>
 </body>
-    </html>
+</html>
