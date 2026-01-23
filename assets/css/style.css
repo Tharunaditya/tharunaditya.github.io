@@ -58,20 +58,20 @@
 
 /* Light Mode Variables */
 .light-mode {
-    --bg-primary: #e8f4f8;
-    --bg-secondary: #d0e7f0;
-    --bg-tertiary: #f5fafb;
-    --text-primary: #0a0a0a;
-    --text-secondary: #4a5568;
+    --bg-primary: #eef1f5;
+    --bg-secondary: #e2e6ee;
+    --bg-tertiary: #f8fafc;
+    --text-primary: #0b1220;
+    --text-secondary: #334155;
     --accent-primary: #00519A;
     --accent-secondary: #003d7a;
-    --accent-glow: rgba(38, 227, 224, 0.4);
-    --gradient-primary: linear-gradient(135deg, #00519A 0%, #26E3E0 100%);
-    --gradient-glass: linear-gradient(135deg, rgba(0,81,154,0.08) 0%, rgba(38,227,224,0.05) 100%);
-    --gradient-dark: linear-gradient(135deg, #d0e7f0 0%, #b8dce8 100%);
-    --success: #00519A;
-    --shadow-glow: 0 0 20px rgba(38, 227, 224, 0.4);
     --accent-active: #26E3E0;
+    --accent-glow: rgba(38, 227, 224, 0.35);
+    --gradient-primary: linear-gradient(135deg, #00519A 0%, #26E3E0 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(232,241,245,0.75) 100%);
+    --gradient-dark: linear-gradient(135deg, #e2e6ee 0%, #d5dbe6 100%);
+    --success: #00519A;
+    --shadow-glow: 0 0 20px rgba(38, 227, 224, 0.3);
 }
 
 /* ============================================
@@ -385,11 +385,11 @@ body {
 }
 
 .light-mode .section {
-    background: var(--bg-primary);
+    background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(255,255,255,0.85) 100%);
 }
 
 .light-mode .dark-section {
-    background: var(--bg-tertiary);
+    background: var(--bg-secondary);
 }
 
 .section-header {
@@ -656,10 +656,10 @@ body {
 
 /* Light Mode Card Styling */
 .light-mode .glass-card {
-    background: rgba(255, 255, 255, 0.7);
+    background: linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(245,250,252,0.9) 100%);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 81, 154, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 81, 154, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 81, 154, 0.18);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .light-mode .glass-card:hover {
@@ -862,9 +862,9 @@ body {
 }
 
 .light-mode .skill-category {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 81, 154, 0.18);
-    box-shadow: 0 3px 10px rgba(0, 81, 154, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(238,241,245,0.9) 100%);
+    border: 1px solid rgba(0, 81, 154, 0.16);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .skill-category h3 {
@@ -1048,9 +1048,9 @@ body {
 }
 
 .light-mode .project-card {
-    background: rgba(255, 255, 255, 0.75);
+    background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245,250,252,0.92) 100%);
     border: 1px solid rgba(0, 81, 154, 0.2);
-    box-shadow: 0 4px 16px rgba(0, 81, 154, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .light-mode .project-card:hover {
