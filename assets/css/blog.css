@@ -863,6 +863,22 @@
     pointer-events: all;
 }
 
+/* Hide TOC button when TOC sidebar is open */
+.toc-sidebar.expanded ~ .toc-toggle,
+.toc-toggle.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+}
+
+/* Hide Series button when Series sidebar is open */
+.series-sidebar.expanded ~ .series-toggle,
+.series-toggle.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+}
+
 .sidebar-toggle:hover {
     opacity: 1;
     transform: translateY(-2px);

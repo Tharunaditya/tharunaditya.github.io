@@ -182,6 +182,7 @@ class BlogEnhancements {
         
         if (toggle) {
             toggle.classList.add('active');
+            toggle.classList.add('hidden'); // Hide the toggle button
             toggle.setAttribute('aria-expanded', 'true');
         }
         
@@ -205,6 +206,7 @@ class BlogEnhancements {
         
         if (toggle) {
             toggle.classList.remove('active');
+            toggle.classList.remove('hidden'); // Show the toggle button again
             toggle.setAttribute('aria-expanded', 'false');
         }
         
