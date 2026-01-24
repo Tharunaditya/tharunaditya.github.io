@@ -828,7 +828,7 @@
 .sidebar-toggle {
     position: fixed;
     top: 120px;
-    z-index: 100;
+    z-index: 1050; /* Above navbar (1000) but below modal (1100) */
     width: 60px;
     height: 60px;
     border-radius: 12px;
@@ -908,7 +908,7 @@
     background: var(--sidebar-bg);
     backdrop-filter: blur(20px);
     box-shadow: var(--shadow-xl);
-    z-index: 99;
+    z-index: 1040; /* Above navbar (1000), below toggle buttons (1050) */
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0;
@@ -1042,7 +1042,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
-    z-index: 98;
+    z-index: 1030; /* Above navbar (1000), below sidebars (1040) */
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition-normal);
@@ -1979,7 +1979,7 @@
     position: fixed;
     right: 30px;
     bottom: 30px;
-    z-index: 90;
+    z-index: 1050; /* Same as toggle buttons */
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -2081,7 +2081,7 @@
     padding: 2rem;
     border-radius: 16px;
     box-shadow: var(--shadow-xl);
-    z-index: 101;
+    z-index: 1060; /* Above everything else when active */
     opacity: 0;
     pointer-events: none;
     transition: all var(--transition-normal);
