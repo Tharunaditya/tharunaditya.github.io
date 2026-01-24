@@ -61,11 +61,26 @@ class BlogEnhancements {
         const tocToggle = document.querySelector('.toc-toggle');
         const seriesToggle = document.querySelector('.series-toggle');
         
+        console.log('=== SIDEBAR DEBUG ===');
+        console.log('TOC Sidebar element:', this.tocSidebar);
+        console.log('Series Sidebar element:', this.seriesSidebar);
+        console.log('Backdrop element:', this.backdrop);
+        console.log('TOC Toggle button:', tocToggle);
+        console.log('Series Toggle button:', seriesToggle);
+        
+        if (tocToggle) {
+            console.log('TOC button position:', window.getComputedStyle(tocToggle).position);
+            console.log('TOC button z-index:', window.getComputedStyle(tocToggle).zIndex);
+            console.log('TOC button display:', window.getComputedStyle(tocToggle).display);
+            console.log('TOC button visibility:', window.getComputedStyle(tocToggle).visibility);
+        }
+        
         // TOC Toggle
         if (tocToggle && this.tocSidebar) {
             tocToggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('🔵 TOC TOGGLE CLICKED!');
                 this.toggleSidebar('toc');
             });
             
@@ -74,9 +89,12 @@ class BlogEnhancements {
                 tocClose.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    console.log('🔵 TOC CLOSE CLICKED');
                     this.closeSidebar('toc');
                 });
             }
+        } else {
+            console.error('❌ TOC Toggle or Sidebar not found!');
         }
         
         // Series Toggle
@@ -84,6 +102,7 @@ class BlogEnhancements {
             seriesToggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('🟠 SERIES TOGGLE CLICKED!');
                 this.toggleSidebar('series');
             });
             
@@ -92,9 +111,12 @@ class BlogEnhancements {
                 seriesClose.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    console.log('🟠 SERIES CLOSE CLICKED');
                     this.closeSidebar('series');
                 });
             }
+        } else {
+            console.log('ℹ️ Series Toggle or Sidebar not found (may not exist on this page)');
         }
         
         // Backdrop click to close
@@ -113,9 +135,13 @@ class BlogEnhancements {
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
         const toggle = document.querySelector(`.${type}-toggle`);
         
-        if (!sidebar) return;
+        if (!sidebar) {
+            console.error(`❌ Sidebar not found for type: ${type}`);
+            return;
+        }
         
         const isExpanded = sidebar.classList.contains('expanded');
+        console.log(`Toggle ${type}: currently ${isExpanded ? 'EXPANDED' : 'COLLAPSED'}`);
         
         if (isExpanded) {
             this.closeSidebar(type);
@@ -130,9 +156,15 @@ class BlogEnhancements {
         
         if (!sidebar) return;
         
+        console.log(`✅ OPENING ${type} sidebar`);
+        console.log('Before - Classes:', sidebar.className);
+        
         sidebar.classList.remove('collapsed');
         sidebar.classList.add('expanded');
         sidebar.setAttribute('aria-hidden', 'false');
+        
+        console.log('After - Classes:', sidebar.className);
+        console.log('Transform:', window.getComputedStyle(sidebar).transform);
         
         if (toggle) {
             toggle.classList.add('active');

@@ -835,20 +835,21 @@
     width: 60px;
     height: 60px;
     border-radius: 12px;
-    border: none;
+    border: 2px solid var(--sidebar-accent); /* Make border visible for debugging */
     background: var(--sidebar-bg);
     backdrop-filter: blur(10px);
     color: var(--sidebar-accent);
     cursor: pointer;
-    display: flex;
+    display: flex !important; /* Force display */
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4px;
     box-shadow: var(--shadow-lg);
     transition: all var(--transition-normal);
-    opacity: 0.9;
+    opacity: 1 !important; /* Force full opacity for debugging */
     pointer-events: all !important; /* Force clickability */
+    visibility: visible !important; /* Force visibility */
 }
 
 .sidebar-toggle:hover {

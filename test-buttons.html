@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Toggle Button Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0a0a0a;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        
+        .test-button {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            z-index: 1050;
+            width: 60px;
+            height: 60px;
+            background: rgba(15, 15, 35, 0.95);
+            border: 2px solid #00ff9f;
+            color: #00ff9f;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border-radius: 12px;
+            pointer-events: all !important;
+        }
+        
+        .test-button:hover {
+            background: #00ff9f;
+            color: #0a0a0a;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(15, 15, 35, 0.98);
+            z-index: 1040;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding: 20px;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .sidebar.active {
+            transform: translateX(0);
+        }
+        
+        .log {
+            margin-top: 200px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        
+        .log div {
+            margin: 5px 0;
+            padding: 5px;
+            background: rgba(0, 255, 159, 0.1);
+            border-left: 3px solid #00ff9f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Toggle Button Test Page</h1>
+    <p>This page tests if the toggle button is clickable and if the sidebar slides in.</p>
+    
+    <button class="test-button" id="toggleBtn">☰</button>
+    
+    <div class="sidebar" id="sidebar">
+        <h2>Test Sidebar</h2>
+        <p>If you can see this, the sidebar is working!</p>
+        <button onclick="closeSidebar()" style="padding: 10px; background: #00ff9f; border: none; color: #0a0a0a; cursor: pointer;">Close</button>
+    </div>
+    
+    <div class="log" id="log">
+        <h3>Event Log:</h3>
+    </div>
+    
+    <script>
+        const btn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const log = document.getElementById('log');
+        
+        function addLog(message) {
+            const div = document.createElement('div');
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            log.appendChild(div);
+        }
+        
+        addLog('Page loaded');
+        addLog(`Button found: ${btn ? 'YES' : 'NO'}`);
+        addLog(`Sidebar found: ${sidebar ? 'YES' : 'NO'}`);
+        
+        btn.addEventListener('click', function(e) {
+            addLog('Button clicked!');
+            sidebar.classList.toggle('active');
+            addLog(`Sidebar active: ${sidebar.classList.contains('active')}`);
+        });
+        
+        function closeSidebar() {
+            addLog('Close button clicked');
+            sidebar.classList.remove('active');
+        }
+        
+        addLog('Event listener attached');
+    </script>
+</body>
+</html>
