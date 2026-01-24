@@ -93,6 +93,23 @@ layout: default
             
             <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
             
+            <!-- Share Buttons (Below Title) -->
+            <div class="share-buttons-header">
+                <span class="share-label">Share:</span>
+                <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url }}&text={{ page.title }}" target="_blank" class="share-btn-small twitter" aria-label="Share on Twitter" title="Share on Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url }}" target="_blank" class="share-btn-small linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}" target="_blank" class="share-btn-small facebook" aria-label="Share on Facebook" title="Share on Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <button onclick="navigator.clipboard.writeText('{{ page.url | absolute_url }}'); this.innerHTML='<i class=\'fas fa-check\'></i>'; setTimeout(() => this.innerHTML='<i class=\'fas fa-link\'></i>', 2000)" class="share-btn-small copy" aria-label="Copy link" title="Copy link">
+                    <i class="fas fa-link"></i>
+                </button>
+            </div>
+            
             {% if page.excerpt %}
             <p class="post-excerpt" itemprop="description">{{ page.excerpt }}</p>
             {% endif %}
@@ -125,22 +142,6 @@ layout: default
                 <div class="post-main-content">
                     <div class="content-wrapper" itemprop="articleBody">
                         {{ content }}
-                    </div>
-                    
-                    <!-- Share Buttons (Floating) -->
-                    <div class="share-buttons-floating">
-                        <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url }}&text={{ page.title }}" target="_blank" class="share-btn twitter" aria-label="Share on Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url }}" target="_blank" class="share-btn linkedin" aria-label="Share on LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}" target="_blank" class="share-btn facebook" aria-label="Share on Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <button onclick="navigator.clipboard.writeText('{{ page.url | absolute_url }}')" class="share-btn copy" aria-label="Copy link">
-                            <i class="fas fa-link"></i>
-                        </button>
                     </div>
                     
                     <!-- Print Button -->

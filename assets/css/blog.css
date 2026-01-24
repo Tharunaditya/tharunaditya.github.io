@@ -816,55 +816,75 @@
     width: 100%;
 }
 
-/* Floating Share Buttons (Left Side of Content) */
-.share-buttons-floating {
-    position: fixed;
-    left: calc(50% - 550px);
-    top: 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    z-index: 100;
-}
-
-.share-buttons-floating .share-btn {
-    width: 45px;
-    height: 45px;
+/* Share Buttons Below Title (Header) */
+.share-buttons-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
+    gap: 0.5rem;
+    margin: 1rem 0 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.share-label {
+    font-size: 0.9rem;
+    font-weight: 600;
     color: var(--text-secondary);
+    margin-right: 0.25rem;
+}
+
+.share-btn-small {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.85rem;
     transition: all var(--transition-fast);
+    border: none;
     cursor: pointer;
+    text-decoration: none;
 }
 
-.share-buttons-floating .share-btn:hover {
+.share-btn-small:hover {
     transform: translateY(-2px);
-    border-color: var(--accent-primary);
-    background: rgba(var(--accent-rgb), 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.share-buttons-floating .share-btn.twitter:hover {
-    color: #1DA1F2;
-    border-color: #1DA1F2;
+.share-btn-small.twitter {
+    background: #1DA1F2;
 }
 
-.share-buttons-floating .share-btn.linkedin:hover {
-    color: #0077B5;
-    border-color: #0077B5;
+.share-btn-small.twitter:hover {
+    background: #0d8ddb;
 }
 
-.share-buttons-floating .share-btn.facebook:hover {
-    color: #1877F2;
-    border-color: #1877F2;
+.share-btn-small.linkedin {
+    background: #0077B5;
 }
 
-.share-buttons-floating .share-btn.copy:hover {
-    color: var(--accent-primary);
+.share-btn-small.linkedin:hover {
+    background: #006399;
 }
+
+.share-btn-small.facebook {
+    background: #1877F2;
+}
+
+.share-btn-small.facebook:hover {
+    background: #0c63d4;
+}
+
+.share-btn-small.copy {
+    background: #6c757d;
+}
+
+.share-btn-small.copy:hover {
+    background: #5a6268;
+}
+
+/* Floating Share Buttons - REMOVED (now in header) */
 
 /* Post Navigation (Prev/Next) */
 .post-navigation {
@@ -927,20 +947,10 @@
 }
 
 /* Responsive Layout */
-@media (max-width: 1400px) {
-    .share-buttons-floating {
-        left: 20px;
-    }
-}
-
 @media (max-width: 1200px) {
     .post-layout-wrapper.has-series {
         grid-template-columns: 220px minmax(0, 1fr) 280px;
         gap: 2rem;
-    }
-    
-    .share-buttons-floating {
-        display: none; /* Hide floating buttons on smaller screens */
     }
 }
 
