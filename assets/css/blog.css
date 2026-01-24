@@ -769,6 +769,25 @@
 }
 
 /* ============================================
+   BLOG POST LAYOUT WITH SERIES SIDEBAR
+============================================ */
+.post-layout {
+    display: block;
+    position: relative;
+}
+
+.post-layout.has-series {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 3rem;
+    align-items: start;
+}
+
+.post-main-content {
+    min-width: 0; /* Prevents content overflow */
+}
+
+/* ============================================
    SERIES NAVIGATION SIDEBAR
 ============================================ */
 .series-sidebar {
@@ -776,14 +795,27 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
     padding: 0;
-    margin: 0 0 3rem 0;
     position: sticky;
     top: 100px;
-    max-height: calc(100vh - 150px);
+    max-height: calc(100vh - 120px);
     overflow-y: auto;
-    float: right;
-    width: 320px;
-    margin-left: 2rem;
+    /* Custom scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-primary) rgba(255, 255, 255, 0.05);
+}
+
+.series-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.series-sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.series-sidebar::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 10px;
 }
 
 .series-box {
@@ -960,14 +992,28 @@
 
 /* Responsive adjustments for series sidebar */
 @media (max-width: 1200px) {
+    .post-layout.has-series {
+        grid-template-columns: 1fr 300px;
+        gap: 2rem;
+    }
+    
     .series-sidebar {
-        float: none;
-        width: 100%;
-        margin-left: 0;
-        margin-bottom: 2rem;
+        top: 90px;
+    }
+}
+
+@media (max-width: 992px) {
+    .post-layout.has-series {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .series-sidebar {
         position: relative;
         top: auto;
         max-height: none;
+        margin-bottom: 2rem;
+        order: -1; /* Show sidebar above content on mobile */
     }
 }
 
