@@ -847,7 +847,7 @@
     gap: 8px;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
     transition: all var(--transition-normal);
-    z-index: 1060;
+    z-index: 1055;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     padding: 15px 8px;
@@ -869,10 +869,19 @@
 }
 
 .sidebar-tab:hover {
-    transform: translateY(-50%) scale(1.05);
     box-shadow: 6px 0 20px rgba(0, 255, 159, 0.4);
     background: var(--sidebar-accent);
     color: #0a0a0a;
+    filter: brightness(1.1);
+}
+
+/* Hover states that maintain positioning */
+.toc-sidebar:not(.expanded) .toc-tab:hover {
+    transform: translateX(calc(300px + 50px)) translateY(-50%) scale(1.05);
+}
+
+.series-sidebar:not(.expanded) .series-tab:hover {
+    transform: translateX(calc(-300px - 50px)) translateY(-50%) scale(1.05);
 }
 
 .sidebar-tab .tab-text {

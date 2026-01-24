@@ -152,6 +152,15 @@ layout: default
         <!-- Right Sidebar: Series Navigation (Collapsible) -->
         {% if page.series %}
         <aside class="series-sidebar collapsed" id="seriesSidebar" aria-hidden="true">
+            <!-- Series Tab (Bookmark style) -->
+            <button class="sidebar-tab series-tab" aria-label="Toggle Series Navigation" title="Series Navigation (S)">
+                <span class="tab-text">SERIES</span>
+                {% assign total_series = site.posts | where: "series", page.series | size %}
+                {% if total_series > 0 %}
+                <span class="tab-badge">{{ total_series }}</span>
+                {% endif %}
+                <i class="fas fa-book-open tab-icon"></i>
+            </button>
             <div class="sidebar-header">
                 <h3><i class="fas fa-book-open"></i> {{ page.series }}</h3>
                 <button class="sidebar-close" aria-label="Close Series">
