@@ -173,7 +173,6 @@ class BlogEnhancements {
         // Close backdrop if both sidebars are closed
         const bothClosed = (!this.tocSidebar || this.tocSidebar.classList.contains('collapsed')) &&
                            (!this.seriesSidebar || this.seriesSidebar.classList.contains('collapsed'));
-                          (!this.seriesSidebar || this.seriesSidebar.classList.contains('collapsed'));
         
         if (bothClosed && this.backdrop) {
             this.backdrop.classList.remove('active');

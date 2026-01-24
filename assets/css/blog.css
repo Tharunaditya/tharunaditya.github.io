@@ -368,6 +368,7 @@
 .blog-main {
     padding-top: 80px;
     min-height: 100vh;
+    overflow: visible;
 }
 
 .blog-post,
@@ -847,7 +848,10 @@
     gap: 8px;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
     transition: all var(--transition-normal);
-    z-index: 1055;
+    z-index: 1200;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     padding: 15px 8px;
