@@ -176,12 +176,17 @@ layout: default
                 {% endif %}
                 
                 <div class="series-progress">
+                    {% assign total_series_posts = site.posts | where: "series", page.series | size %}
                     <div class="progress-label">
                         <span>Series Progress</span>
-                        <span class="progress-text">{{ page.series_order }}/{{ site.posts | where: "series", page.series | size }}</span>
+                        <span class="progress-text">{{ page.series_order }}/{{ total_series_posts }}</span>
                     </div>
                     <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" data-progress="{{ page.series_order | times: 100 | divided_by: site.posts | where: 'series', page.series | size }}"></div>
+                        {% if total_series_posts > 0 %}
+                        <div class="progress-bar-fill" data-progress="{{ page.series_order | times: 100 | divided_by: total_series_posts }}"></div>
+                        {% else %}
+                        <div class="progress-bar-fill" data-progress="0"></div>
+                        {% endif %}
                     </div>
                 </div>
                 
