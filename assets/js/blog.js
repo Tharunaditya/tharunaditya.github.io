@@ -61,23 +61,45 @@ class BlogEnhancements {
         const tocToggle = document.querySelector('.toc-toggle');
         const seriesToggle = document.querySelector('.series-toggle');
         
+        console.log('Sidebar initialization:', {
+            tocSidebar: !!this.tocSidebar,
+            seriesSidebar: !!this.seriesSidebar,
+            backdrop: !!this.backdrop,
+            tocToggle: !!tocToggle,
+            seriesToggle: !!seriesToggle
+        });
+        
         // TOC Toggle
         if (tocToggle && this.tocSidebar) {
-            tocToggle.addEventListener('click', () => this.toggleSidebar('toc'));
+            tocToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('TOC toggle clicked');
+                this.toggleSidebar('toc');
+            });
             
             const tocClose = this.tocSidebar.querySelector('.sidebar-close');
             if (tocClose) {
-                tocClose.addEventListener('click', () => this.closeSidebar('toc'));
+                tocClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.closeSidebar('toc');
+                });
             }
         }
         
         // Series Toggle
         if (seriesToggle && this.seriesSidebar) {
-            seriesToggle.addEventListener('click', () => this.toggleSidebar('series'));
+            seriesToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Series toggle clicked');
+                this.toggleSidebar('series');
+            });
             
             const seriesClose = this.seriesSidebar.querySelector('.sidebar-close');
             if (seriesClose) {
-                seriesClose.addEventListener('click', () => this.closeSidebar('series'));
+                seriesClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.closeSidebar('series');
+                });
             }
         }
         
@@ -94,12 +116,17 @@ class BlogEnhancements {
     }
 
     toggleSidebar(type) {
+        console.log('toggleSidebar called with type:', type);
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
         const toggle = document.querySelector(`.${type}-toggle`);
         
-        if (!sidebar) return;
+        if (!sidebar) {
+            console.log('Sidebar not found for type:', type);
+            return;
+        }
         
         const isExpanded = sidebar.classList.contains('expanded');
+        console.log('Current state - isExpanded:', isExpanded);
         
         if (isExpanded) {
             this.closeSidebar(type);
@@ -109,6 +136,7 @@ class BlogEnhancements {
     }
 
     openSidebar(type) {
+        console.log('openSidebar called with type:', type);
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
         const toggle = document.querySelector(`.${type}-toggle`);
         
@@ -129,9 +157,11 @@ class BlogEnhancements {
         
         // Save state
         this.saveSidebarState(type, true);
+        console.log('Sidebar opened:', type);
     }
 
     closeSidebar(type) {
+        console.log('closeSidebar called with type:', type);
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
         const toggle = document.querySelector(`.${type}-toggle`);
         
