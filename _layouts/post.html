@@ -130,10 +130,12 @@ layout: default
         </div>
     </header>
 
-    <div class="post-content">
+    <div class="post-content {% if page.series %}has-series{% endif %}">
         <!-- Left Sidebar: Table of Contents (Fixed to Left Edge) -->
         <aside class="toc-sidebar">
-            <div id="toc-container"></div>
+            <div class="toc-inner">
+                <div id="toc-container"></div>
+            </div>
         </aside>
         
         <!-- Right Sidebar: Series Navigation (Fixed to Right Edge) -->
@@ -194,9 +196,9 @@ layout: default
         </aside>
         {% endif %}
         
-        <div class="container">
-            <div class="post-layout-wrapper {% if page.series %}has-series{% endif %}">
-                <!-- Main Content Area (Center) -->
+        <!-- Main Content Area (Center) -->
+        <div class="post-main-area">
+            <div class="container">
                 <div class="post-main-content">
                     <div class="content-wrapper" itemprop="articleBody">
                         {{ content }}

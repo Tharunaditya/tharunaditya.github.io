@@ -775,27 +775,38 @@
 /* ============================================
    THREE-COLUMN BLOG POST LAYOUT
 ============================================ */
+
+/* Main wrapper - add padding to body to account for fixed sidebars */
 .post-content {
-    padding: 60px 0;
     position: relative;
+    padding-top: 60px;
 }
 
-.post-content .container {
-    max-width: 1400px;
-    padding-left: 340px; /* 320px sidebar + 20px gap */
+/* Container for center content */
+.post-main-area {
+    padding-left: 320px; /* Width of TOC sidebar */
+    padding-right: 0;
 }
 
-.post-content.has-series .container,
-.post-layout-wrapper.has-series ~ .container {
-    padding-right: 340px; /* 320px sidebar + 20px gap */
+.post-content.has-series .post-main-area {
+    padding-right: 320px; /* Width of series sidebar */
 }
 
-.post-layout-wrapper {
-    display: block;
-    position: relative;
+/* Override default container max-width for blog posts */
+.post-main-area .container {
+    max-width: none !important;
+    width: 100%;
+    padding: 0 2rem;
 }
 
-/* Left Sidebar: Table of Contents (Fixed to Left) */
+/* Main content - centered within available space */
+.post-main-content {
+    max-width: 850px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Left Sidebar: Table of Contents (Fixed to Left Edge) */
 .toc-sidebar {
     position: fixed;
     left: 0;
@@ -818,12 +829,13 @@
     display: none; /* Chrome, Safari, Opera */
 }
 
-/* Main Content Area */
-.post-main-content {
-    min-width: 0;
-    width: 100%;
-    max-width: 850px;
-    margin: 0 auto;
+/* Hide empty TOC sidebar initially */
+.toc-sidebar .toc-inner:empty {
+    display: none;
+}
+
+#toc-container:empty {
+    display: none;
 }
 
 /* Share Buttons Below Title (Header) */
@@ -958,12 +970,12 @@
 
 /* Responsive Layout */
 @media (max-width: 1400px) {
-    .post-content .container {
-        padding-left: 280px; /* Narrower sidebar */
+    .post-main-area {
+        padding-left: 260px; /* Narrower sidebar */
     }
     
-    .post-content.has-series .container {
-        padding-right: 280px;
+    .post-content.has-series .post-main-area {
+        padding-right: 260px;
     }
     
     .toc-sidebar,
@@ -973,12 +985,12 @@
 }
 
 @media (max-width: 1200px) {
-    .post-content .container {
-        padding-left: 240px;
+    .post-main-area {
+        padding-left: 220px;
     }
     
-    .post-content.has-series .container {
-        padding-right: 240px;
+    .post-content.has-series .post-main-area {
+        padding-right: 220px;
     }
     
     .toc-sidebar,
@@ -988,10 +1000,10 @@
 }
 
 @media (max-width: 992px) {
-    .post-content .container,
-    .post-content.has-series .container {
-        padding-left: 15px;
-        padding-right: 15px;
+    .post-main-area,
+    .post-content.has-series .post-main-area {
+        padding-left: 0;
+        padding-right: 0;
     }
     
     .toc-sidebar,
