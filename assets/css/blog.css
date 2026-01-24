@@ -829,7 +829,7 @@
    SIDEBAR BOOKMARK TABS
 ============================================ */
 .sidebar-tab {
-    position: absolute;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
     width: 50px;
@@ -855,33 +855,25 @@
 
 /* TOC Tab - sticks out from left sidebar */
 .toc-tab {
-    right: -50px;
+    left: 0;
     border-left: none;
     border-radius: 0 12px 12px 0;
 }
 
 /* Series Tab - sticks out from right sidebar */
 .series-tab {
-    left: -50px;
+    right: 0;
     border-right: none;
     border-radius: 12px 0 0 12px;
     writing-mode: vertical-lr;
 }
 
 .sidebar-tab:hover {
+    transform: translateY(-50%) scale(1.05);
     box-shadow: 6px 0 20px rgba(0, 255, 159, 0.4);
     background: var(--sidebar-accent);
     color: #0a0a0a;
     filter: brightness(1.1);
-}
-
-/* Hover states that maintain positioning */
-.toc-sidebar:not(.expanded) .toc-tab:hover {
-    transform: translateX(calc(var(--sidebar-width) + 50px)) translateY(-50%) scale(1.05);
-}
-
-.series-sidebar:not(.expanded) .series-tab:hover {
-    transform: translateX(calc(-1 * (var(--sidebar-width) + 50px))) translateY(-50%) scale(1.05);
 }
 
 .sidebar-tab .tab-text {
@@ -908,8 +900,8 @@
 }
 
 /* Hide tabs when sidebar is expanded */
-.toc-sidebar.expanded .toc-tab,
-.series-sidebar.expanded .series-tab {
+.toc-sidebar.expanded + .toc-tab,
+.series-sidebar.expanded + .series-tab {
     opacity: 0;
     pointer-events: none;
 }
@@ -1029,7 +1021,7 @@
     box-shadow: var(--shadow-xl);
     z-index: 1040; /* Above navbar (1000), below toggle buttons (1050) */
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: visible;
     padding: 0;
     transition: transform var(--transition-normal);
     
@@ -1083,19 +1075,9 @@
     transform: translateX(100%);
 }
 
-/* Tabs positioning - keep visible when sidebar is collapsed */
-.toc-sidebar:not(.expanded) .toc-tab {
-    transform: translateX(calc(var(--sidebar-width) + 50px)) translateY(-50%);
-}
-
-.series-sidebar:not(.expanded) .series-tab {
-    transform: translateX(calc(-1 * (var(--sidebar-width) + 50px))) translateY(-50%);
-}
-
 /* Hide tabs when sidebar is expanded */
-.toc-sidebar.expanded .toc-tab,
-.series-sidebar.expanded .series-tab {
-    transform: translateX(0) translateY(-50%);
+.toc-sidebar.expanded + .toc-tab,
+.series-sidebar.expanded + .series-tab {
     opacity: 0;
     pointer-events: none;
 }
@@ -1109,15 +1091,10 @@
     transform: translateX(0);
 }
 
-/* Collapsed state - allow tab interactions */
-.toc-sidebar.collapsed,
-.series-sidebar.collapsed {
+/* Collapsed state - disable inner content only (tabs remain clickable) */
+.toc-sidebar.collapsed .toc-inner,
+.series-sidebar.collapsed .series-box {
     pointer-events: none;
-}
-
-.toc-sidebar.collapsed .toc-tab,
-.series-sidebar.collapsed .series-tab {
-    pointer-events: all;
 }
 
 .toc-sidebar.expanded,
