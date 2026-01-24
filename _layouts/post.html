@@ -129,26 +129,27 @@ layout: default
             {% endif %}
         </div>
     </header>
+</article>
 
-    <!-- TOC Toggle Button (Outside container for proper fixed positioning) -->
-    <button class="sidebar-toggle toc-toggle" aria-label="Toggle Table of Contents" aria-expanded="false" title="Table of Contents (T)">
-        <i class="fas fa-list"></i>
-        <span class="toggle-label">TOC</span>
-    </button>
+<!-- TOC Toggle Button (Outside article for proper stacking context) -->
+<button class="sidebar-toggle toc-toggle" aria-label="Toggle Table of Contents" aria-expanded="false" title="Table of Contents (T)">
+    <i class="fas fa-list"></i>
+    <span class="toggle-label">TOC</span>
+</button>
 
-    <!-- Series Toggle Button -->
-    {% if page.series %}
-    {% assign series_total = site.posts | where: "series", page.series | size %}
-    {% assign series_current = page.series_order | default: 1 %}
-    <button class="sidebar-toggle series-toggle" aria-label="Toggle Series Navigation" aria-expanded="false" title="Series Navigation (S)">
-        <i class="fas fa-book-open"></i>
-        <span class="toggle-label">Series</span>
-        <span class="series-badge">{{ series_current }}/{{ series_total }}</span>
-    </button>
-    {% endif %}
+<!-- Series Toggle Button -->
+{% if page.series %}
+{% assign series_total = site.posts | where: "series", page.series | size %}
+{% assign series_current = page.series_order | default: 1 %}
+<button class="sidebar-toggle series-toggle" aria-label="Toggle Series Navigation" aria-expanded="false" title="Series Navigation (S)">
+    <i class="fas fa-book-open"></i>
+    <span class="toggle-label">Series</span>
+    <span class="series-badge">{{ series_current }}/{{ series_total }}</span>
+</button>
+{% endif %}
 
-    <!-- Left Sidebar: Table of Contents (Collapsible) -->
-    <aside class="toc-sidebar collapsed" id="tocSidebar" aria-hidden="true">
+<!-- Left Sidebar: Table of Contents (Collapsible) -->
+<aside class="toc-sidebar collapsed" id="tocSidebar" aria-hidden="true">
             <div class="sidebar-header">
                 <h3><i class="fas fa-list"></i> Table of Contents</h3>
                 <button class="sidebar-close" aria-label="Close TOC">
@@ -246,6 +247,7 @@ layout: default
     <!-- Sidebar Backdrop (Outside container) -->
     <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
+<article class="blog-post-content" itemscope itemtype="https://schema.org/BlogPosting">
     <div class="post-content {% if page.series %}has-series{% endif %}">
         <!-- Main Content Area (Center) -->
         <div class="post-main-area">

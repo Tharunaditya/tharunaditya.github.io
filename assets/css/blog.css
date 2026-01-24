@@ -370,18 +370,15 @@
     min-height: 100vh;
 }
 
-.blog-post {
+.blog-post,
+.blog-post-content {
     padding-bottom: 4rem;
-    position: relative;
-    z-index: 1; /* Keep below fixed UI elements (toggle buttons at 1050) */
 }
 
 /* Post Header */
 .post-header {
     padding: 80px 0 40px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
-    z-index: 1; /* Keep below toggle buttons */
 }
 
 .post-meta {
