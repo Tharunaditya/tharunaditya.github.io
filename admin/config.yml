@@ -30,6 +30,9 @@ collections:
       - { label: "Tags", name: "tags", widget: "list", required: false }
       - { label: "Featured Image", name: "image", widget: "image", required: false }
       - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Series Name", name: "series", widget: "string", required: false, hint: "Name of the blog series (e.g., 'Penetration Testing Fundamentals')" }
+      - { label: "Series Order", name: "series_order", widget: "number", required: false, min: 1, hint: "Part number in the series (e.g., 1, 2, 3)" }
+      - { label: "Series Description", name: "series_description", widget: "text", required: false, hint: "Brief description of the series (shown in sidebar)" }
       - { label: "Body", name: "body", widget: "markdown" }
 
   # Projects (Optional - for managing portfolio items)
