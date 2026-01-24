@@ -418,9 +418,13 @@
     padding: 60px 0;
 }
 
+.post-content .container {
+    max-width: 1400px;
+}
+
 .content-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
 }
 
 .post-content h1,
@@ -773,18 +777,19 @@
 ============================================ */
 .post-layout {
     display: block;
-    position: relative;
+    width: 100%;
 }
 
 .post-layout.has-series {
     display: grid;
-    grid-template-columns: 1fr 350px;
+    grid-template-columns: minmax(0, 1fr) 350px;
     gap: 3rem;
     align-items: start;
 }
 
 .post-main-content {
-    min-width: 0; /* Prevents content overflow */
+    min-width: 0;
+    max-width: 850px;
 }
 
 /* ============================================
