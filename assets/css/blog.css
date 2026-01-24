@@ -1074,6 +1074,23 @@
     transform: translateX(100%);
 }
 
+/* Tabs positioning - keep visible when sidebar is collapsed */
+.toc-sidebar:not(.expanded) .toc-tab {
+    transform: translateX(calc(300px + 50px)) translateY(-50%);
+}
+
+.series-sidebar:not(.expanded) .series-tab {
+    transform: translateX(calc(-300px - 50px)) translateY(-50%);
+}
+
+/* Hide tabs when sidebar is expanded */
+.toc-sidebar.expanded .toc-tab,
+.series-sidebar.expanded .series-tab {
+    transform: translateX(0) translateY(-50%);
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Expanded state */
 .toc-sidebar.expanded {
     transform: translateX(0);
@@ -1083,10 +1100,15 @@
     transform: translateX(0);
 }
 
-/* Collapsed state - hide completely */
+/* Collapsed state - allow tab interactions */
 .toc-sidebar.collapsed,
 .series-sidebar.collapsed {
     pointer-events: none;
+}
+
+.toc-sidebar.collapsed .toc-tab,
+.series-sidebar.collapsed .series-tab {
+    pointer-events: all;
 }
 
 .toc-sidebar.expanded,
