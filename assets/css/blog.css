@@ -776,44 +776,44 @@
    THREE-COLUMN BLOG POST LAYOUT
 ============================================ */
 .post-layout-wrapper {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 3rem;
-    align-items: start;
+    display: block;
+    position: relative;
+    padding-left: 340px; /* 320px sidebar + 20px gap */
 }
 
 .post-layout-wrapper.has-series {
-    grid-template-columns: 250px minmax(0, 800px) 320px;
-    gap: 2.5rem;
+    padding-right: 340px; /* 320px sidebar + 20px gap */
 }
 
-/* Left Sidebar: Table of Contents */
+/* Left Sidebar: Table of Contents (Fixed to Left) */
 .toc-sidebar {
-    position: sticky;
+    position: fixed;
+    left: 0;
     top: 100px;
-    max-height: calc(100vh - 120px);
+    width: 320px;
+    height: calc(100vh - 120px);
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-primary) rgba(255, 255, 255, 0.05);
+    overflow-x: hidden;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 50;
+    
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
 }
 
 .toc-sidebar::-webkit-scrollbar {
-    width: 4px;
-}
-
-.toc-sidebar::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.toc-sidebar::-webkit-scrollbar-thumb {
-    background: var(--accent-primary);
-    border-radius: 10px;
+    display: none; /* Chrome, Safari, Opera */
 }
 
 /* Main Content Area */
 .post-main-content {
     min-width: 0;
     width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
 }
 
 /* Share Buttons Below Title (Header) */
@@ -947,25 +947,55 @@
 }
 
 /* Responsive Layout */
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
+    .post-layout-wrapper {
+        padding-left: 280px; /* Narrower sidebar */
+    }
+    
     .post-layout-wrapper.has-series {
-        grid-template-columns: 220px minmax(0, 1fr) 280px;
-        gap: 2rem;
+        padding-right: 280px;
+    }
+    
+    .toc-sidebar,
+    .series-sidebar {
+        width: 260px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .post-layout-wrapper {
+        padding-left: 240px;
+    }
+    
+    .post-layout-wrapper.has-series {
+        padding-right: 240px;
+    }
+    
+    .toc-sidebar,
+    .series-sidebar {
+        width: 220px;
     }
 }
 
 @media (max-width: 992px) {
     .post-layout-wrapper,
     .post-layout-wrapper.has-series {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        padding-left: 0;
+        padding-right: 0;
     }
     
     .toc-sidebar,
     .series-sidebar {
         position: relative;
+        left: auto;
+        right: auto;
         top: auto;
+        width: 100%;
+        height: auto;
         max-height: 400px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-lg);
     }
     
     .post-navigation {
@@ -1115,34 +1145,27 @@
 }
 
 /* ============================================
-   SERIES NAVIGATION SIDEBAR
+   SERIES NAVIGATION SIDEBAR (Fixed to Right)
 ============================================ */
 .series-sidebar {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: var(--radius-lg);
-    padding: 0;
-    position: sticky;
+    position: fixed;
+    right: 0;
     top: 100px;
-    max-height: calc(100vh - 120px);
+    width: 320px;
+    height: calc(100vh - 120px);
     overflow-y: auto;
-    /* Custom scrollbar */
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-primary) rgba(255, 255, 255, 0.05);
+    overflow-x: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 50;
+    
+    /* Hide scrollbar but keep functionality */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
 }
 
 .series-sidebar::-webkit-scrollbar {
-    width: 6px;
-}
-
-.series-sidebar::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-}
-
-.series-sidebar::-webkit-scrollbar-thumb {
-    background: var(--accent-primary);
-    border-radius: 10px;
+    display: none; /* Chrome, Safari, Opera */
 }
 
 .series-box {
