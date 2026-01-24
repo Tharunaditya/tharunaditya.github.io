@@ -58,43 +58,21 @@ class BlogEnhancements {
         this.seriesSidebar = document.getElementById('seriesSidebar');
         this.backdrop = document.getElementById('sidebarBackdrop');
         
-        const tocToggle = document.querySelector('.toc-toggle');
-        const seriesToggle = document.querySelector('.series-toggle');
+        const tocTab = document.querySelector('.toc-tab');
+        const seriesTab = document.querySelector('.series-tab');
         
         console.log('=== SIDEBAR DEBUG ===');
-        console.log('TOC Sidebar element:', this.tocSidebar);
-        console.log('Series Sidebar element:', this.seriesSidebar);
-        console.log('Backdrop element:', this.backdrop);
-        console.log('TOC Toggle button:', tocToggle);
-        console.log('Series Toggle button:', seriesToggle);
+        console.log('TOC Sidebar:', this.tocSidebar);
+        console.log('Series Sidebar:', this.seriesSidebar);
+        console.log('TOC Tab:', tocTab);
+        console.log('Series Tab:', seriesTab);
         
-        if (tocToggle) {
-            console.log('TOC button position:', window.getComputedStyle(tocToggle).position);
-            console.log('TOC button z-index:', window.getComputedStyle(tocToggle).zIndex);
-            console.log('TOC button display:', window.getComputedStyle(tocToggle).display);
-            console.log('TOC button visibility:', window.getComputedStyle(tocToggle).visibility);
-        }
-        
-        // Show/hide toggle buttons on scroll
-        const toggleButtons = [tocToggle, seriesToggle].filter(Boolean);
-        if (toggleButtons.length > 0) {
-            window.addEventListener('scroll', () => {
-                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-                // Show buttons after scrolling 200px past header
-                if (scrollY > 200) {
-                    toggleButtons.forEach(btn => btn.classList.add('visible'));
-                } else {
-                    toggleButtons.forEach(btn => btn.classList.remove('visible'));
-                }
-            });
-        }
-        
-        // TOC Toggle
-        if (tocToggle && this.tocSidebar) {
-            tocToggle.addEventListener('click', (e) => {
+        // TOC Tab Click
+        if (tocTab && this.tocSidebar) {
+            tocTab.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('🔵 TOC TOGGLE CLICKED!');
+                console.log('🔵 TOC TAB CLICKED!');
                 this.toggleSidebar('toc');
             });
             
@@ -108,15 +86,15 @@ class BlogEnhancements {
                 });
             }
         } else {
-            console.error('❌ TOC Toggle or Sidebar not found!');
+            console.error('❌ TOC Tab or Sidebar not found!');
         }
         
-        // Series Toggle
-        if (seriesToggle && this.seriesSidebar) {
-            seriesToggle.addEventListener('click', (e) => {
+        // Series Tab Click
+        if (seriesTab && this.seriesSidebar) {
+            seriesTab.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('🟠 SERIES TOGGLE CLICKED!');
+                console.log('🟠 SERIES TAB CLICKED!');
                 this.toggleSidebar('series');
             });
             
@@ -130,7 +108,7 @@ class BlogEnhancements {
                 });
             }
         } else {
-            console.log('ℹ️ Series Toggle or Sidebar not found (may not exist on this page)');
+            console.log('ℹ️ Series Tab or Sidebar not found (may not exist on this page)');
         }
         
         // Backdrop click to close
@@ -166,25 +144,14 @@ class BlogEnhancements {
 
     openSidebar(type) {
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
-        const toggle = document.querySelector(`.${type}-toggle`);
         
         if (!sidebar) return;
         
         console.log(`✅ OPENING ${type} sidebar`);
-        console.log('Before - Classes:', sidebar.className);
         
         sidebar.classList.remove('collapsed');
         sidebar.classList.add('expanded');
         sidebar.setAttribute('aria-hidden', 'false');
-        
-        console.log('After - Classes:', sidebar.className);
-        console.log('Transform:', window.getComputedStyle(sidebar).transform);
-        
-        if (toggle) {
-            toggle.classList.add('active');
-            toggle.classList.add('hidden'); // Hide the toggle button
-            toggle.setAttribute('aria-expanded', 'true');
-        }
         
         if (this.backdrop) {
             this.backdrop.classList.add('active');
@@ -196,19 +163,12 @@ class BlogEnhancements {
 
     closeSidebar(type) {
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
-        const toggle = document.querySelector(`.${type}-toggle`);
         
         if (!sidebar) return;
         
         sidebar.classList.remove('expanded');
         sidebar.classList.add('collapsed');
         sidebar.setAttribute('aria-hidden', 'true');
-        
-        if (toggle) {
-            toggle.classList.remove('active');
-            toggle.classList.remove('hidden'); // Show the toggle button again
-            toggle.setAttribute('aria-expanded', 'false');
-        }
         
         // Close backdrop if both sidebars are closed
         const bothClosed = (!this.tocSidebar || this.tocSidebar.classList.contains('collapsed')) &&

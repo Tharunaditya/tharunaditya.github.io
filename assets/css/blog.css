@@ -826,8 +826,86 @@
 }
 
 /* ============================================
-   SIDEBAR TOGGLE BUTTONS
+   SIDEBAR BOOKMARK TABS
 ============================================ */
+.sidebar-tab {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 180px;
+    border: none;
+    background: linear-gradient(135deg, var(--sidebar-bg) 0%, rgba(15, 15, 35, 0.98) 100%);
+    border: 2px solid var(--sidebar-accent);
+    border-radius: 0 12px 12px 0;
+    color: var(--sidebar-accent);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-normal);
+    z-index: 1060;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 15px 8px;
+}
+
+/* TOC Tab - sticks out from left sidebar */
+.toc-tab {
+    right: -50px;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+}
+
+/* Series Tab - sticks out from right sidebar */
+.series-tab {
+    left: -50px;
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    writing-mode: vertical-lr;
+}
+
+.sidebar-tab:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 6px 0 20px rgba(0, 255, 159, 0.4);
+    background: var(--sidebar-accent);
+    color: #0a0a0a;
+}
+
+.sidebar-tab .tab-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.sidebar-tab .tab-icon {
+    font-size: 1.2rem;
+    margin: 8px 0;
+}
+
+.sidebar-tab .tab-badge {
+    background: var(--series-current);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 10px;
+    margin: 5px 0;
+    writing-mode: horizontal-tb;
+}
+
+/* Hide tabs when sidebar is expanded */
+.toc-sidebar.expanded .toc-tab,
+.series-sidebar.expanded .series-tab {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* OLD TOGGLE BUTTON STYLES - REMOVE */
 .sidebar-toggle {
     position: fixed;
     top: 120px;
