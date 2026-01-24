@@ -145,8 +145,10 @@ layout: default
         </aside>
         <!-- TOC Tab (Bookmark style) -->
         <button class="sidebar-tab toc-tab" aria-label="Toggle Table of Contents" title="Table of Contents (T)">
-            <span class="tab-text">TOC</span>
-            <i class="fas fa-list tab-icon"></i>
+            <span class="tab-label">
+                <i class="fas fa-list tab-icon"></i>
+                <span class="tab-text">TOC</span>
+            </span>
         </button>
         
         <!-- Right Sidebar: Series Navigation (Collapsible) -->
@@ -232,12 +234,14 @@ layout: default
         </aside>
         <!-- Series Tab (Bookmark style) -->
         <button class="sidebar-tab series-tab" aria-label="Toggle Series Navigation" title="Series Navigation (S)">
-            <span class="tab-text">SERIES</span>
+            <span class="tab-label">
+                <i class="fas fa-book-open tab-icon"></i>
+                <span class="tab-text">SERIES</span>
+            </span>
             {% assign total_series = site.posts | where: "series", page.series | size %}
             {% if total_series > 0 %}
             <span class="tab-badge">{{ total_series }}</span>
             {% endif %}
-            <i class="fas fa-book-open tab-icon"></i>
         </button>
         {% endif %}
 

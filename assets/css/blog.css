@@ -857,6 +857,13 @@
     padding: 15px 8px;
 }
 
+.sidebar-tab .tab-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
 /* TOC Tab - sticks out from left sidebar */
 .toc-tab {
     left: 0;
@@ -885,6 +892,7 @@
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .sidebar-tab .tab-icon {
