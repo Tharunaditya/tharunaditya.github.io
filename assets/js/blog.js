@@ -61,19 +61,11 @@ class BlogEnhancements {
         const tocToggle = document.querySelector('.toc-toggle');
         const seriesToggle = document.querySelector('.series-toggle');
         
-        console.log('Sidebar initialization:', {
-            tocSidebar: !!this.tocSidebar,
-            seriesSidebar: !!this.seriesSidebar,
-            backdrop: !!this.backdrop,
-            tocToggle: !!tocToggle,
-            seriesToggle: !!seriesToggle
-        });
-        
         // TOC Toggle
         if (tocToggle && this.tocSidebar) {
             tocToggle.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('TOC toggle clicked');
+                e.stopPropagation();
                 this.toggleSidebar('toc');
             });
             
@@ -81,6 +73,7 @@ class BlogEnhancements {
             if (tocClose) {
                 tocClose.addEventListener('click', (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     this.closeSidebar('toc');
                 });
             }
@@ -90,7 +83,7 @@ class BlogEnhancements {
         if (seriesToggle && this.seriesSidebar) {
             seriesToggle.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('Series toggle clicked');
+                e.stopPropagation();
                 this.toggleSidebar('series');
             });
             
@@ -98,6 +91,7 @@ class BlogEnhancements {
             if (seriesClose) {
                 seriesClose.addEventListener('click', (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     this.closeSidebar('series');
                 });
             }
@@ -116,17 +110,12 @@ class BlogEnhancements {
     }
 
     toggleSidebar(type) {
-        console.log('toggleSidebar called with type:', type);
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
         const toggle = document.querySelector(`.${type}-toggle`);
         
-        if (!sidebar) {
-            console.log('Sidebar not found for type:', type);
-            return;
-        }
+        if (!sidebar) return;
         
         const isExpanded = sidebar.classList.contains('expanded');
-        console.log('Current state - isExpanded:', isExpanded);
         
         if (isExpanded) {
             this.closeSidebar(type);
@@ -136,7 +125,6 @@ class BlogEnhancements {
     }
 
     openSidebar(type) {
-        console.log('openSidebar called with type:', type);
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
         const toggle = document.querySelector(`.${type}-toggle`);
         
@@ -157,11 +145,9 @@ class BlogEnhancements {
         
         // Save state
         this.saveSidebarState(type, true);
-        console.log('Sidebar opened:', type);
     }
 
     closeSidebar(type) {
-        console.log('closeSidebar called with type:', type);
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
         const toggle = document.querySelector(`.${type}-toggle`);
         
@@ -178,6 +164,7 @@ class BlogEnhancements {
         
         // Close backdrop if both sidebars are closed
         const bothClosed = (!this.tocSidebar || this.tocSidebar.classList.contains('collapsed')) &&
+                           (!this.seriesSidebar || this.seriesSidebar.classList.contains('collapsed'));
                           (!this.seriesSidebar || this.seriesSidebar.classList.contains('collapsed'));
         
         if (bothClosed && this.backdrop) {
