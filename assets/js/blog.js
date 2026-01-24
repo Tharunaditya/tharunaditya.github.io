@@ -509,6 +509,23 @@ class BlogEnhancements {
             backToTopBtn.className = 'back-to-top';
             backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
             backToTopBtn.setAttribute('aria-label', 'Back to top');
+            document.body.appendChild(backToTopBtn);
+        }
+
+        // Show/hide based on scroll
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top on click
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
     /**
      * Copy Code Button for code blocks
