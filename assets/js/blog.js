@@ -1,16 +1,29 @@
 /**
  * Blog Enhanced Features
- * Reading Progress, TOC, Back to Top, Copy Code, Search
+ * Collapsible Sidebars, Scroll Spy, FAB Toolbar, Reader Mode, Keyboard Shortcuts
  */
 
 class BlogEnhancements {
     constructor() {
+        this.tocSidebar = null;
+        this.seriesSidebar = null;
+        this.backdrop = null;
+        this.fabToolbar = null;
+        this.shareMenu = null;
+        this.intersectionObserver = null;
+        
         this.init();
     }
 
     init() {
         this.initReadingProgress();
+        this.initCollapsibleSidebars();
         this.initTableOfContents();
+        this.initScrollSpy();
+        this.initFloatingActionBar();
+        this.initShareMenu();
+        this.initReaderMode();
+        this.initKeyboardShortcuts();
         this.initBackToTop();
         this.initCopyCode();
         this.initSearch();
@@ -18,6 +31,8 @@ class BlogEnhancements {
         this.initTagCloud();
         this.initViewCount();
         this.initNotificationPopup();
+        this.initLocalStorage();
+        this.initProgressBarAnimation();
     }
 
     /**
@@ -36,7 +51,115 @@ class BlogEnhancements {
     }
 
     /**
-     * Auto-generate Table of Contents from headings
+     * Collapsible Sidebars with Smooth Animations
+     */
+    initCollapsibleSidebars() {
+        this.tocSidebar = document.getElementById('tocSidebar');
+        this.seriesSidebar = document.getElementById('seriesSidebar');
+        this.backdrop = document.getElementById('sidebarBackdrop');
+        
+        const tocToggle = document.querySelector('.toc-toggle');
+        const seriesToggle = document.querySelector('.series-toggle');
+        
+        // TOC Toggle
+        if (tocToggle && this.tocSidebar) {
+            tocToggle.addEventListener('click', () => this.toggleSidebar('toc'));
+            
+            const tocClose = this.tocSidebar.querySelector('.sidebar-close');
+            if (tocClose) {
+                tocClose.addEventListener('click', () => this.closeSidebar('toc'));
+            }
+        }
+        
+        // Series Toggle
+        if (seriesToggle && this.seriesSidebar) {
+            seriesToggle.addEventListener('click', () => this.toggleSidebar('series'));
+            
+            const seriesClose = this.seriesSidebar.querySelector('.sidebar-close');
+            if (seriesClose) {
+                seriesClose.addEventListener('click', () => this.closeSidebar('series'));
+            }
+        }
+        
+        // Backdrop click to close
+        if (this.backdrop) {
+            this.backdrop.addEventListener('click', () => {
+                this.closeSidebar('toc');
+                this.closeSidebar('series');
+            });
+        }
+
+        // Load saved state from localStorage
+        this.loadSidebarState();
+    }
+
+    toggleSidebar(type) {
+        const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
+        const toggle = document.querySelector(`.${type}-toggle`);
+        
+        if (!sidebar) return;
+        
+        const isExpanded = sidebar.classList.contains('expanded');
+        
+        if (isExpanded) {
+            this.closeSidebar(type);
+        } else {
+            this.openSidebar(type);
+        }
+    }
+
+    openSidebar(type) {
+        const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
+        const toggle = document.querySelector(`.${type}-toggle`);
+        
+        if (!sidebar) return;
+        
+        sidebar.classList.remove('collapsed');
+        sidebar.classList.add('expanded');
+        sidebar.setAttribute('aria-hidden', 'false');
+        
+        if (toggle) {
+            toggle.classList.add('active');
+            toggle.setAttribute('aria-expanded', 'true');
+        }
+        
+        if (this.backdrop) {
+            this.backdrop.classList.add('active');
+        }
+        
+        // Save state
+        this.saveSidebarState(type, true);
+    }
+
+    closeSidebar(type) {
+        const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
+        const toggle = document.querySelector(`.${type}-toggle`);
+        
+        if (!sidebar) return;
+        
+        sidebar.classList.remove('expanded');
+        sidebar.classList.add('collapsed');
+        sidebar.setAttribute('aria-hidden', 'true');
+        
+        if (toggle) {
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+        
+        // Close backdrop if both sidebars are closed
+        const bothClosed = (!this.tocSidebar || this.tocSidebar.classList.contains('collapsed')) &&
+                          (!this.seriesSidebar || this.seriesSidebar.classList.contains('collapsed'));
+        
+        if (bothClosed && this.backdrop) {
+            this.backdrop.classList.remove('active');
+        }
+        
+        // Save state
+        this.saveSidebarState(type, false);
+    }
+
+    /**
+     * Auto-generate Table of Contents with Scroll Spy
      */
     initTableOfContents() {
         const contentWrapper = document.querySelector('.content-wrapper');
@@ -45,7 +168,7 @@ class BlogEnhancements {
         if (!contentWrapper || !tocContainer) return;
 
         const headings = contentWrapper.querySelectorAll('h2, h3');
-        if (headings.length < 3) return; // Only show TOC if there are 3+ headings
+        if (headings.length < 2) return; // Show TOC if there are 2+ headings
 
         const tocHTML = `
             <div class="toc-wrapper">
@@ -62,8 +185,9 @@ class BlogEnhancements {
             const id = `heading-${index}`;
             heading.id = id;
             
-            const level = heading.tagName === 'H2' ? '' : 'style="margin-left: 1rem;"';
-            tocContent += `<li ${level}><a href="#${id}">${heading.textContent}</a></li>`;
+            const isH3 = heading.tagName === 'H3';
+            const listClass = isH3 ? 'class="nested"' : '';
+            tocContent += `<li ${listClass}><a href="#${id}">${heading.textContent}</a></li>`;
         });
 
         tocList.innerHTML = tocContent;
@@ -76,39 +200,257 @@ class BlogEnhancements {
                 const target = document.getElementById(targetId);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Highlight active section in TOC
-        this.highlightActiveTOC(headings);
-    }
-
-    highlightActiveTOC(headings) {
-        const tocLinks = document.querySelectorAll('.toc-list a');
-        if (tocLinks.length === 0) return;
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            
-            headings.forEach(heading => {
-                const sectionTop = heading.offsetTop;
-                if (window.pageYOffset >= sectionTop - 100) {
-                    current = heading.getAttribute('id');
-                }
-            });
-
-            tocLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
+                    
+                    // Close sidebar on mobile after click
+                    if (window.innerWidth <= 992) {
+                        this.closeSidebar('toc');
+                    }
                 }
             });
         });
     }
 
     /**
-     * Back to Top Button
+     * Scroll Spy with Intersection Observer
+     */
+    initScrollSpy() {
+        const headings = document.querySelectorAll('.content-wrapper h2, .content-wrapper h3');
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        
+        if (headings.length === 0 || tocLinks.length === 0) return;
+
+        const observerOptions = {
+            rootMargin: '-100px 0px -66%',
+            threshold: 0
+        };
+
+        this.intersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // Remove active class from all links
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Add active class to current link
+                    const activeLink = document.querySelector(`.toc-list a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                        
+                        // Auto-scroll TOC to keep active item visible
+                        const tocSidebar = document.getElementById('tocSidebar');
+                        if (tocSidebar && tocSidebar.classList.contains('expanded')) {
+                            activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    }
+                }
+            });
+        }, observerOptions);
+
+        headings.forEach(heading => {
+            this.intersectionObserver.observe(heading);
+        });
+    }
+
+    /**
+     * Floating Action Bar
+     */
+    initFloatingActionBar() {
+        this.fabToolbar = document.getElementById('fabToolbar');
+        if (!this.fabToolbar) return;
+
+        // Show/hide FAB on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Show FAB after scrolling down 300px
+            if (scrollTop > 300) {
+                this.fabToolbar.classList.add('visible');
+            } else {
+                this.fabToolbar.classList.remove('visible');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        // Back to Top
+        const fabTop = document.getElementById('fabBackToTop');
+        if (fabTop) {
+            fabTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Share button
+        const fabShare = document.querySelector('.fab-share');
+        if (fabShare) {
+            fabShare.addEventListener('click', () => this.openShareMenu());
+        }
+
+        // Reader mode
+        const readerBtn = document.getElementById('readerModeBtn');
+        if (readerBtn) {
+            readerBtn.addEventListener('click', () => this.toggleReaderMode());
+        }
+    }
+
+    /**
+     * Share Menu
+     */
+    initShareMenu() {
+        this.shareMenu = document.getElementById('shareMenu');
+        if (!this.shareMenu) return;
+
+        const closeBtn = this.shareMenu.querySelector('.share-menu-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.closeShareMenu());
+        }
+
+        // Copy link button
+        const copyBtn = document.getElementById('copyLinkBtn');
+        if (copyBtn) {
+            copyBtn.addEventListener('click', () => {
+                const url = copyBtn.getAttribute('data-url');
+                navigator.clipboard.writeText(url).then(() => {
+                    copyBtn.classList.add('copied');
+                    const span = copyBtn.querySelector('span');
+                    const originalText = span.textContent;
+                    span.textContent = 'Copied!';
+                    
+                    setTimeout(() => {
+                        copyBtn.classList.remove('copied');
+                        span.textContent = originalText;
+                    }, 2000);
+                });
+            });
+        }
+
+        // Close on backdrop click
+        this.shareMenu.addEventListener('click', (e) => {
+            if (e.target === this.shareMenu) {
+                this.closeShareMenu();
+            }
+        });
+    }
+
+    openShareMenu() {
+        if (this.shareMenu) {
+            this.shareMenu.classList.add('active');
+            if (this.backdrop) {
+                this.backdrop.classList.add('active');
+            }
+        }
+    }
+
+    closeShareMenu() {
+        if (this.shareMenu) {
+            this.shareMenu.classList.remove('active');
+            
+            // Check if sidebars are open before closing backdrop
+            const anySidebarOpen = (this.tocSidebar && this.tocSidebar.classList.contains('expanded')) ||
+                                  (this.seriesSidebar && this.seriesSidebar.classList.contains('expanded'));
+            
+            if (!anySidebarOpen && this.backdrop) {
+                this.backdrop.classList.remove('active');
+            }
+        }
+    }
+
+    /**
+     * Reader Mode
+     */
+    initReaderMode() {
+        // Check saved preference
+        const isReaderMode = localStorage.getItem('readerMode') === 'true';
+        if (isReaderMode) {
+            document.body.classList.add('reader-mode');
+            const readerBtn = document.getElementById('readerModeBtn');
+            if (readerBtn) readerBtn.classList.add('active');
+        }
+    }
+
+    toggleReaderMode() {
+        document.body.classList.toggle('reader-mode');
+        const readerBtn = document.getElementById('readerModeBtn');
+        const isActive = document.body.classList.contains('reader-mode');
+        
+        if (readerBtn) {
+            readerBtn.classList.toggle('active', isActive);
+        }
+        
+        // Save preference
+        localStorage.setItem('readerMode', isActive);
+    }
+
+    /**
+     * Keyboard Shortcuts
+     */
+    initKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Ignore if typing in input/textarea
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+            switch(e.key.toLowerCase()) {
+                case 't':
+                    e.preventDefault();
+                    this.toggleSidebar('toc');
+                    break;
+                case 's':
+                    e.preventDefault();
+                    if (this.seriesSidebar) {
+                        this.toggleSidebar('series');
+                    }
+                    break;
+                case 'r':
+                    e.preventDefault();
+                    this.toggleReaderMode();
+                    break;
+                case 'escape':
+                    this.closeSidebar('toc');
+                    this.closeSidebar('series');
+                    this.closeShareMenu();
+                    break;
+            }
+        });
+    }
+
+    /**
+     * localStorage Persistence
+     */
+    saveSidebarState(type, isOpen) {
+        localStorage.setItem(`sidebar-${type}`, isOpen);
+    }
+
+    loadSidebarState() {
+        // Auto-open sidebars on desktop if they were previously open
+        if (window.innerWidth > 992) {
+            const tocState = localStorage.getItem('sidebar-toc');
+            const seriesState = localStorage.getItem('sidebar-series');
+            
+            // Don't auto-open by default, wait for user interaction
+            // This creates a cleaner initial experience
+        }
+    }
+
+    /**
+     * Animate Progress Bar Fill
+     */
+    initProgressBarAnimation() {
+        const progressBar = document.querySelector('.progress-bar-fill');
+        if (!progressBar) return;
+
+        // Get data-progress attribute
+        const progress = progressBar.getAttribute('data-progress');
+        if (progress) {
+            setTimeout(() => {
+                progressBar.style.width = progress + '%';
+            }, 500);
+        }
+    }
+
+    /**
+     * Back to Top Button (Legacy - kept for compatibility)
      */
     initBackToTop() {
         // Create button if it doesn't exist
@@ -118,26 +460,6 @@ class BlogEnhancements {
             backToTopBtn.className = 'back-to-top';
             backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
             backToTopBtn.setAttribute('aria-label', 'Back to top');
-            document.body.appendChild(backToTopBtn);
-        }
-
-        // Show/hide on scroll
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-
-        // Scroll to top on click
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
 
     /**
      * Copy Code Button for code blocks
