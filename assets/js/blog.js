@@ -75,6 +75,20 @@ class BlogEnhancements {
             console.log('TOC button visibility:', window.getComputedStyle(tocToggle).visibility);
         }
         
+        // Show/hide toggle buttons on scroll
+        const toggleButtons = [tocToggle, seriesToggle].filter(Boolean);
+        if (toggleButtons.length > 0) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                // Show buttons after scrolling 200px past header
+                if (scrollY > 200) {
+                    toggleButtons.forEach(btn => btn.classList.add('visible'));
+                } else {
+                    toggleButtons.forEach(btn => btn.classList.remove('visible'));
+                }
+            });
+        }
+        
         // TOC Toggle
         if (tocToggle && this.tocSidebar) {
             tocToggle.addEventListener('click', (e) => {

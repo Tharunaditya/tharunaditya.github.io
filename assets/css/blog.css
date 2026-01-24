@@ -831,25 +831,36 @@
 .sidebar-toggle {
     position: fixed;
     top: 120px;
-    z-index: 1050; /* Above navbar (1000) but below modal (1100) */
+    z-index: 1050;
     width: 60px;
     height: 60px;
     border-radius: 12px;
-    border: 2px solid var(--sidebar-accent); /* Make border visible for debugging */
+    border: 2px solid var(--sidebar-accent);
     background: var(--sidebar-bg);
     backdrop-filter: blur(10px);
     color: var(--sidebar-accent);
     cursor: pointer;
-    display: flex !important; /* Force display */
+    display: flex !important;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4px;
     box-shadow: var(--shadow-lg);
     transition: all var(--transition-normal);
-    opacity: 1 !important; /* Force full opacity for debugging */
-    pointer-events: all !important; /* Force clickability */
-    visibility: visible !important; /* Force visibility */
+    pointer-events: all !important;
+    visibility: visible !important;
+    
+    /* Hidden by default, show after scroll */
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+/* Show buttons after scrolling */
+.sidebar-toggle.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
 }
 
 .sidebar-toggle:hover {
