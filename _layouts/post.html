@@ -131,13 +131,71 @@ layout: default
     </header>
 
     <div class="post-content">
+        <!-- Left Sidebar: Table of Contents (Fixed to Left Edge) -->
+        <aside class="toc-sidebar">
+            <div id="toc-container"></div>
+        </aside>
+        
+        <!-- Right Sidebar: Series Navigation (Fixed to Right Edge) -->
+        {% if page.series %}
+        <aside class="series-sidebar">
+            <div class="series-box">
+                <div class="series-header">
+                    <i class="fas fa-book-open"></i>
+                    <h3>{{ page.series }}</h3>
+                </div>
+                
+                {% if page.series_description %}
+                <div class="series-description">
+                    <p>{{ page.series_description }}</p>
+                </div>
+                {% endif %}
+                
+                <div class="series-list">
+                    {% assign series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
+                    {% assign total_parts = series_posts | size %}
+                    {% assign completed_parts = 0 %}
+                    
+                    {% for post in series_posts %}
+                    <div class="series-item {% if post.url == page.url %}current{% endif %}">
+                        <div class="series-item-number">
+                            {% if post.url == page.url %}
+                            <i class="fas fa-circle-dot"></i>
+                            {% assign completed_parts = post.series_order %}
+                            {% else %}
+                            <span class="part-num">{{ post.series_order }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="series-item-content">
+                            {% if post.url == page.url %}
+                            <span class="series-item-title current-title">{{ post.title }}</span>
+                            <span class="current-badge">You are here</span>
+                            {% else %}
+                            <a href="{{ post.url | relative_url }}" class="series-item-title">{{ post.title }}</a>
+                            {% endif %}
+                            {% if post.excerpt %}
+                            <p class="series-item-excerpt">{{ post.excerpt | strip_html | truncate: 80 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="series-progress">
+                    <div class="progress-label">
+                        <span>Series Progress</span>
+                        <span class="progress-text">{{ completed_parts }}/{{ total_parts }}</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: {{ completed_parts | times: 100 | divided_by: total_parts }}%"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        {% endif %}
+        
         <div class="container">
             <div class="post-layout-wrapper {% if page.series %}has-series{% endif %}">
-                <!-- Left Sidebar: Table of Contents -->
-                <aside class="toc-sidebar">
-                    <div id="toc-container"></div>
-                </aside>
-                
                 <!-- Main Content Area (Center) -->
                 <div class="post-main-content">
                     <div class="content-wrapper" itemprop="articleBody">
@@ -192,64 +250,6 @@ layout: default
                         </script>
                     </div>
                 </div>
-                
-                <!-- Right Sidebar: Series Navigation -->
-                {% if page.series %}
-                <aside class="series-sidebar">
-                    <div class="series-box">
-                        <div class="series-header">
-                            <i class="fas fa-book-open"></i>
-                            <h3>{{ page.series }}</h3>
-                        </div>
-                        
-                        {% if page.series_description %}
-                        <div class="series-description">
-                            <p>{{ page.series_description }}</p>
-                        </div>
-                        {% endif %}
-                        
-                        <div class="series-list">
-                            {% assign series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
-                            {% assign total_parts = series_posts | size %}
-                            {% assign completed_parts = 0 %}
-                            
-                            {% for post in series_posts %}
-                            <div class="series-item {% if post.url == page.url %}current{% endif %}">
-                                <div class="series-item-number">
-                                    {% if post.url == page.url %}
-                                    <i class="fas fa-circle-dot"></i>
-                                    {% assign completed_parts = post.series_order %}
-                                    {% else %}
-                                    <span class="part-num">{{ post.series_order }}</span>
-                                    {% endif %}
-                                </div>
-                                <div class="series-item-content">
-                                    {% if post.url == page.url %}
-                                    <span class="series-item-title current-title">{{ post.title }}</span>
-                                    <span class="current-badge">You are here</span>
-                                    {% else %}
-                                    <a href="{{ post.url | relative_url }}" class="series-item-title">{{ post.title }}</a>
-                                    {% endif %}
-                                    {% if post.excerpt %}
-                                    <p class="series-item-excerpt">{{ post.excerpt | strip_html | truncate: 80 }}</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        
-                        <div class="series-progress">
-                            <div class="progress-label">
-                                <span>Series Progress</span>
-                                <span class="progress-text">{{ completed_parts }}/{{ total_parts }}</span>
-                            </div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" style="width: {{ completed_parts | times: 100 | divided_by: total_parts }}%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-                {% endif %}
             </div>
         </div>
     </div>
