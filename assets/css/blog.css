@@ -2760,7 +2760,7 @@ code[class*="language-"] {
     display: grid;
     grid-template-columns: 300px minmax(0, 1fr); /* Default 2 columns (TOC + Content) */
     gap: 40px;
-    align-items: start;
+    align-items: start; /* KEEP START to prevent sidebars from stretching vertically */
     position: relative;
     padding-top: 40px;
     padding-bottom: 60px;
@@ -2770,29 +2770,30 @@ code[class*="language-"] {
     grid-template-columns: 300px minmax(0, 1fr) 350px; /* 3 columns when Series exists */
 }
 
-/* Common Sticky Sidebar Styles */
+/* FIX: Sticky Sidebars require height to stick within */
+/* We apply sticky to the sidebar wrapper itself now, instead of inner */
 .toc-sidebar-static,
 .series-sidebar-static {
     display: block; 
-    height: auto;
+    height: fit-content; /* Ensure it takes only needed space */
     background: transparent;
     box-shadow: none;
-    position: relative;
-    z-index: 10;
-}
-
-/* Sticky Inner Container */
-.sidebar-inner-sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 100px; /* Below navbar */
+    top: 100px; /* Stick to top */
+    z-index: 10;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    padding-right: 10px;
-    
-    /* Scrollbar styling */
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    scrollbar-width: thin; /* Firefox */
+}
+
+/* Remove inner sticky behavior as we moved it to parent */
+.sidebar-inner-sticky {
+    position: relative;
+    top: auto;
+    max-height: none;
+    overflow-y: visible;
+    padding-right: 0;
 }
 
 .sidebar-inner-sticky::-webkit-scrollbar {
