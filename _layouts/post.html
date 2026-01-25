@@ -129,214 +129,182 @@ layout: default
             {% endif %}
         </div>
     </header>
-</article>
 
-<!-- Left Sidebar: Table of Contents (Collapsible) -->
-<aside class="toc-sidebar collapsed" id="tocSidebar" aria-hidden="true">
-            <div class="sidebar-header">
-                <h3><i class="fas fa-list"></i> Table of Contents</h3>
-                <button class="sidebar-close" aria-label="Close TOC">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="toc-inner">
-                <div id="toc-container"></div>
-            </div>
-        </aside>
-        <!-- TOC Tab (Bookmark style) -->
-        <button class="sidebar-tab toc-tab" aria-label="Toggle Table of Contents" title="Table of Contents (T)">
-            <span class="tab-label">
-                <span class="tab-text">TOC</span>
-                <i class="fas fa-list tab-icon"></i>
-            </span>
-        </button>
-        
-        <!-- Right Sidebar: Series Navigation (Collapsible) -->
-        {% if page.series %}
-        <aside class="series-sidebar collapsed" id="seriesSidebar" aria-hidden="true">
-            <div class="sidebar-header">
-                <h3><i class="fas fa-book-open"></i> {{ page.series }}</h3>
-                <button class="sidebar-close" aria-label="Close Series">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="series-box">
-                {% if page.series_description %}
-                <div class="series-description">
-                    <p>{{ page.series_description }}</p>
-                </div>
-                {% endif %}
-                
-                <div class="series-progress">
-                    {% assign total_series_posts = site.posts | where: "series", page.series | size %}
-                    {% assign current_order = page.series_order | default: 1 %}
-                    <div class="progress-label">
-                        <span>Series Progress</span>
-                        <span class="progress-text">{{ current_order }}/{{ total_series_posts }}</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        {% if total_series_posts > 0 and current_order %}
-                        {% assign progress_percent = current_order | times: 100 | divided_by: total_series_posts %}
-                        <div class="progress-bar-fill" data-progress="{{ progress_percent }}"></div>
-                        {% else %}
-                        <div class="progress-bar-fill" data-progress="0"></div>
-                        {% endif %}
-                    </div>
-                </div>
-                
-                <div class="series-list">
-                    {% assign series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
-                    {% assign total_parts = series_posts | size %}
-                    
-                    {% for post in series_posts %}
-                    <div class="series-item {% if post.url == page.url %}current{% elsif post.series_order < page.series_order %}completed{% else %}pending{% endif %}">
-                        <div class="series-item-icon">
-                            {% if post.series_order < page.series_order %}
-                            <i class="fas fa-check-circle completed-icon"></i>
-                            {% elsif post.url == page.url %}
-                            <i class="fas fa-circle-dot current-icon"></i>
-                            {% else %}
-                            <i class="far fa-circle pending-icon"></i>
-                            {% endif %}
-                        </div>
-                        <div class="series-item-content">
-                            {% if post.url == page.url %}
-                            <span class="series-item-title current-title">{{ post.title }}</span>
-                            <span class="current-badge"><i class="fas fa-map-marker-alt"></i> You are here</span>
-                            {% else %}
-                            <a href="{{ post.url | relative_url }}" class="series-item-title">
-                                <span class="part-label">Part {{ post.series_order }}</span>
-                                {{ post.title }}
-                            </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+    <!-- Mobile Sidebar Toggles (Visible only on small screens) -->
+    <button class="mobile-sidebar-toggle toc-toggle" id="tocToggle" aria-label="Toggle Table of Contents">
+        <i class="fas fa-list"></i>
+    </button>
+    
+    {% if page.series %}
+    <button class="mobile-sidebar-toggle series-toggle" id="seriesToggle" aria-label="Toggle Series Navigation">
+        <i class="fas fa-book-open"></i>
+    </button>
+    {% endif %}
 
-                <!-- Quick Navigation -->
-                <div class="series-quick-nav">
-                    {% assign nav_series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
-                    {% assign prev_post = nil %}
-                    {% assign next_post = nil %}
-                    {% assign temp_prev = nil %}
-                    {% assign found_active = false %}
-                    
-                    {% for item in nav_series_posts %}
-                        {% if item.id == page.id or item.url == page.url %}
-                            {% assign prev_post = temp_prev %}
-                            {% assign found_active = true %}
-                        {% elsif found_active == true and next_post == nil %}
-                            {% assign next_post = item %}
-                        {% endif %}
-                        {% assign temp_prev = item %}
-                    {% endfor %}
-
-                    {% if prev_post and prev_post.id != page.id %}
-                        <a href="{{ prev_post.url | absolute_url }}" class="quick-nav-btn prev" style="pointer-events: auto;">
-                            <i class="fas fa-chevron-left"></i> Previous
-                        </a>
-                    {% endif %}
-                    
-                    {% if next_post and next_post.id != page.id %}
-                        <a href="{{ next_post.url | absolute_url }}" class="quick-nav-btn next" style="pointer-events: auto;">
-                            Next <i class="fas fa-chevron-right"></i>
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        </aside>
-        <!-- Series Tab (Bookmark style) -->
-        <button class="sidebar-tab series-tab" aria-label="Toggle Series Navigation" title="Series Navigation (S)">
-            <span class="tab-label">
-                <span class="tab-text">SERIES</span>
-                <i class="fas fa-book-open tab-icon"></i>
-            </span>
-        </button>
-        {% endif %}
-
-    <!-- Sidebar Backdrop (Outside container) -->
+    <!-- Sidebar Backdrop -->
     <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
-    <!-- Share Menu (Hidden by default) -->
-    <div class="share-menu" id="shareMenu">
-        <button class="share-menu-close" aria-label="Close share menu">
-            <i class="fas fa-times"></i>
-        </button>
-        <h4>Share this article</h4>
-        <div class="share-options">
-            <a href="https://twitter.com/intent/tweet?url={{ page.url | absolute_url | url_encode }}&text={{ page.title | url_encode }}" target="_blank" rel="noopener" class="share-option twitter">
-                <i class="fab fa-twitter"></i>
-                <span>Twitter</span>
-            </a>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener" class="share-option linkedin">
-                <i class="fab fa-linkedin"></i>
-                <span>LinkedIn</span>
-            </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" target="_blank" rel="noopener" class="share-option facebook">
-                <i class="fab fa-facebook"></i>
-                <span>Facebook</span>
-            </a>
-            <button class="share-option copy" id="copyLinkBtn" data-url="{{ page.url | absolute_url }}">
-                <i class="fas fa-link"></i>
-                <span>Copy Link</span>
-            </button>
+    <!-- Main Blog Layout Grid -->
+    <div class="container blog-layout-container">
+        <div class="blog-layout-grid {% if page.series %}has-series-sidebar{% endif %}">
+            
+            <!-- Left Sidebar: Table of Contents -->
+            <aside class="toc-sidebar-static" id="tocSidebarStatic">
+                <div class="sidebar-inner-sticky">
+                    <div class="sidebar-header-static">
+                        <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                    </div>
+                    <div id="toc-container-static"></div>
+                </div>
+            </aside>
+
+            <!-- Center Column: Main Content -->
+            <main class="post-main-column">
+                <div class="content-wrapper" itemprop="articleBody">
+                    {{ content }}
+                </div>
+                
+                <!-- Previous/Next Navigation (Bottom of Article) -->
+                <nav class="post-navigation">
+                    {% if page.previous.url %}
+                    <a href="{{ page.previous.url | relative_url }}" class="nav-prev">
+                        <i class="fas fa-arrow-left"></i>
+                        <div class="nav-content">
+                            <span class="nav-label">Previous</span>
+                            <span class="nav-title">{{ page.previous.title | truncate: 40 }}</span>
+                        </div>
+                    </a>
+                    {% endif %}
+                    
+                    {% if page.next.url %}
+                    <a href="{{ page.next.url | relative_url }}" class="nav-next">
+                        <div class="nav-content">
+                            <span class="nav-label">Next</span>
+                            <span class="nav-title">{{ page.next.title | truncate: 40 }}</span>
+                        </div>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    {% endif %}
+                </nav>
+            </main>
+
+            <!-- Right Sidebar: Series Navigation -->
+            {% if page.series %}
+            <aside class="series-sidebar-static" id="seriesSidebarStatic">
+                <div class="sidebar-inner-sticky">
+                    <div class="sidebar-header-static">
+                        <h3><i class="fas fa-book-open"></i> {{ page.series }}</h3>
+                    </div>
+                    <div class="series-box-static">
+                        {% if page.series_description %}
+                        <div class="series-description">
+                            <p>{{ page.series_description }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="series-progress">
+                            {% assign total_series_posts = site.posts | where: "series", page.series | size %}
+                            {% assign current_order = page.series_order | default: 1 %}
+                            <div class="progress-label">
+                                <span>Series Progress</span>
+                                <span class="progress-text">{{ current_order }}/{{ total_series_posts }}</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                {% if total_series_posts > 0 and current_order %}
+                                {% assign progress_percent = current_order | times: 100 | divided_by: total_series_posts %}
+                                <div class="progress-bar-fill" data-progress="{{ progress_percent }}"></div>
+                                {% else %}
+                                <div class="progress-bar-fill" data-progress="0"></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="series-list">
+                            {% assign series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
+                            
+                            {% for post in series_posts %}
+                            <div class="series-item {% if post.url == page.url %}current{% elsif post.series_order < page.series_order %}completed{% else %}pending{% endif %}">
+                                <div class="series-item-icon">
+                                    {% if post.series_order < page.series_order %}
+                                    <i class="fas fa-check-circle completed-icon"></i>
+                                    {% elsif post.url == page.url %}
+                                    <i class="fas fa-circle-dot current-icon"></i>
+                                    {% else %}
+                                    <i class="far fa-circle pending-icon"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="series-item-content">
+                                    {% if post.url == page.url %}
+                                    <span class="series-item-title current-title">{{ post.title }}</span>
+                                    <span class="current-badge"><i class="fas fa-map-marker-alt"></i> You are here</span>
+                                    {% else %}
+                                    <a href="{{ post.url | relative_url }}" class="series-item-title">
+                                        <span class="part-label">Part {{ post.series_order }}</span>
+                                        {{ post.title }}
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Quick Navigation -->
+                        <div class="series-quick-nav">
+                            {% assign nav_series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
+                            {% assign prev_post = nil %}
+                            {% assign next_post = nil %}
+                            {% assign temp_prev = nil %}
+                            {% assign found_active = false %}
+                            
+                            {% for item in nav_series_posts %}
+                                {% if item.id == page.id or item.url == page.url %}
+                                    {% assign prev_post = temp_prev %}
+                                    {% assign found_active = true %}
+                                {% elsif found_active == true and next_post == nil %}
+                                    {% assign next_post = item %}
+                                {% endif %}
+                                {% assign temp_prev = item %}
+                            {% endfor %}
+
+                            {% if prev_post and prev_post.id != page.id %}
+                                <a href="{{ prev_post.url | absolute_url }}" class="quick-nav-btn prev" style="pointer-events: auto;">
+                                    <i class="fas fa-chevron-left"></i> Previous
+                                </a>
+                            {% endif %}
+                            
+                            {% if next_post and next_post.id != page.id %}
+                                <a href="{{ next_post.url | absolute_url }}" class="quick-nav-btn next" style="pointer-events: auto;">
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            {% endif %}
         </div>
     </div>
 
-<article class="blog-post-content" itemscope itemtype="https://schema.org/BlogPosting">
-    <div class="post-content {% if page.series %}has-series{% endif %}">
-        <!-- Main Content Area (Center) -->
-        <div class="post-main-area">
-            <div class="container">
-                <div class="post-main-content">
-                    <div class="content-wrapper" itemprop="articleBody">
-                        {{ content }}
-                    </div>
-                    
-                    <!-- Previous/Next Navigation -->
-                    <nav class="post-navigation">
-                        {% if page.previous.url %}
-                        <a href="{{ page.previous.url | relative_url }}" class="nav-prev">
-                            <i class="fas fa-arrow-left"></i>
-                            <div class="nav-content">
-                                <span class="nav-label">Previous</span>
-                                <span class="nav-title">{{ page.previous.title | truncate: 40 }}</span>
-                            </div>
-                        </a>
-                        {% endif %}
-                        
-                        {% if page.next.url %}
-                        <a href="{{ page.next.url | relative_url }}" class="nav-next">
-                            <div class="nav-content">
-                                <span class="nav-label">Next</span>
-                                <span class="nav-title">{{ page.next.title | truncate: 40 }}</span>
-                            </div>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                        {% endif %}
-                    </nav>
-                    
-                    <!-- Comments Section -->
-                    <div class="comments-section">
-                        <h3>💬 Comments</h3>
-                        <script src="https://giscus.app/client.js"
-                                data-repo="Tharunaditya/tharunaditya.github.io"
-                                data-repo-id="MDEwOlJlcG9zaXRvcnkzODQyMTQ1MzY="
-                                data-category="Announcements"
-                                data-category-id="DIC_kwDOFuamCM4C1VwK"
-                                data-mapping="pathname"
-                                data-strict="0"
-                                data-reactions-enabled="1"
-                                data-emit-metadata="0"
-                                data-input-position="bottom"
-                                data-theme="dark"
-                                data-lang="en"
-                                crossorigin="anonymous"
-                                async>
-                        </script>
-                    </div>
-                </div>
+    <!-- Bottom Section: Comments & Footer -->
+    <div class="container">
+        <div class="post-bottom-section">
+            <div class="comments-section">
+                <h3>💬 Comments</h3>
+                <script src="https://giscus.app/client.js"
+                        data-repo="Tharunaditya/tharunaditya.github.io"
+                        data-repo-id="MDEwOlJlcG9zaXRvcnkzODQyMTQ1MzY="
+                        data-category="Announcements"
+                        data-category-id="DIC_kwDOFuamCM4C1VwK"
+                        data-mapping="pathname"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="dark"
+                        data-lang="en"
+                        crossorigin="anonymous"
+                        async>
+                </script>
             </div>
         </div>
     </div>

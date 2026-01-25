@@ -53,88 +53,66 @@ class BlogEnhancements {
      * Collapsible Sidebars with Smooth Animations
      */
     initCollapsibleSidebars() {
-        this.tocSidebar = document.getElementById('tocSidebar');
-        this.seriesSidebar = document.getElementById('seriesSidebar');
+        // Target updated static sidebars
+        this.tocSidebar = document.getElementById('tocSidebarStatic') || document.getElementById('tocSidebar');
+        this.seriesSidebar = document.getElementById('seriesSidebarStatic') || document.getElementById('seriesSidebar');
         this.backdrop = document.getElementById('sidebarBackdrop');
         
-        const tocTab = document.querySelector('.toc-tab');
-        const seriesTab = document.querySelector('.series-tab');
+        // Target new mobile toggles
+        const tocToggle = document.getElementById('tocToggle') || document.querySelector('.toc-tab');
+        const seriesToggle = document.getElementById('seriesToggle') || document.querySelector('.series-tab');
         
-        console.log('=== SIDEBAR DEBUG ===');
-        console.log('TOC Sidebar:', this.tocSidebar);
-        console.log('Series Sidebar:', this.seriesSidebar);
-        console.log('TOC Tab:', tocTab);
-        console.log('Series Tab:', seriesTab);
-        
-        // TOC Tab Click
-        if (tocTab && this.tocSidebar) {
-            tocTab.addEventListener('click', (e) => {
+        // TOC Toggle Click
+        if (tocToggle && this.tocSidebar) {
+            tocToggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('🔵 TOC TAB CLICKED!');
                 this.toggleSidebar('toc');
             });
             
-            const tocClose = this.tocSidebar.querySelector('.sidebar-close');
-            if (tocClose) {
-                tocClose.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('🔵 TOC CLOSE CLICKED');
-                    this.closeSidebar('toc');
-                });
-            }
-        } else {
-            console.error('❌ TOC Tab or Sidebar not found!');
+            // Close buttons inside sidebar (if any - though we removed them in static HTML, we might add them via JS for mobile)
+             const tocClose = this.tocSidebar.querySelector('.sidebar-close');
+             if (tocClose) {
+                 tocClose.addEventListener('click', (e) => { 
+                     e.preventDefault(); 
+                     e.stopPropagation(); 
+                     this.closeSidebar('toc'); 
+                 });
+             }
         }
         
-        // Series Tab Click
-        if (seriesTab && this.seriesSidebar) {
-            seriesTab.addEventListener('click', (e) => {
+        // Series Toggle Click
+        if (seriesToggle && this.seriesSidebar) {
+            seriesToggle.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('🟠 SERIES TAB CLICKED!');
                 this.toggleSidebar('series');
             });
-            
-            const seriesClose = this.seriesSidebar.querySelector('.sidebar-close');
-            if (seriesClose) {
-                seriesClose.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('🟠 SERIES CLOSE CLICKED');
-                    this.closeSidebar('series');
-                });
-            }
-        } else {
-            console.log('ℹ️ Series Tab or Sidebar not found (may not exist on this page)');
+
+             const seriesClose = this.seriesSidebar.querySelector('.sidebar-close');
+             if (seriesClose) {
+                 seriesClose.addEventListener('click', (e) => { 
+                     e.preventDefault(); 
+                     e.stopPropagation(); 
+                     this.closeSidebar('series'); 
+                 });
+             }
         }
         
-        // Backdrop click to close - DISABLE (User prefers manual close)
-        /*
+        // Backdrop click to close (Standard behavior for mobile drawers)
         if (this.backdrop) {
             this.backdrop.addEventListener('click', () => {
                 this.closeSidebar('toc');
                 this.closeSidebar('series');
             });
         }
-        */
-
-        // Load saved state from localStorage
-        this.loadSidebarState();
     }
 
     toggleSidebar(type) {
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
-        const toggle = document.querySelector(`.${type}-toggle`);
+        if (!sidebar) return;
         
-        if (!sidebar) {
-            console.error(`❌ Sidebar not found for type: ${type}`);
-            return;
-        }
-        
-        const isExpanded = sidebar.classList.contains('expanded');
-        console.log(`Toggle ${type}: currently ${isExpanded ? 'EXPANDED' : 'COLLAPSED'}`);
+        const isExpanded = sidebar.classList.contains('mobile-expanded') || sidebar.classList.contains('expanded');
         
         if (isExpanded) {
             this.closeSidebar(type);
@@ -145,42 +123,39 @@ class BlogEnhancements {
 
     openSidebar(type) {
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
-        
         if (!sidebar) return;
         
-        console.log(`✅ OPENING ${type} sidebar`);
-        
-        sidebar.classList.remove('collapsed');
-        sidebar.classList.add('expanded');
+        // Use 'mobile-expanded' for clarity on static sidebars, 'expanded' for legacy support
+        sidebar.classList.add('mobile-expanded');
+        sidebar.classList.add('expanded'); 
         sidebar.setAttribute('aria-hidden', 'false');
         
         if (this.backdrop) {
             this.backdrop.classList.add('active');
         }
         
-        // Save state
-        this.saveSidebarState(type, true);
+        // Disable body scroll on mobile when sidebar is open
+        if (window.innerWidth < 1400) {
+            document.body.style.overflow = 'hidden';
+        }
     }
 
     closeSidebar(type) {
         const sidebar = type === 'toc' ? this.tocSidebar : this.seriesSidebar;
-        
         if (!sidebar) return;
         
+        sidebar.classList.remove('mobile-expanded');
         sidebar.classList.remove('expanded');
-        sidebar.classList.add('collapsed');
         sidebar.setAttribute('aria-hidden', 'true');
         
         // Close backdrop if both sidebars are closed
-        const bothClosed = (!this.tocSidebar || this.tocSidebar.classList.contains('collapsed')) &&
-                           (!this.seriesSidebar || this.seriesSidebar.classList.contains('collapsed'));
+        const tocClosed = !this.tocSidebar || (!this.tocSidebar.classList.contains('mobile-expanded') && !this.tocSidebar.classList.contains('expanded'));
+        const seriesClosed = !this.seriesSidebar || (!this.seriesSidebar.classList.contains('mobile-expanded') && !this.seriesSidebar.classList.contains('expanded'));
         
-        if (bothClosed && this.backdrop) {
+        if (tocClosed && seriesClosed && this.backdrop) {
             this.backdrop.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scroll
         }
-        
-        // Save state
-        this.saveSidebarState(type, false);
     }
 
     /**
@@ -188,22 +163,35 @@ class BlogEnhancements {
      */
     initTableOfContents() {
         const contentWrapper = document.querySelector('.content-wrapper');
-        const tocContainer = document.getElementById('toc-container');
+        // Check for both static (new) and dynamic (old) containers
+        const tocContainer = document.getElementById('toc-container-static') || document.getElementById('toc-container');
         
         if (!contentWrapper || !tocContainer) return;
 
         const headings = contentWrapper.querySelectorAll('h2, h3');
         if (headings.length < 2) return; // Show TOC if there are 2+ headings
 
-        const tocHTML = `
-            <div class="toc-wrapper">
-                <h3 class="toc-title"><i class="fas fa-list"></i> Table of Contents</h3>
-                <ul class="toc-list" id="toc-list"></ul>
-            </div>
-        `;
-        tocContainer.innerHTML = tocHTML;
+        // If using static container, we don't need the wrapper/title as it's structurally outside
+        const isStatic = tocContainer.id === 'toc-container-static';
+        
+        let tocListContainer;
 
-        const tocList = document.getElementById('toc-list');
+        if (isStatic) {
+            // New Layout: Just inject the list
+            tocContainer.innerHTML = '<ul class="toc-list" id="toc-list"></ul>';
+            tocListContainer = document.getElementById('toc-list');
+        } else {
+             // Old Layout: Inject wrapper + title
+            const tocHTML = `
+                <div class="toc-wrapper">
+                    <h3 class="toc-title"><i class="fas fa-list"></i> Table of Contents</h3>
+                    <ul class="toc-list" id="toc-list"></ul>
+                </div>
+            `;
+            tocContainer.innerHTML = tocHTML;
+            tocListContainer = document.getElementById('toc-list');
+        }
+
         let tocContent = '';
 
         headings.forEach((heading, index) => {
@@ -215,19 +203,28 @@ class BlogEnhancements {
             tocContent += `<li ${listClass}><a href="#${id}">${heading.textContent}</a></li>`;
         });
 
-        tocList.innerHTML = tocContent;
+        tocListContainer.innerHTML = tocContent;
 
         // Smooth scroll for TOC links
-        tocList.querySelectorAll('a').forEach(link => {
+        tocListContainer.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const targetId = link.getAttribute('href').substring(1);
                 const target = document.getElementById(targetId);
+                
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Update offset for sticky header
+                    const headerOffset = 120; // Increased offset for safe clearing
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
                     
-                    // Close sidebar on mobile after click
-                    if (window.innerWidth <= 992) {
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close sidebar on mobile after click (only if using old sidebar drawer)
+                    if (!isStatic && window.innerWidth <= 992) {
                         this.closeSidebar('toc');
                     }
                 }
