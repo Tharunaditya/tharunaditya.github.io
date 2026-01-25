@@ -1044,7 +1044,7 @@
     gap: 8px;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.3);
     transition: all var(--transition-normal);
-    z-index: 1200;
+    z-index: 980; /* Below navbar (1000) and same level as sidebars */
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -1109,7 +1109,7 @@
 .sidebar-toggle {
     position: fixed;
     top: 120px;
-    z-index: 1050;
+    z-index: 950; /* Reduced from 1050 to be below navbar */
     width: 60px;
     height: 60px;
     border-radius: 12px;
@@ -1220,7 +1220,7 @@
     box-shadow: var(--shadow-xl);
     z-index: 990; /* Below navbar (1000) */
     overflow-y: auto;
-    overflow-x: visible;
+    overflow-x: hidden;
     padding: 0;
     transition: transform var(--transition-normal);
     
