@@ -86,9 +86,14 @@ title: Blog
         </section>
         {% endif %}
 
-        <!-- Blog Grid (Non-series posts) -->
+        <!-- Individual Posts Section -->
         {% assign non_series_posts = site.posts | where_exp: "post", "post.series == nil" %}
-        <div class="blog-grid">
+        <section class="posts-section">
+            <div class="posts-section-header">
+                <h3><i class="fas fa-file-alt"></i> Individual Posts</h3>
+                <p>Standalone articles and one-off explorations.</p>
+            </div>
+            <div class="blog-grid">
             {% for post in non_series_posts %}
             <article class="blog-card glass-card">
                 {% if post.image %}
@@ -156,6 +161,7 @@ title: Blog
                 <a href="/admin" class="btn btn-primary">Write Your First Post</a>
             </div>
             {% endif %}
-        </div>
+            </div>
+        </section>
     </div>
 </section>
