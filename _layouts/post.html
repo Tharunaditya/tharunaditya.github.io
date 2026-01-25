@@ -282,10 +282,10 @@ layout: default
                     
                     <!-- Floating Action Toolbar -->
                     <div class="fab-toolbar" id="fabToolbar">
-                        <button class="fab-btn fab-share" title="Share this article" aria-label="Share">
+                        <button class="fab-btn fab-share" id="fabShare" title="Share this article" aria-label="Share">
                             <i class="fas fa-share-alt"></i>
                         </button>
-                        <button class="fab-btn fab-comment" title="Jump to comments (💬)" aria-label="Go to comments" onclick="document.querySelector('.comments-section').scrollIntoView({behavior: 'smooth'})">
+                        <button class="fab-btn fab-comment" id="fabComment" title="Jump to comments (💬)" aria-label="Go to comments">
                             <i class="fas fa-comment"></i>
                         </button>
                         <button class="fab-btn fab-print" title="Print or save as PDF (🖨️)" aria-label="Print" onclick="window.print()">

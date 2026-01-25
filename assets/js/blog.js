@@ -20,8 +20,8 @@ class BlogEnhancements {
         this.initCollapsibleSidebars();
         this.initTableOfContents();
         this.initScrollSpy();
-        this.initFloatingActionBar();
         this.initShareMenu();
+        this.initFloatingActionBar();
         this.initReaderMode();
         this.initKeyboardShortcuts();
         this.initBackToTop();
@@ -307,13 +307,24 @@ class BlogEnhancements {
         }
 
         // Share button
-        const fabShare = document.querySelector('.fab-share');
+        const fabShare = document.getElementById('fabShare');
         if (fabShare) {
             fabShare.addEventListener('click', () => {
                 if (this.shareMenu && this.shareMenu.classList.contains('active')) {
                     this.closeShareMenu();
                 } else {
                     this.openShareMenu();
+                }
+            });
+        }
+
+        // Comment button
+        const fabComment = document.getElementById('fabComment');
+        if (fabComment) {
+            fabComment.addEventListener('click', () => {
+                const comments = document.querySelector('.comments-section');
+                if (comments) {
+                    comments.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         }
