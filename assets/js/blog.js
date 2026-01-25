@@ -110,13 +110,15 @@ class BlogEnhancements {
             console.log('ℹ️ Series Tab or Sidebar not found (may not exist on this page)');
         }
         
-        // Backdrop click to close
+        // Backdrop click to close - DISABLE (User prefers manual close)
+        /*
         if (this.backdrop) {
             this.backdrop.addEventListener('click', () => {
                 this.closeSidebar('toc');
                 this.closeSidebar('series');
             });
         }
+        */
 
         // Load saved state from localStorage
         this.loadSidebarState();
