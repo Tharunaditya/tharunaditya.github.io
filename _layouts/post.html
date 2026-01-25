@@ -203,24 +203,26 @@ layout: default
                         {% endif %}
                         
                         <div class="series-progress">
-                            {% assign total_series_posts = site.posts | where: "series", page.series | size %}
+                            {% assign series_posts_list = site.posts | where: "series", page.series %}
+                            {% assign total_series_posts = series_posts_list | size %}
                             {% assign current_order = page.series_order | default: 1 %}
+                            
                             <div class="progress-label">
                                 <span>Series Progress</span>
                                 <span class="progress-text">{{ current_order }}/{{ total_series_posts }}</span>
                             </div>
                             <div class="progress-bar-bg">
-                                {% if total_series_posts > 0 and current_order %}
-                                {% assign progress_percent = current_order | times: 100 | divided_by: total_series_posts %}
-                                <div class="progress-bar-fill" data-progress="{{ progress_percent }}"></div>
+                                {% if total_series_posts > 0 %}
+                                    {% assign progress_percent = current_order | times: 100 | divided_by: total_series_posts %}
+                                    <div class="progress-bar-fill" data-progress="{{ progress_percent }}"></div>
                                 {% else %}
-                                <div class="progress-bar-fill" data-progress="0"></div>
+                                    <div class="progress-bar-fill" data-progress="0"></div>
                                 {% endif %}
                             </div>
                         </div>
                         
                         <div class="series-list">
-                            {% assign series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
+                            {% assign series_posts = series_posts_list | sort: "series_order" %}
                             
                             {% for post in series_posts %}
                             <div class="series-item {% if post.url == page.url %}current{% elsif post.series_order < page.series_order %}completed{% else %}pending{% endif %}">
