@@ -284,8 +284,7 @@ class BlogEnhancements {
         if (!this.fabToolbar) return;
 
         // Show/hide FAB on scroll
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', () => {
+        const updateFabVisibility = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             // Show FAB after scrolling down 300px
@@ -294,9 +293,10 @@ class BlogEnhancements {
             } else {
                 this.fabToolbar.classList.remove('visible');
             }
-            
-            lastScrollTop = scrollTop;
-        });
+        };
+
+        updateFabVisibility();
+        window.addEventListener('scroll', updateFabVisibility);
 
         // Back to Top
         const fabTop = document.getElementById('fabBackToTop');
