@@ -216,36 +216,31 @@ layout: default
 
                 <!-- Quick Navigation -->
                 <div class="series-quick-nav">
-                    {% assign current_index = nil %}
+                    {% assign prev_post = nil %}
+                    {% assign next_post = nil %}
+                    {% assign found_current = false %}
+                    {% assign temp_prev = nil %}
+                    
                     {% for s_post in series_posts %}
                         {% if s_post.id == page.id %}
-                            {% assign current_index = forloop.index0 %}
+                            {% assign found_current = true %}
+                            {% assign prev_post = temp_prev %}
+                        {% elsif found_current == true and next_post == nil %}
+                            {% assign next_post = s_post %}
                         {% endif %}
+                        {% assign temp_prev = s_post %}
                     {% endfor %}
-                    
-                    {% assign total_parts = series_posts | size %}
-                    {% assign last_index = total_parts | minus: 1 %}
-                    
-                    {% if current_index != nil %}
-                        {% assign prev_index = current_index | minus: 1 %}
-                        {% if prev_index >= 0 %}
-                            {% assign prev_post = series_posts[prev_index] %}
-                            {% if prev_post %}
-                            <a href="{{ prev_post.url | relative_url }}" class="quick-nav-btn prev">
-                                <i class="fas fa-chevron-left"></i> Previous
-                            </a>
-                            {% endif %}
-                        {% endif %}
 
-                        {% assign next_index = current_index | plus: 1 %}
-                        {% if next_index <= last_index %}
-                            {% assign next_post = series_posts[next_index] %}
-                            {% if next_post %}
-                            <a href="{{ next_post.url | relative_url }}" class="quick-nav-btn next">
-                                Next <i class="fas fa-chevron-right"></i>
-                            </a>
-                            {% endif %}
-                        {% endif %}
+                    {% if prev_post %}
+                        <a href="{{ prev_post.url | relative_url }}" class="quick-nav-btn prev">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </a>
+                    {% endif %}
+                    
+                    {% if next_post %}
+                        <a href="{{ next_post.url | relative_url }}" class="quick-nav-btn next">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </a>
                     {% endif %}
                 </div>
             </div>
