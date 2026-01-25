@@ -2104,10 +2104,10 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 1;
+    transform: translateY(0);
     transition: all var(--transition-normal);
-    pointer-events: none;
+    pointer-events: all;
 }
 
 .fab-toolbar.visible {
