@@ -2929,3 +2929,161 @@ code[class*="language-"] {
         margin-top: 40px; /* Space for close button if we had one, or just breathing room */
     }
 }
+
+/* ============================================
+   ADVANCED TYPOGRAPHY & ELEMENT STYLING
+============================================ */
+
+/* Text Selection */
+::selection {
+    background: rgba(0, 255, 159, 0.3);
+    color: #fff;
+}
+
+/* Horizontal Rule */
+.post-content hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+    margin: 4rem 0;
+}
+
+/* Keyboard Inputs <kbd> */
+.post-content kbd {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: var(--font-code);
+    font-size: 0.85em;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+/* Task Lists [ ] */
+.post-content .task-list-item {
+    list-style: none;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.post-content .task-list-item-checkbox {
+    margin: 0;
+    appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    border: 1px solid var(--accent-primary);
+    border-radius: 4px;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+}
+
+.post-content .task-list-item-checkbox::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--accent-primary);
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.post-content .task-list-item-checkbox:checked::before {
+    transform: scale(1);
+}
+
+/* Enhanced Tables */
+.post-content table {
+    width: 100%;
+    margin: 2.5rem 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-content th {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--accent-primary);
+    font-weight: 700;
+    padding: 1.2rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.post-content td {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.01);
+    transition: background 0.2s;
+}
+
+.post-content tr:last-child td {
+    border-bottom: none;
+}
+
+.post-content tr:hover td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Scrollable Tables wrapper (for mobile) */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 2rem 0;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Callout Boxes / Admonitions (Blockquote variants) */
+/* Usage: > [!NOTE] Text */
+.post-content blockquote.callout {
+    border-left-width: 5px;
+    position: relative;
+    padding-left: 3.5rem;
+}
+
+.post-content blockquote.callout::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 1.2rem;
+    top: 1.8rem;
+    font-size: 1.2rem;
+}
+
+/* Note */
+.post-content blockquote.note {
+    border-color: #3b82f6;
+    background: rgba(59, 130, 246, 0.05);
+}
+.post-content blockquote.note::before { content: "\f05a"; color: #3b82f6; }
+
+/* Warning */
+.post-content blockquote.warning {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.05);
+}
+.post-content blockquote.warning::before { content: "\f071"; color: #f59e0b; }
+
+/* Tip */
+.post-content blockquote.tip {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
+}
+.post-content blockquote.tip::before { content: "\f0eb"; color: #10b981; }
+
+/* Danger */
+.post-content blockquote.danger {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+.post-content blockquote.danger::before { content: "\f00d"; color: #ef4444; }
+
