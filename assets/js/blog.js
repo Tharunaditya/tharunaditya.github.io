@@ -106,6 +106,23 @@ class BlogEnhancements {
                 this.closeSidebar('series');
             });
         }
+
+        // Generic Mobile: Close sidebar when ANY link inside it is clicked
+        // This ensures better UX for TOC anchors and Series navigation
+        [this.tocSidebar, this.seriesSidebar].forEach(sidebar => {
+            if (sidebar) {
+                sidebar.addEventListener('click', (e) => {
+                    // Check if clicked element is a link or inside a link
+                    if (e.target.closest('a')) {
+                        // Check if we are in mobile/tablet mode (1400px breakpoint from CSS)
+                        if (window.innerWidth <= 1400) {
+                            if (sidebar === this.tocSidebar) this.closeSidebar('toc');
+                            if (sidebar === this.seriesSidebar) this.closeSidebar('series');
+                        }
+                    }
+                });
+            }
+        });
     }
 
     toggleSidebar(type) {
@@ -223,10 +240,14 @@ class BlogEnhancements {
                         behavior: 'smooth'
                     });
                     
-                    // Close sidebar on mobile after click (only if using old sidebar drawer)
-                    if (!isStatic && window.innerWidth <= 992) {
+                    // Close sidebar on mobile after click
+                    // Now handled by generic listener in initCollapsibleSidebars
+                    // leaving empty for reference or specific overriding if needed
+                    /*
+                    if (window.innerWidth <= 1400) {
                         this.closeSidebar('toc');
                     }
+                    */
                 }
             });
         });

@@ -3154,3 +3154,44 @@ code[class*="language-"] {
 .giscus {
     margin-top: 1rem;
 }
+
+
+/* ============================================
+   MOBILE TYPOGRAPHY REFINEMENTS
+============================================ */
+@media (max-width: 768px) {
+    .content-wrapper h1 {
+        font-size: 1.8rem; /* Smaller H1 for mobile */
+        margin-top: 2rem;
+    }
+
+    .content-wrapper h2 {
+        font-size: 1.5rem;
+    }
+
+    .content-wrapper h3 {
+        font-size: 1.25rem;
+    }
+
+    .content-wrapper p, 
+    .content-wrapper li {
+        font-size: 1rem; /* Standard readable size */
+        line-height: 1.7;
+    }
+
+    .blog-layout-container {
+        padding: 0 15px; /* Slightly less padding on small screens */
+    }
+
+    .blog-layout-grid {
+        padding-top: 20px;
+        padding-bottom: 40px;
+    }
+    
+    /* Ensure sidebars cover full width on small phones */
+    .toc-sidebar-static,
+    .series-sidebar-static {
+        width: 85vw;
+        max-width: 300px;
+    }
+}
