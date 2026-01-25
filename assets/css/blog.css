@@ -858,10 +858,12 @@
 }
 
 .sidebar-tab .tab-label {
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
+    flex-direction: row;
     align-items: center;
     gap: 6px;
+    writing-mode: horizontal-tb;
+    transform: rotate(-90deg);
 }
 
 /* TOC Tab - sticks out from left sidebar */
