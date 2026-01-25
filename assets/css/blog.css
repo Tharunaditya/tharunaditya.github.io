@@ -1290,12 +1290,6 @@
     transform: translateX(0);
 }
 
-/* Collapsed state - disable inner content only (tabs remain clickable) */
-.toc-sidebar.collapsed .toc-inner,
-.series-sidebar.collapsed .series-box {
-    pointer-events: none;
-}
-
 .toc-sidebar.expanded,
 .series-sidebar.expanded {
     pointer-events: all;
