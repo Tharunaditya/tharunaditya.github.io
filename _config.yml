@@ -25,6 +25,7 @@ social:
     - https://instagram.com/adityaanuganti
 
 # Blog Settings
+enable_blog: false
 paginate: 10
 paginate_path: "/blog/page:num/"
 
