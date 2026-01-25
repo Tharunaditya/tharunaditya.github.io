@@ -2,6 +2,9 @@
 layout: default
 ---
 
+{% if site.enable_blog %}
+
+
 <!-- JSON-LD Structured Data for Blog Post -->
 <script type="application/ld+json">
 {
@@ -342,3 +345,39 @@ layout: default
         </div>
     </footer>
 </article>
+
+{% else %}
+
+<!-- Maintenance / Disabled View -->
+<section class="maintenance-section">
+    <div class="container">
+        <div class="maintenance-content" style="text-align: center; padding: 150px 0;">
+             <div style="font-size: 5rem; color: #00ff41; margin-bottom: 2rem; animation: pulse 2s infinite;">
+                <i class="fas fa-hammer"></i>
+            </div>
+            <h1 style="font-size: 3rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">Blog Unavailable</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #a0a0a0;">
+                Tharunaditya Anuganti is working hard on this soon he will announce the blog.
+            </p>
+            <div style="margin-top: 3rem;">
+                <a href="{{ '/' | relative_url }}" class="btn" style="padding: 12px 30px; border: 1px solid #00ff41; color: #00ff41; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; text-transform: uppercase; font-weight: bold; letter-spacing: 1px;">
+                    <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Back to Home
+                </a>
+            </div>
+             <style>
+                @keyframes pulse {
+                    0% { transform: scale(1); opacity: 1; text-shadow: 0 0 10px #00ff41; }
+                    50% { transform: scale(1.1); opacity: 0.8; text-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41; }
+                    100% { transform: scale(1); opacity: 1; text-shadow: 0 0 10px #00ff41; }
+                }
+                .btn:hover {
+                    background: #00ff41;
+                    color: #000 !important;
+                    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+                }
+            </style>
+        </div>
+    </div>
+</section>
+
+{% endif %}
