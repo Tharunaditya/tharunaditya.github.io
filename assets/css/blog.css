@@ -1212,13 +1212,13 @@
 .toc-sidebar,
 .series-sidebar {
     position: fixed;
-    top: 0;
+    top: 80px; /* Offset to sit below navbar */
     width: var(--sidebar-width);
-    height: 100vh;
+    height: calc(100vh - 80px); /* Adjust height to fit below navbar */
     background: #0f0f23; /* Solid background - No transparency */
     backdrop-filter: none; /* No blur effect */
     box-shadow: var(--shadow-xl);
-    z-index: 1040; /* Above navbar (1000), below toggle buttons (1050) */
+    z-index: 990; /* Below navbar (1000) */
     overflow-y: auto;
     overflow-x: visible;
     padding: 0;
