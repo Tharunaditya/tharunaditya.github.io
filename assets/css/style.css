@@ -21,9 +21,9 @@
     --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
     
     /* Typography */
-    --font-primary: 'Fira Code', 'Share Tech Mono', 'Courier New', monospace;
-    --font-heading: 'Orbitron', 'Share Tech Mono', monospace;
-    --font-code: 'Fira Code', 'Courier New', monospace;
+    --font-primary: 'Inter', 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Manrope', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-code: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
     
     /* Spacing */
     --spacing-xs: 0.5rem;
