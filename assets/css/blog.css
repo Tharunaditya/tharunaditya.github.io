@@ -1364,20 +1364,6 @@
         grid-template-columns: 1fr;
     }
     
-    /* FAB toolbar adjustments */
-    .fab-toolbar {
-        right: 20px;
-        bottom: 20px;
-    }
-    
-    .fab-btn {
-        width: 48px;
-        height: 48px;
-    }
-    
-    .fab-btn i {
-        font-size: 1rem;
-    }
 }
 
 @media (max-width: 768px) {
@@ -2093,103 +2079,6 @@
     border-color: var(--success);
 }
 
-/* ============================================
-   FLOATING ACTION TOOLBAR (FAB)
-============================================ */
-.fab-toolbar {
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    z-index: 1050; /* Same as toggle buttons */
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    opacity: 1;
-    transform: translateY(0);
-    transition: all var(--transition-normal);
-    pointer-events: all;
-}
-
-.fab-toolbar.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
-}
-
-.fab-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: none;
-    background: var(--sidebar-bg);
-    backdrop-filter: blur(10px);
-    color: var(--text-primary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-lg);
-    transition: all var(--transition-fast);
-    position: relative;
-}
-
-.fab-btn::before {
-    content: attr(title);
-    position: absolute;
-    right: calc(100% + 12px);
-    background: rgba(15, 15, 35, 0.95);
-    color: white;
-    padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-fast);
-    box-shadow: var(--shadow-md);
-}
-
-.fab-btn:hover::before {
-    opacity: 1;
-}
-
-.fab-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: var(--shadow-xl);
-}
-
-.fab-btn:active {
-    transform: scale(0.95);
-}
-
-.fab-btn i {
-    font-size: 1.2rem;
-}
-
-/* Specific FAB button colors */
-.fab-share {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.fab-comment {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.fab-print {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.fab-reader {
-    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-}
-
-.fab-reader.active {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-}
-
-.fab-top {
-    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
-}
 
 /* Share Menu */
 .share-menu {

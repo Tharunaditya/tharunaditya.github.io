@@ -21,7 +21,6 @@ class BlogEnhancements {
         this.initTableOfContents();
         this.initScrollSpy();
         this.initShareMenu();
-        this.initFloatingActionBar();
         this.initReaderMode();
         this.initKeyboardShortcuts();
         this.initBackToTop();
@@ -274,66 +273,6 @@ class BlogEnhancements {
         headings.forEach(heading => {
             this.intersectionObserver.observe(heading);
         });
-    }
-
-    /**
-     * Floating Action Bar
-     */
-    initFloatingActionBar() {
-        this.fabToolbar = document.getElementById('fabToolbar');
-        if (!this.fabToolbar) return;
-
-        // Show/hide FAB on scroll
-        const updateFabVisibility = () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Show FAB after scrolling down 300px
-            if (scrollTop > 300) {
-                this.fabToolbar.classList.add('visible');
-            } else {
-                this.fabToolbar.classList.remove('visible');
-            }
-        };
-
-        updateFabVisibility();
-        window.addEventListener('scroll', updateFabVisibility);
-
-        // Back to Top
-        const fabTop = document.getElementById('fabBackToTop');
-        if (fabTop) {
-            fabTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
-
-        // Share button
-        const fabShare = document.getElementById('fabShare');
-        if (fabShare) {
-            fabShare.addEventListener('click', () => {
-                if (this.shareMenu && this.shareMenu.classList.contains('active')) {
-                    this.closeShareMenu();
-                } else {
-                    this.openShareMenu();
-                }
-            });
-        }
-
-        // Comment button
-        const fabComment = document.getElementById('fabComment');
-        if (fabComment) {
-            fabComment.addEventListener('click', () => {
-                const comments = document.querySelector('.comments-section');
-                if (comments) {
-                    comments.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        }
-
-        // Reader mode
-        const readerBtn = document.getElementById('readerModeBtn');
-        if (readerBtn) {
-            readerBtn.addEventListener('click', () => this.toggleReaderMode());
-        }
     }
 
     /**
