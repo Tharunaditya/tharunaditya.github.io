@@ -1790,3 +1790,53 @@ a:focus-visible {
         gap: 2rem;
     }
 }
+
+
+/* Footer Profile Customization */
+.footer-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-primary);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+.footer-profile-info h3 {
+    font-size: 1.25rem !important; /* Override generic h3 */
+    margin: 0 !important;
+    line-height: 1.2;
+}
+
+.footer-role {
+    font-size: 0.85rem;
+    color: var(--accent-primary) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0.25rem 0 0 0 !important;
+}
+
+.footer-quote {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    border-left: 2px solid var(--accent-primary);
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+.footer-quote i {
+    color: var(--accent-primary);
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+    vertical-align: top;
+    opacity: 0.7;
+}
