@@ -216,14 +216,19 @@ layout: default
 
                 <!-- Quick Navigation -->
                 <div class="series-quick-nav">
-                    {% assign current_index = page.series_order | minus: 1 %}
-                    {% if current_index > 0 %}
+                    {% assign current_index = nil %}
+                    {% for s_post in series_posts %}
+                        {% if s_post.url == page.url %}
+                            {% assign current_index = forloop.index0 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if current_index != nil and current_index > 0 %}
                         {% assign prev_post = series_posts[current_index | minus: 1] %}
                         <a href="{{ prev_post.url | relative_url }}" class="quick-nav-btn prev">
                             <i class="fas fa-chevron-left"></i> Previous
                         </a>
                     {% endif %}
-                    {% if page.series_order < total_parts %}
+                    {% if current_index != nil and current_index < total_parts | minus: 1 %}
                         {% assign next_post = series_posts[current_index | plus: 1] %}
                         <a href="{{ next_post.url | relative_url }}" class="quick-nav-btn next">
                             Next <i class="fas fa-chevron-right"></i>
