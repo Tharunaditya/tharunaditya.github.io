@@ -41,9 +41,55 @@ title: Blog
         <!-- Search Results (hidden by default) -->
         <div id="search-results" style="display: none;"></div>
         
-        <!-- Blog Grid -->
+        <!-- Series Shelf -->
+        {% assign series_posts = site.posts | where_exp: "post", "post.series != nil" %}
+        {% assign series_names = series_posts | map: "series" | uniq %}
+        {% if series_names.size > 0 %}
+        <section class="series-shelf">
+            <div class="series-shelf-header">
+                <h3><i class="fas fa-folder-open"></i> Series Collections</h3>
+                <p>Grouped reading paths with multiple parts.</p>
+            </div>
+            <div class="series-shelf-row">
+                {% for series_name in series_names %}
+                    {% assign series_group = series_posts | where: "series", series_name | sort: "series_order" %}
+                    {% assign first_post = series_group | first %}
+                    {% assign last_post = series_group | last %}
+                    <article class="series-folder glass-card">
+                        <div class="series-folder-header">
+                            <div class="series-folder-icon">
+                                <i class="fas fa-folder"></i>
+                            </div>
+                            <div class="series-folder-title">
+                                <h4>{{ series_name }}</h4>
+                                <span class="series-folder-count">{{ series_group.size }} parts</span>
+                            </div>
+                        </div>
+                        {% if first_post.series_description %}
+                        <p class="series-folder-desc">{{ first_post.series_description | strip_html | truncatewords: 24 }}</p>
+                        {% endif %}
+                        <ul class="series-folder-list">
+                            {% for post in series_group limit:3 %}
+                            <li>
+                                <span class="series-part">Part {{ post.series_order | default: forloop.index }}</span>
+                                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="series-folder-actions">
+                            <a href="{{ first_post.url | relative_url }}" class="series-btn primary">Start Series</a>
+                            <a href="{{ last_post.url | relative_url }}" class="series-btn">Latest Part</a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- Blog Grid (Non-series posts) -->
+        {% assign non_series_posts = site.posts | where_exp: "post", "post.series == nil" %}
         <div class="blog-grid">
-            {% for post in site.posts %}
+            {% for post in non_series_posts %}
             <article class="blog-card glass-card">
                 {% if post.image %}
                 <div class="blog-card-image">
@@ -102,7 +148,7 @@ title: Blog
             </article>
             {% endfor %}
             
-            {% if site.posts.size == 0 %}
+            {% if non_series_posts.size == 0 and series_names.size == 0 %}
             <div class="no-posts">
                 <i class="fas fa-blog"></i>
                 <h3>No blog posts yet</h3>
