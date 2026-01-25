@@ -216,29 +216,30 @@ layout: default
 
                 <!-- Quick Navigation -->
                 <div class="series-quick-nav">
+                    {% assign nav_series_posts = site.posts | where: "series", page.series | sort: "series_order" %}
                     {% assign prev_post = nil %}
                     {% assign next_post = nil %}
-                    {% assign found_current = false %}
                     {% assign temp_prev = nil %}
+                    {% assign found_active = false %}
                     
-                    {% for s_post in series_posts %}
-                        {% if s_post.id == page.id %}
-                            {% assign found_current = true %}
+                    {% for item in nav_series_posts %}
+                        {% if item.url == page.url %}
                             {% assign prev_post = temp_prev %}
-                        {% elsif found_current == true and next_post == nil %}
-                            {% assign next_post = s_post %}
+                            {% assign found_active = true %}
+                        {% elsif found_active == true and next_post == nil %}
+                            {% assign next_post = item %}
                         {% endif %}
-                        {% assign temp_prev = s_post %}
+                        {% assign temp_prev = item %}
                     {% endfor %}
 
-                    {% if prev_post %}
-                        <a href="{{ prev_post.url | relative_url }}" class="quick-nav-btn prev">
+                    {% if prev_post and prev_post.url != page.url %}
+                        <a href="{{ prev_post.url | absolute_url }}" class="quick-nav-btn prev" style="pointer-events: auto;">
                             <i class="fas fa-chevron-left"></i> Previous
                         </a>
                     {% endif %}
                     
-                    {% if next_post %}
-                        <a href="{{ next_post.url | relative_url }}" class="quick-nav-btn next">
+                    {% if next_post and next_post.url != page.url %}
+                        <a href="{{ next_post.url | absolute_url }}" class="quick-nav-btn next" style="pointer-events: auto;">
                             Next <i class="fas fa-chevron-right"></i>
                         </a>
                     {% endif %}
