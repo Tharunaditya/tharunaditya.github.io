@@ -309,7 +309,13 @@ class BlogEnhancements {
         // Share button
         const fabShare = document.querySelector('.fab-share');
         if (fabShare) {
-            fabShare.addEventListener('click', () => this.openShareMenu());
+            fabShare.addEventListener('click', () => {
+                if (this.shareMenu && this.shareMenu.classList.contains('active')) {
+                    this.closeShareMenu();
+                } else {
+                    this.openShareMenu();
+                }
+            });
         }
 
         // Reader mode
@@ -356,6 +362,12 @@ class BlogEnhancements {
                 this.closeShareMenu();
             }
         });
+
+        // Close when clicking any share option
+        const shareOptions = this.shareMenu.querySelectorAll('.share-option');
+        shareOptions.forEach((option) => {
+            option.addEventListener('click', () => this.closeShareMenu());
+        });
     }
 
     openShareMenu() {
@@ -364,6 +376,7 @@ class BlogEnhancements {
             if (this.backdrop) {
                 this.backdrop.classList.add('active');
             }
+                this.closeShareMenu();
         }
     }
 
