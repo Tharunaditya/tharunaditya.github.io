@@ -900,17 +900,6 @@
     margin: 8px 0;
 }
 
-.sidebar-tab .tab-badge {
-    background: var(--series-current);
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 10px;
-    margin: 5px 0;
-    writing-mode: horizontal-tb;
-}
-
 /* Hide tabs when sidebar is expanded */
 .toc-sidebar.expanded + .toc-tab,
 .series-sidebar.expanded + .series-tab {

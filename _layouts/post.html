@@ -238,10 +238,6 @@ layout: default
                 <i class="fas fa-book-open tab-icon"></i>
                 <span class="tab-text">SERIES</span>
             </span>
-            {% assign total_series = site.posts | where: "series", page.series | size %}
-            {% if total_series > 0 %}
-            <span class="tab-badge">{{ total_series }}</span>
-            {% endif %}
         </button>
         {% endif %}
 
