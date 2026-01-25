@@ -218,7 +218,7 @@ layout: default
                 <div class="series-quick-nav">
                     {% assign current_index = nil %}
                     {% for s_post in series_posts %}
-                        {% if s_post.url == page.url %}
+                        {% if s_post.id == page.id %}
                             {% assign current_index = forloop.index0 %}
                         {% endif %}
                     {% endfor %}

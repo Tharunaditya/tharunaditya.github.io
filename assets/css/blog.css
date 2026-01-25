@@ -1946,6 +1946,9 @@
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
 }
 
 .quick-nav-btn {
@@ -1963,6 +1966,9 @@
     font-weight: 600;
     font-size: 0.85rem;
     transition: all var(--transition-fast);
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
 }
 
 .quick-nav-btn:hover {
