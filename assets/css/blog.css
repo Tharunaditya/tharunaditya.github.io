@@ -3119,3 +3119,38 @@ code[class*="language-"] {
 }
 .content-wrapper blockquote.danger::before { content: "\f00d"; color: #ef4444; }
 
+
+
+/* ============================================
+   INTEGRATED COMMENTS SECTION
+============================================ */
+.integrated-comments {
+    max-width: 850px; /* Match content wrapper */
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.integrated-comments h4 {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.integrated-comments h4::before {
+    content: "\f086"; /* FontAwesome comment icon */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--accent-primary);
+}
+
+/* Giscus Customization */
+.giscus {
+    margin-top: 1rem;
+}
