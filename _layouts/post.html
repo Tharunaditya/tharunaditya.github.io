@@ -223,7 +223,7 @@ layout: default
                     {% assign found_active = false %}
                     
                     {% for item in nav_series_posts %}
-                        {% if item.url == page.url %}
+                        {% if item.id == page.id or item.url == page.url %}
                             {% assign prev_post = temp_prev %}
                             {% assign found_active = true %}
                         {% elsif found_active == true and next_post == nil %}
@@ -232,13 +232,13 @@ layout: default
                         {% assign temp_prev = item %}
                     {% endfor %}
 
-                    {% if prev_post and prev_post.url != page.url %}
+                    {% if prev_post and prev_post.id != page.id %}
                         <a href="{{ prev_post.url | absolute_url }}" class="quick-nav-btn prev" style="pointer-events: auto;">
                             <i class="fas fa-chevron-left"></i> Previous
                         </a>
                     {% endif %}
                     
-                    {% if next_post and next_post.url != page.url %}
+                    {% if next_post and next_post.id != page.id %}
                         <a href="{{ next_post.url | absolute_url }}" class="quick-nav-btn next" style="pointer-events: auto;">
                             Next <i class="fas fa-chevron-right"></i>
                         </a>

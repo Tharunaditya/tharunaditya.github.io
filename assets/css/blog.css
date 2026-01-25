@@ -1215,8 +1215,8 @@
     top: 0;
     width: var(--sidebar-width);
     height: 100vh;
-    background: var(--sidebar-bg);
-    backdrop-filter: blur(20px);
+    background: #0f0f23; /* Solid background - No transparency */
+    backdrop-filter: none; /* No blur effect */
     box-shadow: var(--shadow-xl);
     z-index: 1040; /* Above navbar (1000), below toggle buttons (1050) */
     overflow-y: auto;
