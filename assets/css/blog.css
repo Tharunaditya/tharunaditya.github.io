@@ -2202,7 +2202,7 @@
     padding: 2rem;
     border-radius: 16px;
     box-shadow: var(--shadow-xl);
-    z-index: 1060; /* Above everything else when active */
+    z-index: 2000; /* Above sidebar backdrop and all UI */
     opacity: 0;
     pointer-events: none;
     transition: all var(--transition-normal);
