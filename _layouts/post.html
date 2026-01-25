@@ -222,18 +222,30 @@ layout: default
                             {% assign current_index = forloop.index0 %}
                         {% endif %}
                     {% endfor %}
+                    
+                    {% assign total_parts = series_posts | size %}
                     {% assign last_index = total_parts | minus: 1 %}
-                    {% if current_index != nil and current_index > 0 %}
-                        {% assign prev_post = series_posts[current_index | minus: 1] %}
-                        <a href="{{ prev_post.url | relative_url }}" class="quick-nav-btn prev">
-                            <i class="fas fa-chevron-left"></i> Previous
-                        </a>
-                    {% endif %}
-                    {% if current_index != nil and current_index < last_index %}
-                        {% assign next_post = series_posts[current_index | plus: 1] %}
-                        <a href="{{ next_post.url | relative_url }}" class="quick-nav-btn next">
-                            Next <i class="fas fa-chevron-right"></i>
-                        </a>
+                    
+                    {% if current_index != nil %}
+                        {% assign prev_index = current_index | minus: 1 %}
+                        {% if prev_index >= 0 %}
+                            {% assign prev_post = series_posts[prev_index] %}
+                            {% if prev_post %}
+                            <a href="{{ prev_post.url | relative_url }}" class="quick-nav-btn prev">
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </a>
+                            {% endif %}
+                        {% endif %}
+
+                        {% assign next_index = current_index | plus: 1 %}
+                        {% if next_index <= last_index %}
+                            {% assign next_post = series_posts[next_index] %}
+                            {% if next_post %}
+                            <a href="{{ next_post.url | relative_url }}" class="quick-nav-btn next">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </a>
+                            {% endif %}
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>
