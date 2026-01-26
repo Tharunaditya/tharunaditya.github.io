@@ -535,19 +535,28 @@
     align-items: center;
     background: linear-gradient(
         135deg, 
-        rgba(255, 255, 255, 0.1) 0%, 
-        rgba(255, 255, 255, 0.05) 50%, 
-        rgba(255, 255, 255, 0) 100%
+        rgba(30, 30, 40, 0.6) 0%, 
+        rgba(20, 20, 25, 0.8) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-top: 1px solid rgba(255, 255, 255, 0.5); /* Mirror reflection top */
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    /* Materialistic Real Badge Edges */
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 
-        0 8px 32px 0 rgba(0, 0, 0, 0.37),
-        inset 0 0 20px rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px;
+        /* Inner Bevel Highlight */
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.2),
+        
+        /* Dark Rim (Gap) */
+        0 0 0 1px rgba(0, 0, 0, 0.8),
+        
+        /* Outer Metallic/Glass Edge */
+        0 0 0 3px rgba(255, 255, 255, 0.05),
+        
+        /* Deep Drop Shadow */
+        0 15px 35px rgba(0, 0, 0, 0.6);
+        
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1.5rem 1rem 1rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -557,18 +566,22 @@
 }
 
 .series-badge-card:hover {
-    transform: translateY(-5px); /* No Scale, just lift */
+    transform: translateY(-5px);
+    /* Neon Glow on Edge */
     box-shadow: 
-        0 15px 40px rgba(0, 255, 65, 0.2),
-        inset 0 0 30px rgba(255, 255, 255, 0.1);
-    border-color: rgba(0, 255, 65, 0.5);
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 0 0 1px rgba(0, 0, 0, 1),
+        0 0 0 3px rgba(0, 255, 65, 0.4), /* Neon Edge */
+        0 15px 40px rgba(0, 255, 65, 0.2);
 }
 
 .series-sidebar-badge {
-    width: 100%; /* Fill width */
+    width: 100%;
     height: auto;
     max-height: 180px;
     object-fit: contain;
+    /* Soft edges for the image itself */
+    border-radius: 16px; 
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
     margin-bottom: 1rem;
     z-index: 2;
