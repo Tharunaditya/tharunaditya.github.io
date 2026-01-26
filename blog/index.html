@@ -58,14 +58,12 @@ title: Blog
                     {% assign first_post = series_group | first %}
                     {% assign last_post = series_group | last %}
                     <article class="series-folder glass-card">
-                        {% if first_post.image %}
-                        <div class="series-card-image" style="background-image: url('{{ first_post.image | relative_url }}');">
+                        <div class="series-card-image" style="background-image: url('{{ '/assets/images/series_badges/' | append: series_name | slugify | append: '.jpg' | relative_url }}');">
                             <div class="series-overlay"></div>
                             <div class="series-icon-overlay">
                                 <i class="fas fa-layer-group"></i>
                             </div>
                         </div>
-                        {% endif %}
                         
                         <div class="series-folder-content">
                             <div class="series-folder-header">
@@ -79,13 +77,15 @@ title: Blog
                             <p class="series-folder-desc">{{ first_post.series_description | strip_html | truncatewords: 20 }}</p>
                             {% endif %}
                             
-                            <div class="series-parts-wrapper">
-                                <div class="series-parts-chips">
+                            <div class="series-timeline-container">
+                                <div class="series-timeline-track">
                                     {% for post in series_group %}
-                                    <a href="{{ post.url | relative_url }}" class="series-chip" title="{{ post.title }}">
-                                        Part {{ post.series_order }}
-                                    </a>
+                                    <a href="{{ post.url | relative_url }}" class="series-timeline-dot" data-title="{{ post.title }}" aria-label="Part {{ post.series_order }}: {{ post.title }}"></a>
                                     {% endfor %}
+                                </div>
+                                <div class="series-timeline-labels">
+                                    <span class="timeline-start">Part 1</span>
+                                    <span class="timeline-end">Part {{ series_group.size }}</span>
                                 </div>
                             </div>
 
