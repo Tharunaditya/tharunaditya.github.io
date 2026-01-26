@@ -3305,10 +3305,13 @@ code[class*="language-"] {
     -ms-overflow-style: none; /* IE and Edge */
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Force hide scrollbars for Chrome, Safari and Opera with !important */
 .toc-sidebar-static::-webkit-scrollbar,
 .series-sidebar-static::-webkit-scrollbar {
-    display: none;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
 }
 
 /* Remove inner sticky behavior as we moved it to parent */
@@ -3320,15 +3323,11 @@ code[class*="language-"] {
     padding-right: 0;
 }
 
+/* Ensure inner container doesn't generate scrollbars either */
 .sidebar-inner-sticky::-webkit-scrollbar {
-    width: 4px;
-}
-.sidebar-inner-sticky::-webkit-scrollbar-track {
-    background: transparent;
-}
-.sidebar-inner-sticky::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 /* Sidebar Header Static */
