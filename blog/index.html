@@ -58,29 +58,40 @@ title: Blog
                     {% assign first_post = series_group | first %}
                     {% assign last_post = series_group | last %}
                     <article class="series-folder glass-card">
-                        <div class="series-folder-header">
-                            <div class="series-folder-icon">
-                                <i class="fas fa-folder"></i>
-                            </div>
-                            <div class="series-folder-title">
-                                <h4>{{ series_name }}</h4>
-                                <span class="series-folder-count">{{ series_group.size }} parts</span>
+                        {% if first_post.image %}
+                        <div class="series-card-image" style="background-image: url('{{ first_post.image | relative_url }}');">
+                            <div class="series-overlay"></div>
+                            <div class="series-icon-overlay">
+                                <i class="fas fa-layer-group"></i>
                             </div>
                         </div>
-                        {% if first_post.series_description %}
-                        <p class="series-folder-desc">{{ first_post.series_description | strip_html | truncatewords: 24 }}</p>
                         {% endif %}
-                        <ul class="series-folder-list">
-                            {% for post in series_group limit:3 %}
-                            <li>
-                                <span class="series-part">Part {{ post.series_order | default: forloop.index }}</span>
-                                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        <div class="series-folder-actions">
-                            <a href="{{ first_post.url | relative_url }}" class="series-btn primary">Start Series</a>
-                            <a href="{{ last_post.url | relative_url }}" class="series-btn">Latest Part</a>
+                        
+                        <div class="series-folder-content">
+                            <div class="series-folder-header">
+                                <div class="series-folder-title">
+                                    <h4>{{ series_name }}</h4>
+                                    <span class="series-folder-count">{{ series_group.size }} parts</span>
+                                </div>
+                            </div>
+                            
+                            {% if first_post.series_description %}
+                            <p class="series-folder-desc">{{ first_post.series_description | strip_html | truncatewords: 20 }}</p>
+                            {% endif %}
+                            
+                            <div class="series-parts-wrapper">
+                                <div class="series-parts-chips">
+                                    {% for post in series_group %}
+                                    <a href="{{ post.url | relative_url }}" class="series-chip" title="{{ post.title }}">
+                                        Part {{ post.series_order }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="series-folder-actions">
+                                <a href="{{ first_post.url | relative_url }}" class="series-btn primary">Start Series</a>
+                            </div>
                         </div>
                     </article>
                 {% endfor %}
