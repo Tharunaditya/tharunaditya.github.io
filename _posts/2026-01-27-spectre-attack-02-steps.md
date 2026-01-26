@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Spectre Attack Explained: How Time Reveals Secrets (Part 2)"
-date: 2026-01-27 06:00:00 +0530
+date: 2026-01-26 18:00:00 +0530
 categories: [Hardware Security, Spectre]
 tags: [spectre, side-channel, speculative-execution, cache-attacks, microarchitecture]
 series: "Microarchitecture Attacks"
