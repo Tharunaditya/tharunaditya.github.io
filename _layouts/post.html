@@ -215,6 +215,19 @@ layout: default
             {% if page.series %}
             <aside class="series-sidebar-static" id="seriesSidebarStatic">
                 <div class="sidebar-inner-sticky">
+                    <!-- Series Badge Section -->
+                    {% assign series_slug = page.series | strip | slugify %}
+                    <div class="series-sidebar-badge-container">
+                        <img src="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
+                             alt="{{ page.series }} Badge" 
+                             class="series-sidebar-badge"
+                             onerror="this.style.display='none'">
+                        
+                        <button class="claim-badge-btn" onclick="openBadgeModal()">
+                            <i class="fas fa-certificate"></i> Claim Series Badge
+                        </button>
+                    </div>
+
                     <div class="sidebar-header-static">
                         <h3><i class="fas fa-book-open"></i> {{ page.series }}</h3>
                     </div>
@@ -345,6 +358,74 @@ layout: default
         </div>
     </footer>
 </article>
+
+<!-- Badge Modal -->
+<div id="badge-modal" class="badge-modal-overlay">
+    <div class="badge-modal-content">
+        <button class="badge-modal-close" onclick="closeBadgeModal()">&times;</button>
+        
+        <div class="badge-modal-header">
+            <i class="fas fa-trophy badge-trophy-icon"></i>
+            <h2>Claim Your Achievement</h2>
+        </div>
+
+        <div class="badge-modal-body">
+            <div class="badge-preview">
+                <img src="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
+                     alt="{{ page.series }} Badge"
+                     class="modal-badge-image">
+            </div>
+            
+            <p class="badge-congrats">
+                You've navigated the <strong>{{ page.series }}</strong> series! 
+                This badge represents your journey through these concepts.
+            </p>
+
+            <div class="badge-usage-policy">
+                <h4><i class="fas fa-shield-alt"></i> Badge Usage Policy</h4>
+                <ul>
+                    <li>You are free to display this badge on your portfolio, LinkedIn, or GitHub profile.</li>
+                    <li>This badge signifies that you have engaged with the educational material provided in this series.</li>
+                    <li>Tag <strong>@Tharunaditya1</strong> when you share it!</li>
+                </ul>
+            </div>
+
+            <div class="badge-actions">
+                <a href="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
+                   download="{{ series_slug }}-badge.png" 
+                   class="badge-action-btn download-btn">
+                    <i class="fas fa-download"></i> Download Badge
+                </a>
+                
+                <a href="https://twitter.com/intent/tweet?text=I%20just%20completed%20the%20{{ page.series | uri_escape }}%20series%20by%20@Tharunaditya1!%20Check%20it%20out%20here:%20{{ page.url | absolute_url }}%20%F0%9F%8E%93%20%23Security%20%23Learning" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="badge-action-btn share-btn">
+                    <i class="fab fa-twitter"></i> Share Achievement
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openBadgeModal() {
+        document.getElementById('badge-modal').classList.add('visible');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    function closeBadgeModal() {
+        document.getElementById('badge-modal').classList.remove('visible');
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Close on click outside
+    document.getElementById('badge-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeBadgeModal();
+        }
+    });
+</script>
 
 {% else %}
 
