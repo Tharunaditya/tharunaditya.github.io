@@ -3301,7 +3301,14 @@ code[class*="language-"] {
     z-index: 10;
     max-height: calc(100vh - 120px);
     overflow-y: auto;
-    scrollbar-width: thin; /* Firefox */
+    scrollbar-width: none; /* Hidden scrollbar */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.toc-sidebar-static::-webkit-scrollbar,
+.series-sidebar-static::-webkit-scrollbar {
+    display: none;
 }
 
 /* Remove inner sticky behavior as we moved it to parent */
