@@ -535,62 +535,65 @@
     align-items: center;
     background: linear-gradient(
         135deg, 
-        rgba(30, 30, 40, 0.6) 0%, 
-        rgba(20, 20, 25, 0.8) 100%
+        rgba(255, 255, 255, 0.05) 0%, 
+        rgba(255, 255, 255, 0.01) 100%
     );
-    /* Materialistic Real Badge Edges */
-    border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
-        /* Inner Bevel Highlight */
-        inset 0 1px 0 rgba(255, 255, 255, 0.3),
-        inset 0 0 20px rgba(0, 0, 0, 0.2),
-        
-        /* Dark Rim (Gap) */
-        0 0 0 1px rgba(0, 0, 0, 0.8),
-        
-        /* Outer Metallic/Glass Edge */
-        0 0 0 3px rgba(255, 255, 255, 0.05),
-        
-        /* Deep Drop Shadow */
-        0 15px 35px rgba(0, 0, 0, 0.6);
-        
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
     padding: 1.5rem 1rem 1rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.4s ease;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .series-badge-card:hover {
     transform: translateY(-5px);
-    /* Neon Glow on Edge */
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        0 0 0 1px rgba(0, 0, 0, 1),
-        0 0 0 3px rgba(0, 255, 65, 0.4), /* Neon Edge */
-        0 15px 40px rgba(0, 255, 65, 0.2);
+    background: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.02) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Materialistic Badge Image Styles */
 .series-sidebar-badge {
     width: 100%;
     height: auto;
-    max-height: 180px;
-    object-fit: contain;
-    /* Soft edges for the image itself */
-    border-radius: 16px; 
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
+    max-height: 200px;
+    object-fit: cover;
+    
+    /* The Real Materialistic Badge Edge */
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        /* Inner Highlight (Bevel) */
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+        
+        /* Thickness/Rim */
+        0 1px 0 1px rgba(0, 0, 0, 0.8), /* Dark side */
+        0 -1px 0 1px rgba(255, 255, 255, 0.1), /* Light side */
+        
+        /* Drop Shadow */
+        0 10px 20px rgba(0, 0, 0, 0.5);
+        
+    background: rgba(0, 0, 0, 0.3); /* Subtle backing for transparency */
     margin-bottom: 1rem;
     z-index: 2;
-    transition: transform 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .series-badge-card:hover .series-sidebar-badge {
-    transform: scale(1.05);
-    filter: drop-shadow(0 15px 25px rgba(0, 255, 65, 0.3));
+    transform: scale(1.02);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.3),
+        0 0 0 2px var(--accent-primary), /* Neon Ring Activation */
+        0 15px 30px rgba(0, 255, 65, 0.3);
 }
 
 /* Mirror Shine Effect */
