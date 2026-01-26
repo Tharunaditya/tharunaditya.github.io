@@ -57,7 +57,7 @@ title: Blog
                     {% assign series_group = series_posts | where: "series", series_name | sort: "series_order" %}
                     {% assign first_post = series_group | first %}
                     {% assign last_post = series_group | last %}
-                    {% assign series_slug = series_name | slugify %}
+                    {% assign series_slug = series_name | strip | slugify %}
                     <article class="series-folder glass-card">
                         <div class="series-card-image" style="background-image: url('{{ '/assets/images/series_badges/' | append: series_slug | append: '.jpg' | relative_url }}');">
                             <div class="series-overlay"></div>
