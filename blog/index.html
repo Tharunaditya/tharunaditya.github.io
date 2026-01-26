@@ -61,7 +61,8 @@ title: Blog
                     {% assign last_post = series_group | last %}
                     {% assign series_slug = series_name | strip | slugify %}
                     <article class="series-folder glass-card">
-                        <div class="series-card-image" style="background-image: url('{{ '/assets/images/series_badges/' | append: series_slug | append: '.jpg' | relative_url }}');">
+                        <!-- Try PNG first, then fallbacks if we could (here we switch to PNG default) -->
+                        <div class="series-card-image" style="background-image: url('{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}');">
                             <div class="series-overlay"></div>
                             <div class="series-icon-overlay">
                                 <i class="fas fa-layer-group"></i>
