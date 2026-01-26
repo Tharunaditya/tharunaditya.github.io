@@ -58,3 +58,18 @@ node_modules/
 
 # Draft posts (optional)
 _drafts/
+
+# Maintenance Scripts & Docs
+*.py
+*_GUIDE.md
+*_SETUP.md
+*_CHECKLIST.md
+*_REPORT.md
+CODE_SUMMARY.md
+DIRECTORY_STRUCTURE.txt
+VERSION_COMPARISON.md
+test-buttons.html
+update_*.py
+append_*.py
+check_*.py
+fix_*.py
