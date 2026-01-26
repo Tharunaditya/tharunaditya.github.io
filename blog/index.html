@@ -10,19 +10,16 @@ title: Blog
         <h1 class="blog-title">Blog</h1>
         <p class="blog-description">Insights on Cybersecurity, AI, Design, and Development</p>
         
-        <!-- Search Bar -->
+        <!-- Search Bar with Minimal Filter -->
         <div class="blog-search-wrapper">
             <input type="text" id="blog-search" class="blog-search-input" placeholder="🔍 Search articles by title, tags, or content...">
-        </div>
-    </div>
-</section>
-
-<section class="blog-section">
-    <div class="container">
-        <!-- Tag Cloud -->
-        <div class="tag-cloud-section">
-            <h3 class="tag-cloud-title"><i class="fas fa-tags"></i> Popular Topics</h3>
-            <div class="tag-cloud">
+            <button id="filter-btn" class="search-filter-btn" aria-label="Filter by Topic">
+                <i class="fas fa-filter"></i>
+            </button>
+            
+            <!-- Hidden Dropdown for Popular Topics -->
+            <div id="tags-dropdown" class="tags-dropdown">
+                <div class="tags-dropdown-header">Filter by Topic</div>
                 {% assign all_tags = site.posts | map: 'tags' | join: ',' | split: ',' | uniq | sort %}
                 {% for tag in all_tags %}
                     {% assign tag_count = 0 %}
@@ -32,14 +29,19 @@ title: Blog
                         {% endif %}
                     {% endfor %}
                     {% if tag_count > 0 %}
-                    <a href="#" class="tag-cloud-item" data-tag="{{ tag | slugify }}" data-count="{{ tag_count }}">
-                        {{ tag }} <span class="tag-count">({{ tag_count }})</span>
+                    <a href="#" class="tag-option" data-tag="{{ tag | slugify }}">
+                        <span>{{ tag }}</span>
+                        <span class="tag-count-badge">{{ tag_count }}</span>
                     </a>
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
-        
+    </div>
+</section>
+
+<section class="blog-section">
+    <div class="container">
         <!-- Search Results (hidden by default) -->
         <div id="search-results" style="display: none;"></div>
         
@@ -179,6 +181,78 @@ title: Blog
         </section>
     </div>
 </section>
+
+<!-- Global Tooltip Container -->
+<div id="global-series-tooltip"></div>
+
+<!-- Blog Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Tag Filter Logic
+    const filterBtn = document.getElementById('filter-btn');
+    const tagsDropdown = document.getElementById('tags-dropdown');
+    const searchInput = document.getElementById('blog-search');
+    
+    if(filterBtn) {
+        filterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filterBtn.classList.toggle('active');
+            tagsDropdown.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!filterBtn.contains(e.target) && !tagsDropdown.contains(e.target)) {
+                tagsDropdown.classList.remove('show');
+                filterBtn.classList.remove('active');
+            }
+        });
+
+        // Handle tag selection
+        document.querySelectorAll('.tag-option').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tagName = tag.querySelector('span').textContent;
+                searchInput.value = tagName; // Populate search
+                searchInput.focus();
+                // Trigger input event for search libraries
+                searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+                searchInput.dispatchEvent(new Event('keyup', { bubbles: true }));
+                
+                tagsDropdown.classList.remove('show');
+                filterBtn.classList.remove('active');
+            });
+        });
+    }
+
+    // 2. Global Tooltip Logic for Series Timeline
+    const tooltip = document.getElementById('global-series-tooltip');
+    
+    document.querySelectorAll('.series-timeline-dot').forEach(dot => {
+        dot.addEventListener('mouseenter', (e) => {
+            const title = dot.getAttribute('data-title');
+            if(!title) return;
+
+            tooltip.textContent = title;
+            tooltip.classList.add('visible');
+
+            // Position calculation
+            const rect = dot.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            
+            // Centered above the dot
+            let top = rect.top - tooltipRect.height - 12;
+            let left = rect.left + (rect.width / 2);
+
+            tooltip.style.top = `${top}px`;
+            tooltip.style.left = `${left}px`;
+        });
+
+        dot.addEventListener('mouseleave', () => {
+            tooltip.classList.remove('visible');
+        });
+    });
+});
+</script>
 
 {% else %}
 

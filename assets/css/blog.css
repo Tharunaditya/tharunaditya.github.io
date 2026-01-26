@@ -48,17 +48,132 @@
 .blog-search-wrapper {
     max-width: 600px;
     margin: 2rem auto 0;
+    display: flex;
+    gap: 10px;
+    position: relative;
+    z-index: 50;
 }
 
 .blog-search-input {
+    flex-grow: 1;
     width: 100%;
     padding: 1rem 1.5rem;
     background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-lg);
     color: var(--text-primary);
     font-size: 1rem;
     transition: all var(--transition-normal);
+}
+
+.search-filter-btn {
+    flex-shrink: 0;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-filter-btn:hover, .search-filter-btn.active {
+    background: var(--sidebar-accent);
+    color: #000;
+    border-color: var(--sidebar-accent);
+}
+
+/* Tags Dropdown */
+.tags-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: #0d1117;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    display: none;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+.tags-dropdown.show {
+    display: grid;
+    animation: fadeInDown 0.2s ease forwards;
+}
+
+.tags-dropdown-header {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.tag-option {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.tag-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--sidebar-accent);
+}
+
+.tag-count-badge {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Global Tooltip */
+#global-series-tooltip {
+    position: fixed;
+    background: rgba(10, 10, 15, 0.95);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(0, 255, 159, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    transform: translate(-50%, 10px);
+    white-space: normal;
+    max-width: 250px;
+    text-align: center;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+#global-series-tooltip.visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
 }
 
 .blog-search-input:focus {
