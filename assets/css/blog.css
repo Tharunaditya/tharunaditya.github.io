@@ -256,13 +256,16 @@
     border: 1px solid rgba(0, 255, 159, 0.18);
     backdrop-filter: blur(14px);
     transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-    overflow: hidden;
+    /* overflow: hidden; Removed to allow tooltips to popup */
+    position: relative;
+    z-index: 1; 
 }
 
 .series-folder:hover {
     transform: translateY(-6px);
     border-color: rgba(0, 255, 159, 0.45);
     box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+    z-index: 10; /* Bring to front on hover */
 }
 
 .series-card-image {
@@ -271,6 +274,7 @@
     background-size: cover;
     background-position: center;
     position: relative;
+    border-radius: 20px 20px 0 0; /* Match card radius manually */
 }
 
 .series-overlay {
