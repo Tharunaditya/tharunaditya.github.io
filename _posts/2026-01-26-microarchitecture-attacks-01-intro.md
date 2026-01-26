@@ -4,7 +4,7 @@ title: "Microarchitecture Attacks: The Invisible Threat (Part 1)"
 date: 2026-01-26 12:00:00 +0530
 categories: [Hardware Security, Microarchitecture]
 tags: [side-channel, cpu, spectre, cache-attacks, speculative-execution]
-series: "Microarchitecture Attacks"
+series: "Microarchitecture Security"
 series_order: 1
 series_description: "A comprehensive analysis of how modern CPU optimizations like speculative execution and caching are exploited to leak sensitive data."
 image: /assets/images/uploads/microarchitecture.jpg
