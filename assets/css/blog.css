@@ -507,34 +507,12 @@
 }
 
 /* Tooltip on Hover */
+/* Tooltip removed in favor of global JS tooltip
 .series-timeline-dot::after {
-    content: attr(data-title);
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: rgba(0, 0, 0, 0.95);
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    white-space: normal;
-    width: max-content;
-    max-width: 200px;
-    text-align: center;
-    line-height: 1.4;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.2s ease;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    z-index: 100;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
+    display: none;
+} */
 
-.series-timeline-dot:hover::after {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
+/* Tooltip Hover removed */
 
 .series-timeline-labels {
     display: flex;
