@@ -215,17 +215,19 @@ layout: default
             {% if page.series %}
             <aside class="series-sidebar-static" id="seriesSidebarStatic">
                 <div class="sidebar-inner-sticky">
-                    <!-- Series Badge Section -->
+                    <!-- Series Badge Card -->
                     {% assign series_slug = page.series | strip | slugify %}
-                    <div class="series-sidebar-badge-container">
+                    <div class="series-badge-card" onclick="openBadgeModal()" role="button" tabindex="0">
+                        <div class="badge-shimmer"></div>
                         <img src="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
                              alt="{{ page.series }} Badge" 
                              class="series-sidebar-badge"
-                             onerror="this.style.display='none'">
+                             onerror="this.parentElement.style.display='none'">
                         
-                        <button class="claim-badge-btn" onclick="openBadgeModal()">
-                            <i class="fas fa-certificate"></i> Claim Series Badge
-                        </button>
+                        <div class="badge-card-footer">
+                            <i class="fas fa-trophy"></i>
+                            <span>Claim Badge</span>
+                        </div>
                     </div>
 
                     <div class="sidebar-header-static">
@@ -397,7 +399,7 @@ layout: default
                     <i class="fas fa-download"></i> Download Badge
                 </a>
                 
-                <a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20completed%20the%20{{ page.series | uri_escape }}%20series%20by%20@Tharunaditya%20Anuganti!%20Check%20it%20out%20here:%20{{ page.url | absolute_url }}%20%23CyberSecurity%20%23Learning%20%23Microarchitecture" 
+                <a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20completed%20the%20{{ page.series | uri_escape }}%20series%20by%20@Tharunaditya%20Anuganti%20Check%20it%20out%20here:%20{{ page.url | absolute_url }}%20%23CyberSecurity%20%23Learning%20%23Microarchitecture" 
                    target="_blank" 
                    rel="noopener noreferrer"
                    class="badge-action-btn share-btn-linkedin">
