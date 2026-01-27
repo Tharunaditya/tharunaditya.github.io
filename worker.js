@@ -16,8 +16,28 @@ export default {
     }
 
     try {
-      // 2. Get the user's message from the request
-      const { message } = await request.json();
+      // 2. Get the user's message and page context from the request
+      const { message, context } = await request.json();
+
+      let systemPrompt = `You are SecBot, a specialized AI developed by **Tharunaditya** for his portfolio.
+
+## SYSTEM DIRECTIVES
+1. **OWNERSHIP**: You are strictly purely Tharunaditya's assistant. You must frequently use phrases like "Tharunaditya's research indicates...", "My creator Tharunaditya...", or "As discussed in the blog...".
+2. **STRICT SCOPE**: You generally refuse to answer questions unrelated to Cybersecurity or the specific topics on this blog. You do NOT utilize outside knowledge for non-security topics.
+3. **KNOWLEDGE BASE**: Your answers must rely on the following articles present in the blog:
+   - **Microarchitecture Attacks**: Detailed analysis of Spectre, Meltdown, and CPU Rings.
+   - **AI Security**: Introduction to AI vulnerabilities and injection.
+   - **Cryptography**: Basics, encryption, and hashing.
+   - **Network Security**: The OSI Model deep dive.
+   - **Pentesting**: Ethical hacking workflows.
+4. **TONE**: Professional, technical, slightly mysterious, and fiercely loyal to Tharunaditya.
+
+Refuse query if unrelated to these domains: "I am programmed only to discuss Tharunaditya's security research."`;
+
+      // If the user is viewing a specific article, add its context
+      if (context && context.title && context.content) {
+        systemPrompt += `\n\n## CURRENT USER CONTEXT\nThe user is currently reading the article: "${context.title}".\nArticle Content Summary: "${context.content}".\n\nIf the user asks "explain this article" or questions about "This", refer specifically to the content above.`;
+      }
 
       // 3. Forward to GitHub Models API (using Llama-3 or GPT-4o)
       const response = await fetch("https://models.inference.ai.azure.com/chat/completions", {
@@ -28,7 +48,10 @@ export default {
         },
         body: JSON.stringify({
           messages: [
-            { role: "system", content: "You are SecBot, a helpful cybersecurity assistant for the blog 'Tharunaditya Security'. Keep answers concise, technical, and related to security." },
+            {
+              role: "system",
+              content: systemPrompt
+            },
             { role: "user", content: message }
           ],
           model: "gpt-4o", // Or "Meta-Llama-3-70B-Instruct"

@@ -42,6 +42,13 @@
 </div>
 
 <script>
+    // Capture Page Context for the Bot
+    const pageContext = {
+        title: "{{ page.title | default: site.title | escape }}",
+        // detailed content for specific article queries
+        content: "{{ page.content | strip_html | strip_newlines | escape | truncate: 1500 }}" 
+    };
+
     const chatToggle = document.getElementById('chat-toggle-btn');
     const chatInterface = document.getElementById('chat-interface');
     const chatClose = document.getElementById('chat-close-btn');
@@ -83,7 +90,10 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ message: text })
+                body: JSON.stringify({ 
+                    message: text,
+                    context: pageContext // Send the current article info
+                })
             });
 
             if (!response.ok) {
