@@ -13,32 +13,38 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2 # Need access to previous commit to check diff
-
-      - name: Get Changed Files
-        id: changed-files
-        uses: tj-actions/changed-files@v35
-        with:
-          files: _posts/**
+          fetch-depth: 2
 
       - name: Setup Python
-        if: steps.changed-files.outputs.any_changed == 'true'
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install Dependencies
-        if: steps.changed-files.outputs.any_changed == 'true'
         run: pip install requests
 
       - name: Send Notification
-        if: steps.changed-files.outputs.any_changed == 'true'
         env:
           ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
         run: |
-          # Loop through all changed files and notify for each (usually just one)
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "Sending notification for $file"
-            python _scripts/notify.py "$file"
+          # Get list of Added (A) or Modified (M) files in _posts/
+          FILES=$(git diff --name-only --diff-filter=AM HEAD^ HEAD -- _posts/ || true)
+          
+          if [ -z "$FILES" ]; then
+            echo "No added or modified posts found."
+            exit 0
+          fi
+
+          echo "Found files to process:"
+          echo "$FILES"
+
+          for file in $FILES; do
+            if [ -f "$file" ]; then
+              echo "--------------------------------"
+              echo "Sending notification for: $file"
+              python _scripts/notify.py "$file"
+            else
+              echo "Skipping '$file': File not found."
+            fi
           done
