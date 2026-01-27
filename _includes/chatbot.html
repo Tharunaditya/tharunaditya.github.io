@@ -1,4 +1,7 @@
 <!-- Cyberpunk Glass Chatbot Widget -->
+<!-- Library for Markdown Parsing -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <div class="chat-widget-container">
     <!-- Floating Action Button -->
     <button id="chat-toggle-btn" class="chat-toggle-btn" aria-label="Open AI Assistant">
@@ -139,7 +142,9 @@
                 : "Security breach detected in communication protocol. (API Error)";
 
             removeTypingIndicator();
-            appendMessage('bot', formatBotResponse(botReply));
+            // Parse Markdown to HTML
+            const htmlReply = marked.parse(botReply);
+            appendMessage('bot', htmlReply);
 
         } catch (error) {
             console.error('Error:', error);
@@ -148,23 +153,23 @@
         }
     }
 
-    // formatting for code blocks and new lines
-    function formatBotResponse(text) {
-        // Simple sanitization and formatting
-        // Convert newlines to <br>
-        let formatted = text.replace(/\n/g, '<br>');
-        // Convert **bold** to <strong>
-        formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        // Convert `code` to <code>
-        formatted = formatted.replace(/`(.*?)`/g, '<code style="background: rgba(0, 255, 65, 0.1); padding: 2px 4px; border-radius: 3px; font-family: monospace;">$1</code>');
-        return formatted;
-    }
-
-    function appendMessage(sender, text) {
+    function appendMessage(sender, htmlContent) {
         const div = document.createElement('div');
         div.className = `message ${sender}-message`;
+        // Ensure user input is escaped if it's not already, but usually text input is safe to display as text. 
+        // For the bot (Markdown), we trust the HTML. For user, we might want to be careful if we processed it as markdown too.
+        // For consistency, let's treat user input as text and bot input as HTML.
+        
+        let finalContent = htmlContent;
+        if (sender === 'user') {
+            // Escape user input to prevent XSS if they type HTML
+            const temp = document.createElement('div');
+            temp.textContent = htmlContent;
+            finalContent = `<p>${temp.innerHTML}</p>`;
+        }
+
         div.innerHTML = `
-            <div class="message-content"><p>${text}</p></div>
+            <div class="message-content">${finalContent}</div>
             <span class="message-time">Just now</span>
         `;
         chatMessages.appendChild(div);

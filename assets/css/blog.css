@@ -4093,3 +4093,79 @@ code[class*="language-"] {
         right: 20px;
     }
 }
+
+/* Markdown Styling for Chatbot */
+.message-content h1, 
+.message-content h2, 
+.message-content h3, 
+.message-content h4 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.message-content h3 { font-size: 1.1em; }
+.message-content h4 { font-size: 1em; }
+
+.message-content p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.message-content ul, 
+.message-content ol {
+    margin-bottom: 8px;
+    padding-left: 20px;
+}
+
+.message-content li {
+    margin-bottom: 4px;
+}
+
+.message-content strong {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+.message-content pre {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+.message-content code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    color: #a5d6ff;
+}
+
+.message-content p > code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: #ff7b72;
+}
+
+.message-content hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 12px 0;
+}
+
+.message-content a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+}
+
+.message-content blockquote {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 10px;
+    margin: 8px 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
