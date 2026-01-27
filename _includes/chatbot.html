@@ -52,8 +52,15 @@
     // Capture Page Context for the Bot
     const pageContext = {
         title: "{{ page.title | default: site.title | escape }}",
-        // detailed content for specific article queries
-        content: "{{ page.content | strip_html | strip_newlines | escape | truncate: 1500 }}" 
+        {% if page.layout == 'post' %}
+        isArticle: true,
+        // Detailed content ONLY for actual articles
+        content: "{{ page.content | strip_html | strip_newlines | escape | truncate: 2500 }}"
+        {% else %}
+        isArticle: false,
+        // General description for other pages (Home, Blog Index, etc.)
+        content: "User is currently browsing the page: {{ page.title | default: 'Home' }}. Description: {{ page.description | default: site.description | escape }}"
+        {% endif %}
     };
 
     const chatToggle = document.getElementById('chat-toggle-btn');

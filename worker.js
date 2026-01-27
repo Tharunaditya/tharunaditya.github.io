@@ -36,7 +36,11 @@ Refuse query if unrelated to these domains: "I am programmed only to discuss Tha
 
       // If the user is viewing a specific article, add its context
       if (context && context.title && context.content) {
-        systemPrompt += `\n\n## CURRENT USER CONTEXT\nThe user is currently reading the article: "${context.title}".\nArticle Content Summary: "${context.content}".\n\nIf the user asks "explain this article" or questions about "This", refer specifically to the content above.`;
+        if (context.isArticle) {
+            systemPrompt += `\n\n## CURRENT USER CONTEXT\nThe user is currently reading the article: "${context.title}".\nArticle Content Summary: "${context.content}".\n\nIf the user asks "explain this article" or questions about "This", refer specifically to the content above.`;
+        } else {
+            systemPrompt += `\n\n## CURRENT USER CONTEXT\nThe user is currently browsing the page: "${context.title}".\nPage Context: "${context.content}".\n\nThe user is NOT reading a specific article right now. If they ask for "this article", explain that they are on the "${context.title}" page and offer to help find an article.`;
+        }
       }
 
       // 3. Forward to GitHub Models API (using Llama-3 or GPT-4o)
