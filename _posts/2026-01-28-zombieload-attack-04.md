@@ -87,3 +87,6 @@ The fix for ZombieLoad was heavy-handed because the flaw is architectural.
 ZombieLoad taught us that **data in flight** is just as vulnerable as data at rest. It forced CPU architects to rethink how resources are shared between threads. In the next part, we will explore **Rowhammer**, where we stop reading memory and start breaking it.
 
 *Tharunaditya's Security Note: Keep your BIOS/Firmware updated. These hardware patches are your primary defense against MDS attacks.*
+
+> **System Update**: Notification automated links have been calibrated.
+
