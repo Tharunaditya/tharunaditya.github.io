@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ZombieLoad Attack: Resurrecting Dead Data (Part 4)"
-date: 2026-01-28 14:00:00 +0530
+date: 2026-01-28 09:00:00 +0530
 categories: [System Security]
 tags: [cpu, side-channel, exploit, intel, mds]
 image: /assets/images/logo.png
