@@ -4077,20 +4077,58 @@ code[class*="language-"] {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobile Responsive */
-@media (max-width: 480px) {
-    .chat-interface {
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
-        transform-origin: bottom center;
+/* Mobile Responsive & Optimization */
+@media (max-width: 768px) {
+    /* Force Full Screen on Mobile regardless of size selection */
+    .chat-interface.size-1x,
+    .chat-interface.size-2x,
+    .chat-interface.size-3x {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100vw !important;
+        max-height: 100dvh !important; /* Use dynamic viewport height */
+        bottom: 0 !important;
+        right: 0 !important;
+        border-radius: 0 !important;
+        border: none;
+        background: rgba(10, 10, 15, 0.98); /* Less transparent on mobile for readability */
     }
-    
-    .chat-toggle-btn {
+
+    /* Adjust initial transform for slide-up effect */
+    .chat-interface {
+        transform: translateY(110%) !important;
+        transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1) !important;
+    }
+
+    .chat-interface.visible {
+        transform: translateY(0) !important;
+    }
+
+    /* Hide resize dots on mobile */
+    .size-controls {
+        display: none;
+    }
+
+    /* Reposition toggle button */
+    .chat-widget-container {
         bottom: 20px;
         right: 20px;
+        z-index: 100000;
+    }
+
+    .chat-toggle-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    /* Better spacing on mobile */
+    .chat-messages {
+        padding: 15px 10px;
+    }
+
+    .message {
+        max-width: 90%;
     }
 }
 
