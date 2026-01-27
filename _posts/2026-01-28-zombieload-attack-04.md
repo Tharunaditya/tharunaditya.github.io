@@ -5,7 +5,7 @@ date: 2026-01-28 09:00:00 +0530
 categories: [System Security]
 tags: [cpu, side-channel, exploit, intel, mds]
 image: /assets/images/logo.png
-description: "LIVE TEST VERIFICATION: A deep dive into Microarchitectural Data Sampling (MDS). Learn how ZombieLoad exploits CPU load buffers to leak data across processes, VMs, and SGX enclaves."
+description: "A deep dive into Microarchitectural Data Sampling (MDS). Learn how ZombieLoad exploits CPU load buffers to leak data across processes, VMs, and SGX enclaves."
 author: Tharunaditya
 series: "Microarchitecture Attacks"
 series_order: 4
