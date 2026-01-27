@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Zero-Day Delay: Perfect Timing Protocol"
-date: 2026-01-28 09:15:00 +0530
+date: 2026-01-28 00:00:00 +0000
 categories: [Announcements]
 tags: [automation, testing]
 image: /assets/images/logo.png
