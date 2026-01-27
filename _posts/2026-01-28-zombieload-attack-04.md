@@ -6,10 +6,10 @@ categories: [System Security]
 tags: [cpu, side-channel, exploit, intel, mds]
 image: /assets/images/logo.png
 description: "A deep dive into Microarchitectural Data Sampling (MDS). Learn how ZombieLoad exploits CPU load buffers to leak data across processes, VMs, and SGX enclaves."
-author: Tharunaditya
-series: "Microarchitecture Attacks"
+author: Tharunaditya Anuganti
+series: "Microarchitecture Security"
 series_order: 4
-series_description: "Understanding the invisible war inside your CPU."
+series_description: "A comprehensive analysis of how modern CPU optimizations like speculative execution and caching are exploited to leak sensitive data."
 ---
 
 # The Dead Don't Stay Dead
