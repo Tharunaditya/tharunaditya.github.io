@@ -6,7 +6,7 @@ author: Tharunaditya Anuganti
 categories: [Cybersecurity, System Security]
 tags: [os-security, kernel, protection-rings]
 excerpt: "Part 1 of the System Security Series. Deep dive into OS architecture, Protection Rings, and how User Mode interacts with Kernel Mode."
-series: "Complete System Security"
+series: "System Security"
 series_order: 1
 series_description: "Deep dive into OS internals, memory protection, kernel exploitation defense, and secure architecture design."
 image: /assets/images/sys-sec-bg.jpg

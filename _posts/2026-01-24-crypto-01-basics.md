@@ -6,7 +6,7 @@ author: Tharunaditya Anuganti
 categories: [Cybersecurity, Cryptography]
 tags: [crypto, encryption, hashing]
 excerpt: "Part 1 of the Applied Cryptography Series. Formatting the groundwork with CIA Triad, Symmetric vs Asymmetric encryption, and Hashing."
-series: "Complete Cryptography"
+series: "Cryptography Explorer"
 series_order: 1
 series_description: "From modern encryption standards (AES/RSA) to Zero-Knowledge Proofs and Post-Quantum Cryptography."
 image: /assets/images/crypto-bg.jpg
