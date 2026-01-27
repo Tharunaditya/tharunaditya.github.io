@@ -17,28 +17,28 @@ jobs:
 
       - name: Get Changed Files
         id: changed-files
-        # This command lists files added (A) or modified (M) in the last commit within _posts/
-        run: |
-          changed_files=$(git diff --name-only --diff-filter=AM HEAD^ HEAD | grep '_posts/' || true)
-          echo "Files detected: $changed_files"
-          # Just pick the first one if multiple are pushed, to avoid spam
-          first_file=$(echo "$changed_files" | head -n 1)
-          echo "target_file=$first_file" >> $GITHUB_OUTPUT
+        uses: tj-actions/changed-files@v35
+        with:
+          files: _posts/**
 
       - name: Setup Python
-        if: steps.changed-files.outputs.target_file != ''
+        if: steps.changed-files.outputs.any_changed == 'true'
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
       - name: Install Dependencies
-        if: steps.changed-files.outputs.target_file != ''
+        if: steps.changed-files.outputs.any_changed == 'true'
         run: pip install requests
 
       - name: Send Notification
-        if: steps.changed-files.outputs.target_file != ''
+        if: steps.changed-files.outputs.any_changed == 'true'
         env:
           ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
         run: |
-          python _scripts/notify.py "${{ steps.changed-files.outputs.target_file }}"
+          # Loop through all changed files and notify for each (usually just one)
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "Sending notification for $file"
+            python _scripts/notify.py "$file"
+          done
