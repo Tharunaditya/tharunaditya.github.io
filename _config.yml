@@ -31,7 +31,7 @@ paginate_path: "/blog/page:num/"
 
 # Build Settings
 markdown: kramdown
-permalink: /blog/:year/:month/:day/:title/
+permalink: /blog/:year/:month/:day/:slug/
 timezone: Asia/Kolkata
 
 # Collections
