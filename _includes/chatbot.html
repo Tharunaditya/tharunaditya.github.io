@@ -1,0 +1,116 @@
+<!-- Cyberpunk Glass Chatbot Widget -->
+<div class="chat-widget-container">
+    <!-- Floating Action Button -->
+    <button id="chat-toggle-btn" class="chat-toggle-btn" aria-label="Open AI Assistant">
+        <i class="fas fa-robot"></i>
+        <div class="chat-pulse-ring"></div>
+    </button>
+
+    <!-- Chat Interface -->
+    <div id="chat-interface" class="chat-interface hidden">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <h3 class="chat-title">SecBot v1.0</h3>
+                    <span class="chat-status">● Online</span>
+                </div>
+            </div>
+            <button id="chat-close-btn" class="chat-close-btn">&times;</button>
+        </div>
+
+        <div id="chat-messages" class="chat-messages">
+            <!-- Initial Greeting -->
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Greetings. I am <strong>SecBot</strong>.</p>
+                    <p>I have indexed all <strong>{{ site.posts.size }}</strong> security articles on this blog. Ask me about Microarchitecture, AI Injection, or Buffer Overflows.</p>
+                </div>
+                <span class="message-time">Now</span>
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <form id="chat-form" onsubmit="handleChatSubmit(event)">
+                <input type="text" id="chat-input" placeholder="Ask about cybersecurity..." autocomplete="off">
+                <button type="submit" class="chat-send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const chatToggle = document.getElementById('chat-toggle-btn');
+    const chatInterface = document.getElementById('chat-interface');
+    const chatClose = document.getElementById('chat-close-btn');
+    const chatMessages = document.getElementById('chat-messages');
+
+    // Toggle Chat
+    chatToggle.addEventListener('click', () => {
+        chatInterface.classList.toggle('hidden');
+        chatInterface.classList.toggle('visible');
+        if (chatInterface.classList.contains('visible')) {
+            document.getElementById('chat-input').focus();
+        }
+    });
+
+    chatClose.addEventListener('click', () => {
+        chatInterface.classList.remove('visible');
+        chatInterface.classList.add('hidden');
+    });
+
+    // Mock Chat Functionality for UI Demo
+    function handleChatSubmit(e) {
+        e.preventDefault();
+        const input = document.getElementById('chat-input');
+        const text = input.value.trim();
+        
+        if (!text) return;
+
+        // Add User Message
+        appendMessage('user', text);
+        input.value = '';
+
+        // Simulate Bot Typing
+        showTypingIndicator();
+
+        // Mock Response (To be replaced with Real API)
+        setTimeout(() => {
+            removeTypingIndicator();
+            appendMessage('bot', "I am currently in UI Demo Mode. Connect me to an API to unlock my full potential!");
+        }, 1500);
+    }
+
+    function appendMessage(sender, text) {
+        const div = document.createElement('div');
+        div.className = `message ${sender}-message`;
+        div.innerHTML = `
+            <div class="message-content"><p>${text}</p></div>
+            <span class="message-time">Just now</span>
+        `;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+        const div = document.createElement('div');
+        div.id = 'typing-indicator';
+        div.className = 'message bot-message typing';
+        div.innerHTML = `
+            <div class="message-content">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const el = document.getElementById('typing-indicator');
+        if (el) el.remove();
+    }
+</script>
