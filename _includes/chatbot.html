@@ -16,8 +16,12 @@
                     <span class="chat-status">● Online</span>
                 </div>
             </div>
-            <div class="chat-controls" style="display: flex; gap: 8px;">
-                <button id="chat-size-btn" class="chat-size-btn" title="Resize Chat">1x</button>
+            <div class="chat-controls">
+                <div class="size-controls">
+                    <button class="size-dot dot-sm active" onclick="setChatSize(1)" aria-label="Small Size"></button>
+                    <button class="size-dot dot-md" onclick="setChatSize(2)" aria-label="Medium Size"></button>
+                    <button class="size-dot dot-lg" onclick="setChatSize(3)" aria-label="Large Size"></button>
+                </div>
                 <button id="chat-close-btn" class="chat-close-btn">&times;</button>
             </div>
         </div>
@@ -55,19 +59,24 @@
     const chatToggle = document.getElementById('chat-toggle-btn');
     const chatInterface = document.getElementById('chat-interface');
     const chatClose = document.getElementById('chat-close-btn');
-    const chatSizeBtn = document.getElementById('chat-size-btn');
     const chatMessages = document.getElementById('chat-messages');
 
     // Resizing Logic
-    let currentSize = 1;
-    chatSizeBtn.addEventListener('click', () => {
-        currentSize++;
-        if (currentSize > 3) currentSize = 1;
-        
+    function setChatSize(size) {
+        // Remove all size classes
         chatInterface.classList.remove('size-1x', 'size-2x', 'size-3x');
-        chatInterface.classList.add(`size-${currentSize}x`);
-        chatSizeBtn.textContent = `${currentSize}x`;
-    });
+        
+        // Add new size class
+        chatInterface.classList.add(`size-${size}x`);
+        
+        // Update active dot
+        document.querySelectorAll('.size-dot').forEach(dot => dot.classList.remove('active'));
+        const dotIndex = size === 1 ? 0 : size === 2 ? 1 : 2; // Map 1->sm, 2->md, 3->lg
+        
+        // Simple mapping based on order in DOM
+        const dots = document.querySelectorAll('.size-dot');
+        if(dots[size-1]) dots[size-1].classList.add('active');
+    }
 
     // Toggle Chat
     chatToggle.addEventListener('click', () => {

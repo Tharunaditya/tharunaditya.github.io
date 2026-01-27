@@ -3883,35 +3883,56 @@ code[class*="language-"] {
     color: #fff;
 }
 
-.chat-size-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 2px 8px;
-    transition: all 0.3s;
+.chat-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.chat-size-btn:hover {
-    background: var(--accent-primary);
-    color: #000;
+.size-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+.size-dot {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.size-dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: scale(1.2);
+}
+
+.size-dot.active {
+    background: var(--accent-primary);
+    box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.dot-sm { width: 8px; height: 8px; }
+.dot-md { width: 12px; height: 12px; }
+.dot-lg { width: 16px; height: 16px; }
 
 .chat-interface.size-1x {
     width: 350px;
     height: 500px;
 }
 .chat-interface.size-2x {
-    width: 480px;
+    width: 500px;
     height: 650px;
 }
 .chat-interface.size-3x {
-    width: 700px;
-    height: 85vh;
-    max-width: 90vw;
+    width: 800px;
+    height: 80vh;
+    max-width: 95vw;
 }
 
 /* Chat Messages Area */
