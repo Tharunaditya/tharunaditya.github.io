@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import json
+import time
 import requests
 from datetime import datetime
 
@@ -9,6 +10,27 @@ from datetime import datetime
 ONESIGNAL_APP_ID = os.environ.get('ONESIGNAL_APP_ID')
 ONESIGNAL_API_KEY = os.environ.get('ONESIGNAL_API_KEY')
 SITE_URL = "https://tharunaditya.github.io"
+
+def check_url_availability(url, timeout=300):
+    """Polls the URL until it returns 200 OK or timeout expires"""
+    print(f"Waiting for deployment to propagate... (Target: {url})")
+    start_time = time.time()
+    
+    while time.time() - start_time < timeout:
+        try:
+            r = requests.head(url)
+            if r.status_code == 200:
+                print("✅ Content is Live! Proceeding to notify.")
+                return True
+            else:
+                print(f"⏳ Still 404/Pending... (Status: {r.status_code})")
+        except Exception as e:
+            print(f"⚠️ Connection error: {e}")
+        
+        time.sleep(15) # Check every 15 seconds
+        
+    print("❌ Timeout reached. The page did not go live within 5 minutes.")
+    return False
 
 def parse_frontmatter(file_path):
     """Simple regex parser for Jekyll frontmatter"""
@@ -38,12 +60,17 @@ def get_post_url(file_path):
     
     if match:
         year, month, day, slug, ext = match.groups()
-        # Adjusted to match _config.yml permalink: /blog/:year/:month/:day/:title/
+        # Adjusted to match _config.yml permalink: /blog/:year/:month/:day/:slug/
         return f"{SITE_URL}/blog/{year}/{month}/{day}/{slug}/"
     
     return SITE_URL
 
 def send_notification(title, description, url):
+    # Verify site is live before sending (Prevent 404s)
+    if not check_url_availability(url):
+        print("Skipping notification to avoid dead link.")
+        return
+
     if not ONESIGNAL_APP_ID or not ONESIGNAL_API_KEY:
         print("Error: Missing OneSignal Credentials")
         sys.exit(1)
