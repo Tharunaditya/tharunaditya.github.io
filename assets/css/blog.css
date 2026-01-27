@@ -3883,6 +3883,37 @@ code[class*="language-"] {
     color: #fff;
 }
 
+.chat-size-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px 8px;
+    transition: all 0.3s;
+}
+
+.chat-size-btn:hover {
+    background: var(--accent-primary);
+    color: #000;
+}
+
+.chat-interface.size-1x {
+    width: 350px;
+    height: 500px;
+}
+.chat-interface.size-2x {
+    width: 480px;
+    height: 650px;
+}
+.chat-interface.size-3x {
+    width: 700px;
+    height: 85vh;
+    max-width: 90vw;
+}
+
 /* Chat Messages Area */
 .chat-messages {
     flex: 1;

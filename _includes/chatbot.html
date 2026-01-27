@@ -16,7 +16,10 @@
                     <span class="chat-status">● Online</span>
                 </div>
             </div>
-            <button id="chat-close-btn" class="chat-close-btn">&times;</button>
+            <div class="chat-controls" style="display: flex; gap: 8px;">
+                <button id="chat-size-btn" class="chat-size-btn" title="Resize Chat">1x</button>
+                <button id="chat-close-btn" class="chat-close-btn">&times;</button>
+            </div>
         </div>
 
         <div id="chat-messages" class="chat-messages">
@@ -52,7 +55,19 @@
     const chatToggle = document.getElementById('chat-toggle-btn');
     const chatInterface = document.getElementById('chat-interface');
     const chatClose = document.getElementById('chat-close-btn');
+    const chatSizeBtn = document.getElementById('chat-size-btn');
     const chatMessages = document.getElementById('chat-messages');
+
+    // Resizing Logic
+    let currentSize = 1;
+    chatSizeBtn.addEventListener('click', () => {
+        currentSize++;
+        if (currentSize > 3) currentSize = 1;
+        
+        chatInterface.classList.remove('size-1x', 'size-2x', 'size-3x');
+        chatInterface.classList.add(`size-${currentSize}x`);
+        chatSizeBtn.textContent = `${currentSize}x`;
+    });
 
     // Toggle Chat
     chatToggle.addEventListener('click', () => {
