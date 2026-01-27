@@ -38,9 +38,8 @@ def get_post_url(file_path):
     
     if match:
         year, month, day, slug, ext = match.groups()
-        # Jekyll default permalink style: /year/month/day/slug.html
-        # If your config users a different permalink style, adjust this!
-        return f"{SITE_URL}/{year}/{month}/{day}/{slug}.html"
+        # Adjusted to match _config.yml permalink: /blog/:year/:month/:day/:title/
+        return f"{SITE_URL}/blog/{year}/{month}/{day}/{slug}/"
     
     return SITE_URL
 
