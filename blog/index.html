@@ -186,6 +186,60 @@ title: Blog
 <!-- Global Tooltip Container -->
 <div id="global-series-tooltip"></div>
 
+<!-- SimpleJekyllSearch -->
+<script src="https://unpkg.com/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+<script>
+    // Search Initialization
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+        SimpleJekyllSearch({
+            searchInput: document.getElementById('blog-search'),
+            resultsContainer: document.getElementById('search-results'),
+            json: '{{ "/search.json" | relative_url }}',
+            searchResultTemplate: `
+                <article class="blog-card glass-card search-result-item" style="margin-bottom: 2rem;">
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                             <span class="blog-category">Search Result</span>
+                             <span class="blog-date">{date}</span>
+                        </div>
+                        <h2 class="blog-card-title">
+                            <a href="{url}">{title}</a>
+                        </h2>
+                        <p class="blog-card-excerpt">{excerpt}</p>
+                        <a href="{url}" class="blog-read-more">
+                            Read Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            `,
+            noResultsText: '<div class="no-results" style="text-align:center; padding: 2rem;"><h3>No posts found</h3><p>Try different keywords or tags.</p></div>',
+            limit: 10,
+            fuzzy: false
+        });
+
+        // Toggle Content on Search
+        const searchInput = document.getElementById('blog-search');
+        const searchResults = document.getElementById('search-results');
+        const seriesShelf = document.querySelector('.series-shelf');
+        const postsSection = document.querySelector('.posts-section');
+
+        if(searchInput) {
+            searchInput.addEventListener('input', function() {
+                if (this.value.trim().length > 0) {
+                    if(searchResults) searchResults.style.display = 'block';
+                    if(seriesShelf) seriesShelf.style.display = 'none';
+                    if(postsSection) postsSection.style.display = 'none';
+                } else {
+                    if(searchResults) searchResults.style.display = 'none';
+                    if(seriesShelf) seriesShelf.style.display = 'block';
+                    if(postsSection) postsSection.style.display = 'block';
+                }
+            });
+        }
+    });
+</script>
+
 <!-- Blog Scripts -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
