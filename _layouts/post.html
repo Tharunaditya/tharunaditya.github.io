@@ -372,58 +372,235 @@ layout: default
         </div>
 
         <div class="badge-modal-body">
-            <div class="badge-preview">
-                <img src="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
-                     alt="{{ page.series }} Badge"
-                     class="modal-badge-image">
-            </div>
-            
-            <p class="badge-congrats">
-                You've navigated the <strong>{{ page.series }}</strong> series! 
-                This badge represents your journey through these concepts.
-            </p>
-
-            <div class="badge-usage-policy">
-                <h4><i class="fas fa-shield-alt"></i> Badge Usage Policy</h4>
-                <ul>
-                    <li>You are free to display this badge on your portfolio, LinkedIn, or GitHub profile.</li>
-                    <li>This badge signifies that you have engaged with the educational material provided in this series.</li>
-                    <li>Tag <strong>@Tharunaditya1</strong> when you share it!</li>
-                </ul>
-            </div>
-
-            <div class="badge-actions">
-                <a href="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
-                   download="{{ series_slug }}-badge.png" 
-                   class="badge-action-btn download-btn">
-                    <i class="fas fa-download"></i> Download Badge
-                </a>
+            <!-- Step 1: Claim Form -->
+            <div id="cert-step-form" class="cert-step active">
+                <div class="badge-preview">
+                    <img src="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
+                         alt="{{ page.series }} Badge"
+                         class="modal-badge-image">
+                </div>
                 
-                <a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20completed%20the%20{{ page.series | uri_escape }}%20series%20by%20@Tharunaditya%20Anuganti%20Check%20it%20out%20here:%20{{ page.url | absolute_url }}%20%23CyberSecurity%20%23Learning%20%23Microarchitecture" 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   class="badge-action-btn share-btn-linkedin">
-                    <i class="fab fa-linkedin-in"></i> Share on LinkedIn
-                </a>
+                <p class="badge-congrats">
+                    You've completed the <strong>{{ page.series }}</strong> series! 
+                    Enter your details to generate a personalized, verifiable certificate.
+                </p>
+
+                <form id="cert-claim-form" class="cert-claim-form">
+                    <div class="cert-form-group">
+                        <label for="cert-name"><i class="fas fa-user"></i> Your Full Name *</label>
+                        <input type="text" id="cert-name" name="name" required 
+                               placeholder="Enter your name as it should appear on the certificate"
+                               minlength="2" maxlength="50">
+                    </div>
+                    
+                    <div class="cert-form-group">
+                        <label for="cert-title"><i class="fas fa-briefcase"></i> Title/Role (Optional)</label>
+                        <input type="text" id="cert-title" name="title" 
+                               placeholder="e.g., Security Researcher, Student"
+                               maxlength="50">
+                    </div>
+
+                    <div class="cert-form-agreement">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="cert-agree" required>
+                            <span class="checkmark"></span>
+                            I confirm that I have completed this series and agree to the <a href="#" onclick="event.preventDefault(); togglePolicy()">badge usage policy</a>.
+                        </label>
+                    </div>
+
+                    <div id="cert-policy-details" class="cert-policy-details" style="display: none;">
+                        <h4><i class="fas fa-shield-alt"></i> Badge Usage Policy</h4>
+                        <ul>
+                            <li>You are free to display this badge on your portfolio, LinkedIn, or GitHub profile.</li>
+                            <li>This badge signifies that you have engaged with the educational material provided in this series.</li>
+                            <li>Your certificate includes a verifiable credential ID.</li>
+                            <li>Tag <strong>@Tharunaditya1</strong> when you share it!</li>
+                        </ul>
+                    </div>
+
+                    <button type="submit" class="cert-generate-btn">
+                        <i class="fas fa-certificate"></i> Generate Certificate
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: Certificate Preview -->
+            <div id="cert-step-preview" class="cert-step">
+                <div class="cert-preview-container">
+                    <canvas id="cert-canvas"></canvas>
+                </div>
+                
+                <div class="cert-credential-box">
+                    <label><i class="fas fa-fingerprint"></i> Your Credential ID</label>
+                    <div class="credential-display">
+                        <input type="text" id="cert-credential-id" readonly>
+                        <button type="button" class="copy-credential-btn" onclick="copyCredential()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="credential-hint">Save this ID! Anyone can verify your certificate at <a href="/verify" target="_blank">tharunaditya.dev/verify</a></p>
+                </div>
+
+                <div class="badge-actions">
+                    <button type="button" class="badge-action-btn download-btn" onclick="downloadCert()">
+                        <i class="fas fa-download"></i> Download Certificate
+                    </button>
+                    
+                    <a href="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
+                       download="{{ series_slug }}-badge.png" 
+                       class="badge-action-btn secondary-btn">
+                        <i class="fas fa-medal"></i> Download Badge
+                    </a>
+                    
+                    <a id="linkedin-share-btn"
+                       href="#" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="badge-action-btn share-btn-linkedin">
+                        <i class="fab fa-linkedin-in"></i> Share on LinkedIn
+                    </a>
+                </div>
+
+                <button type="button" class="cert-back-btn" onclick="goBackToForm()">
+                    <i class="fas fa-arrow-left"></i> Generate Another
+                </button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Certificate Generation Script -->
+<script src="{{ '/assets/js/certificate.js' | relative_url }}"></script>
 <script>
+    const SERIES_NAME = "{{ page.series }}";
+    const SERIES_SLUG = "{{ page.series | slugify }}";
+    const BADGE_URL = "{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}";
+    const SERIES_PARTS = {{ site.posts | where: "series", page.series | size }};
+    const PAGE_URL = "{{ page.url | absolute_url }}";
+    
+    let generatedCanvas = null;
+    let generatedCredentialId = null;
+
     function openBadgeModal() {
         document.getElementById('badge-modal').classList.add('visible');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        document.body.style.overflow = 'hidden';
     }
 
     function closeBadgeModal() {
         document.getElementById('badge-modal').classList.remove('visible');
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = '';
     }
+
+    function togglePolicy() {
+        const details = document.getElementById('cert-policy-details');
+        details.style.display = details.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function goBackToForm() {
+        document.getElementById('cert-step-form').classList.add('active');
+        document.getElementById('cert-step-preview').classList.remove('active');
+    }
+
+    function copyCredential() {
+        const input = document.getElementById('cert-credential-id');
+        input.select();
+        navigator.clipboard.writeText(input.value);
+        
+        const btn = document.querySelector('.copy-credential-btn');
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-copy"></i>';
+        }, 2000);
+    }
+
+    function downloadCert() {
+        if (generatedCanvas) {
+            CertificateSystem.downloadCertificate(generatedCanvas, `${SERIES_SLUG}-certificate.png`);
+        }
+    }
+
+    // Form submission
+    document.getElementById('cert-claim-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('cert-name').value.trim();
+        const title = document.getElementById('cert-title').value.trim();
+        const date = new Date().toISOString().split('T')[0];
+        
+        // Generate credential ID
+        generatedCredentialId = CertificateSystem.generateCredentialId(name, SERIES_NAME, date);
+        
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+        submitBtn.disabled = true;
+        
+        try {
+            // Generate certificate canvas
+            generatedCanvas = await CertificateSystem.generateCertificateCanvas({
+                name: name,
+                series: SERIES_NAME,
+                date: date,
+                credentialId: generatedCredentialId,
+                partsCompleted: SERIES_PARTS,
+                badgeUrl: BADGE_URL
+            });
+            
+            // Display canvas in preview
+            const previewContainer = document.querySelector('.cert-preview-container');
+            previewContainer.innerHTML = '';
+            generatedCanvas.style.maxWidth = '100%';
+            generatedCanvas.style.height = 'auto';
+            generatedCanvas.style.borderRadius = '8px';
+            generatedCanvas.style.boxShadow = '0 10px 40px rgba(0, 255, 65, 0.2)';
+            previewContainer.appendChild(generatedCanvas);
+            
+            // Show credential ID
+            document.getElementById('cert-credential-id').value = generatedCredentialId;
+            
+            // Update LinkedIn share link
+            const linkedInText = encodeURIComponent(
+                `🎉 I just earned my "${SERIES_NAME}" certificate from @Tharunaditya Anuganti's blog!\n\n` +
+                `📜 Credential ID: ${generatedCredentialId.substring(0, 30)}...\n` +
+                `✅ Verify at: tharunaditya.dev/verify\n\n` +
+                `Check out the series: ${PAGE_URL}\n\n` +
+                `#CyberSecurity #Learning #Certificate`
+            );
+            document.getElementById('linkedin-share-btn').href = 
+                `https://www.linkedin.com/feed/?shareActive=true&text=${linkedInText}`;
+            
+            // Save to localStorage
+            CertificateSystem.saveCertificate(generatedCredentialId, {
+                name: name,
+                title: title,
+                series: SERIES_NAME,
+                date: date
+            });
+            
+            // Switch to preview step
+            document.getElementById('cert-step-form').classList.remove('active');
+            document.getElementById('cert-step-preview').classList.add('active');
+            
+        } catch (error) {
+            console.error('Certificate generation failed:', error);
+            alert('Failed to generate certificate. Please try again.');
+        }
+        
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
 
     // Close on click outside
     document.getElementById('badge-modal').addEventListener('click', function(e) {
         if (e.target === this) {
+            closeBadgeModal();
+        }
+    });
+
+    // ESC key to close
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
             closeBadgeModal();
         }
     });

@@ -1,0 +1,708 @@
+---
+layout: default
+title: Verify Certificate
+description: Verify the authenticity of certificates issued for completing blog series on tharunaditya.dev
+---
+
+<section class="verify-section">
+    <div class="container">
+        <div class="verify-header">
+            <div class="verify-icon">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <h1>Verify Certificate</h1>
+            <p class="verify-subtitle">Enter a credential ID to verify the authenticity of a certificate issued by tharunaditya.dev</p>
+        </div>
+
+        <div class="verify-card glass-card">
+            <form id="verify-form" class="verify-form">
+                <div class="verify-input-group">
+                    <label for="credential-input">
+                        <i class="fas fa-fingerprint"></i> Credential ID
+                    </label>
+                    <div class="input-wrapper">
+                        <input type="text" 
+                               id="credential-input" 
+                               placeholder="Paste the credential ID here..."
+                               required
+                               autocomplete="off">
+                        <button type="submit" class="verify-btn">
+                            <i class="fas fa-search"></i> Verify
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Results Container -->
+            <div id="verify-results" class="verify-results" style="display: none;">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- How It Works Section -->
+        <div class="verify-info-section">
+            <h2><i class="fas fa-question-circle"></i> How Verification Works</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Cryptographic Hash</h3>
+                    <p>Each certificate contains a unique credential ID that is cryptographically generated from the certificate data, making it tamper-proof.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <h3>Self-Contained</h3>
+                    <p>The credential ID contains all necessary information. No database lookup required—verification is instant and works offline.</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Tamper Detection</h3>
+                    <p>Any modification to the credential ID will cause verification to fail. The hash ensures data integrity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Certificates Section -->
+        <div class="my-certs-section">
+            <h2><i class="fas fa-folder-open"></i> Your Saved Certificates</h2>
+            <p class="my-certs-description">Certificates you've generated on this device are stored locally for easy access.</p>
+            <div id="saved-certs-container" class="saved-certs-container">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{{ '/assets/js/certificate.js' | relative_url }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('verify-form');
+    const resultsContainer = document.getElementById('verify-results');
+    const savedCertsContainer = document.getElementById('saved-certs-container');
+    
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const credentialId = document.getElementById('credential-input').value.trim();
+        
+        if (!credentialId) {
+            showResult('error', 'Please enter a credential ID');
+            return;
+        }
+        
+        verifyCredential(credentialId);
+    });
+    
+    // Check for credential ID in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const credentialParam = urlParams.get('id');
+    if (credentialParam) {
+        document.getElementById('credential-input').value = credentialParam;
+        verifyCredential(credentialParam);
+    }
+    
+    // Load saved certificates
+    loadSavedCertificates();
+    
+    function verifyCredential(credentialId) {
+        resultsContainer.style.display = 'block';
+        resultsContainer.innerHTML = `
+            <div class="verify-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Verifying credential...</span>
+            </div>
+        `;
+        
+        // Simulate brief delay for UX
+        setTimeout(() => {
+            const result = CertificateSystem.verifyCredential(credentialId);
+            
+            if (result.valid) {
+                showValidResult(result);
+            } else {
+                showInvalidResult(result.error);
+            }
+        }, 500);
+    }
+    
+    function showValidResult(data) {
+        const formattedDate = CertificateSystem.formatDate(data.date);
+        const issuedTimestamp = new Date(data.timestamp).toLocaleString();
+        
+        resultsContainer.innerHTML = `
+            <div class="verify-result valid">
+                <div class="result-header">
+                    <div class="result-icon valid-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="result-title">
+                        <h3>Certificate Verified</h3>
+                        <span class="result-badge valid-badge">AUTHENTIC</span>
+                    </div>
+                </div>
+                
+                <div class="result-details">
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fas fa-user"></i> Recipient</span>
+                        <span class="detail-value">${escapeHtml(data.name)}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fas fa-book"></i> Series Completed</span>
+                        <span class="detail-value">${escapeHtml(data.series)}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fas fa-calendar"></i> Completion Date</span>
+                        <span class="detail-value">${formattedDate}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label"><i class="fas fa-clock"></i> Issued</span>
+                        <span class="detail-value">${issuedTimestamp}</span>
+                    </div>
+                </div>
+                
+                <div class="result-footer">
+                    <p><i class="fas fa-info-circle"></i> This certificate was issued by tharunaditya.dev and its authenticity has been verified.</p>
+                </div>
+            </div>
+        `;
+    }
+    
+    function showInvalidResult(error) {
+        resultsContainer.innerHTML = `
+            <div class="verify-result invalid">
+                <div class="result-header">
+                    <div class="result-icon invalid-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="result-title">
+                        <h3>Verification Failed</h3>
+                        <span class="result-badge invalid-badge">INVALID</span>
+                    </div>
+                </div>
+                
+                <div class="result-message">
+                    <p>${escapeHtml(error || 'The credential ID could not be verified. It may be invalid, corrupted, or tampered with.')}</p>
+                </div>
+                
+                <div class="result-help">
+                    <h4>Possible Reasons:</h4>
+                    <ul>
+                        <li>The credential ID was not copied completely</li>
+                        <li>The credential has been modified or corrupted</li>
+                        <li>The credential was not issued by this platform</li>
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+    
+    function loadSavedCertificates() {
+        const certs = CertificateSystem.getSavedCertificates();
+        const certIds = Object.keys(certs);
+        
+        if (certIds.length === 0) {
+            savedCertsContainer.innerHTML = `
+                <div class="no-certs">
+                    <i class="fas fa-file-certificate"></i>
+                    <p>No certificates saved on this device yet.</p>
+                    <a href="/blog" class="explore-link">Explore Blog Series <i class="fas fa-arrow-right"></i></a>
+                </div>
+            `;
+            return;
+        }
+        
+        let html = '<div class="saved-certs-grid">';
+        
+        certIds.forEach(id => {
+            const cert = certs[id];
+            html += `
+                <div class="saved-cert-card">
+                    <div class="cert-card-header">
+                        <i class="fas fa-certificate"></i>
+                        <span class="cert-series">${escapeHtml(cert.series)}</span>
+                    </div>
+                    <div class="cert-card-body">
+                        <p class="cert-name">${escapeHtml(cert.name)}</p>
+                        <p class="cert-date">${CertificateSystem.formatDate(cert.date)}</p>
+                    </div>
+                    <div class="cert-card-actions">
+                        <button class="cert-action-btn" onclick="verifySavedCert('${escapeHtml(id)}')">
+                            <i class="fas fa-search"></i> Verify
+                        </button>
+                        <button class="cert-action-btn copy-btn" onclick="copyCertId('${escapeHtml(id)}', this)">
+                            <i class="fas fa-copy"></i> Copy ID
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        savedCertsContainer.innerHTML = html;
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Global functions for onclick handlers
+    window.verifySavedCert = function(id) {
+        document.getElementById('credential-input').value = id;
+        verifyCredential(id);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    
+    window.copyCertId = function(id, btn) {
+        navigator.clipboard.writeText(id);
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+            btn.innerHTML = originalHtml;
+        }, 2000);
+    };
+});
+</script>
+
+<style>
+/* Verify Page Styles */
+.verify-section {
+    padding: 100px 0 60px;
+    min-height: 100vh;
+}
+
+.verify-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.verify-icon {
+    font-size: 4rem;
+    color: #00ff41;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+}
+
+.verify-header h1 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.verify-subtitle {
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.verify-card {
+    max-width: 700px;
+    margin: 0 auto 4rem;
+    padding: 2rem;
+    background: rgba(13, 17, 23, 0.8);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 65, 0.2);
+}
+
+.verify-form label {
+    display: block;
+    color: #00ff41;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 1rem;
+}
+
+.verify-form input {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+}
+
+.verify-form input:focus {
+    outline: none;
+    border-color: #00ff41;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.verify-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #00ff41, #00cc33);
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.verify-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.3);
+}
+
+/* Results */
+.verify-results {
+    margin-top: 2rem;
+}
+
+.verify-loading {
+    text-align: center;
+    padding: 2rem;
+    color: #00ff41;
+}
+
+.verify-loading i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.verify-result {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.verify-result.valid {
+    border: 1px solid #00ff41;
+    background: rgba(0, 255, 65, 0.05);
+}
+
+.verify-result.invalid {
+    border: 1px solid #ff4141;
+    background: rgba(255, 65, 65, 0.05);
+}
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.result-icon {
+    font-size: 2.5rem;
+}
+
+.valid-icon {
+    color: #00ff41;
+}
+
+.invalid-icon {
+    color: #ff4141;
+}
+
+.result-title h3 {
+    margin: 0 0 0.25rem;
+    color: #fff;
+}
+
+.result-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.valid-badge {
+    background: #00ff41;
+    color: #000;
+}
+
+.invalid-badge {
+    background: #ff4141;
+    color: #fff;
+}
+
+.result-details {
+    padding: 1.5rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: #a0a0a0;
+}
+
+.detail-label i {
+    margin-right: 0.5rem;
+    color: #00ff41;
+}
+
+.detail-value {
+    color: #fff;
+    font-weight: 600;
+}
+
+.result-footer {
+    padding: 1rem 1.5rem;
+    background: rgba(0, 255, 65, 0.1);
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+.result-footer i {
+    color: #00ff41;
+    margin-right: 0.5rem;
+}
+
+.result-message {
+    padding: 1.5rem;
+    color: #ff8080;
+}
+
+.result-help {
+    padding: 0 1.5rem 1.5rem;
+    color: #a0a0a0;
+}
+
+.result-help h4 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.result-help ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.result-help li {
+    margin-bottom: 0.25rem;
+}
+
+/* Info Section */
+.verify-info-section {
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+}
+
+.verify-info-section h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.verify-info-section h2 i {
+    color: #00ff41;
+    margin-right: 0.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: rgba(13, 17, 23, 0.6);
+    border: 1px solid rgba(0, 255, 65, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    border-color: rgba(0, 255, 65, 0.3);
+    transform: translateY(-5px);
+}
+
+.info-icon {
+    font-size: 2.5rem;
+    color: #00ff41;
+    margin-bottom: 1rem;
+}
+
+.info-card h3 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.info-card p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Saved Certificates */
+.my-certs-section {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.my-certs-section h2 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.my-certs-section h2 i {
+    color: #00ff41;
+    margin-right: 0.5rem;
+}
+
+.my-certs-description {
+    text-align: center;
+    color: #a0a0a0;
+    margin-bottom: 2rem;
+}
+
+.saved-certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.saved-cert-card {
+    background: rgba(13, 17, 23, 0.8);
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.saved-cert-card:hover {
+    border-color: #00ff41;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1);
+}
+
+.cert-card-header {
+    background: rgba(0, 255, 65, 0.1);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cert-card-header i {
+    color: #00ff41;
+    font-size: 1.5rem;
+}
+
+.cert-series {
+    color: #fff;
+    font-weight: 600;
+}
+
+.cert-card-body {
+    padding: 1rem;
+}
+
+.cert-name {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.cert-date {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+.cert-card-actions {
+    padding: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cert-action-btn {
+    flex: 1;
+    padding: 0.5rem;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 6px;
+    color: #00ff41;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cert-action-btn:hover {
+    background: #00ff41;
+    color: #000;
+}
+
+.no-certs {
+    text-align: center;
+    padding: 3rem;
+    color: #a0a0a0;
+}
+
+.no-certs i {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.explore-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #00ff41;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.explore-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .verify-header h1 {
+        font-size: 2rem;
+    }
+    
+    .input-wrapper {
+        flex-direction: column;
+    }
+    
+    .verify-btn {
+        justify-content: center;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .result-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
