@@ -366,62 +366,77 @@ layout: default
     <div class="badge-modal-content">
         <button class="badge-modal-close" onclick="closeBadgeModal()">&times;</button>
         
-        <div class="badge-modal-header">
-            <i class="fas fa-trophy badge-trophy-icon"></i>
-            <h2>Claim Your Achievement</h2>
-        </div>
-
         <div class="badge-modal-body">
             <!-- Step 1: Claim Form -->
             <div id="cert-step-form" class="cert-step active">
-                <div class="badge-preview">
-                    <img src="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
-                         alt="{{ page.series }} Badge"
-                         class="modal-badge-image">
-                </div>
-                
-                <p class="badge-congrats">
-                    You've completed the <strong>{{ page.series }}</strong> series! 
-                    Enter your details to generate a personalized, verifiable certificate.
-                </p>
-
-                <form id="cert-claim-form" class="cert-claim-form">
-                    <div class="cert-form-group">
-                        <label for="cert-name"><i class="fas fa-user"></i> Your Full Name *</label>
-                        <input type="text" id="cert-name" name="name" required 
-                               placeholder="Enter your name as it should appear on the certificate"
-                               minlength="2" maxlength="50">
+                <div class="cert-form-layout">
+                    <!-- Left: Badge Preview -->
+                    <div class="cert-form-left">
+                        <div class="badge-preview">
+                            <i class="fas fa-trophy badge-trophy-icon"></i>
+                            <img src="{{ '/assets/images/series_badges/' | append: series_slug | append: '.png' | relative_url }}" 
+                                 alt="{{ page.series }} Badge"
+                                 class="modal-badge-image">
+                        </div>
+                        <h3 class="series-complete-title">{{ page.series }}</h3>
+                        <p class="badge-congrats">Series Completed!</p>
                     </div>
                     
-                    <div class="cert-form-group">
-                        <label for="cert-title"><i class="fas fa-briefcase"></i> Title/Role (Optional)</label>
-                        <input type="text" id="cert-title" name="title" 
-                               placeholder="e.g., Security Researcher, Student"
-                               maxlength="50">
-                    </div>
+                    <!-- Right: Form Fields -->
+                    <div class="cert-form-right">
+                        <div class="form-header">
+                            <h2>Claim Your Certificate</h2>
+                            <p>Enter your details to generate a personalized, verifiable certificate.</p>
+                        </div>
 
-                    <div class="cert-form-agreement">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="cert-agree" required>
-                            <span class="checkmark"></span>
-                            I confirm that I have completed this series and agree to the <a href="#" onclick="event.preventDefault(); togglePolicy()">badge usage policy</a>.
-                        </label>
-                    </div>
+                        <form id="cert-claim-form" class="cert-claim-form">
+                            <div class="cert-form-row">
+                                <div class="cert-form-group">
+                                    <label for="cert-name"><i class="fas fa-user"></i> Full Name *</label>
+                                    <input type="text" id="cert-name" name="name" required 
+                                           placeholder="Your name on certificate"
+                                           minlength="2" maxlength="50">
+                                </div>
+                                
+                                <div class="cert-form-group">
+                                    <label for="cert-title"><i class="fas fa-briefcase"></i> Designation</label>
+                                    <input type="text" id="cert-title" name="title" 
+                                           placeholder="e.g., Security Researcher"
+                                           maxlength="50">
+                                </div>
+                            </div>
 
-                    <div id="cert-policy-details" class="cert-policy-details" style="display: none;">
-                        <h4><i class="fas fa-shield-alt"></i> Badge Usage Policy</h4>
-                        <ul>
-                            <li>You are free to display this badge on your portfolio, LinkedIn, or GitHub profile.</li>
-                            <li>This badge signifies that you have engaged with the educational material provided in this series.</li>
-                            <li>Your certificate includes a verifiable credential ID.</li>
-                            <li>Tag <strong>@Tharunaditya1</strong> when you share it!</li>
-                        </ul>
-                    </div>
+                            <div class="cert-form-group">
+                                <label for="cert-email"><i class="fas fa-envelope"></i> Email *</label>
+                                <input type="email" id="cert-email" name="email" required 
+                                       placeholder="your.email@example.com"
+                                       maxlength="100">
+                            </div>
 
-                    <button type="submit" class="cert-generate-btn">
-                        <i class="fas fa-certificate"></i> Generate Certificate
-                    </button>
-                </form>
+                            <div class="cert-form-checkboxes">
+                                <div class="cert-form-agreement">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="cert-agree" required>
+                                        <span class="checkmark"></span>
+                                        I confirm I have completed this series
+                                    </label>
+                                </div>
+
+                                <div class="cert-form-newsletter">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" id="cert-newsletter">
+                                        <span class="checkmark"></span>
+                                        Keep me updated on upcoming security series
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="cert-generate-btn">
+                                <i class="fas fa-certificate"></i> Generate Certificate
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <!-- Step 2: Certificate Preview -->
