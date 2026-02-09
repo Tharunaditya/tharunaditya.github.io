@@ -100,7 +100,7 @@ Finally, the privilege check completes.
 *   The register `secret` never officially held the kernel value.
 
 **Microarchitectural State**:
-*   The cache line for `probe_array[42 * 4006]` is **still in the cache**.
+*   The cache line for `probe_array[42 * 4096]` is **still in the cache**.
 
 ---
 

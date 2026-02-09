@@ -72,7 +72,7 @@ The fault is handled (caught), but the side-effect remains. The attacker measure
 ### Why is this terrifying?
 
 1.  **Cross-Process & Cross-VM**: Since fill buffers are shared by Hyper-Threads, a malicious VM in the cloud could read data from a legitimate VM running on the same physical core.
-2.  **SGX Breach**: Intel SGX (Software Guard Extensions) is designed to be a secure vault even if the OS is compromised. ZombieLoad can overlook the walls of this vault and read the secrets inside, rendering the "Secure Enclave" concept vulnerable.
+2.  **SGX Breach**: Intel SGX (Software Guard Extensions) is designed to be a secure vault even if the OS is compromised. ZombieLoad can bypass the walls of this vault and read the secrets inside, rendering the "Secure Enclave" concept vulnerable.
 3.  **Browser Exploits**: JavaScript in a malicious tab could theoretically spy on your banking tab.
 
 ### Mitigation: Flushing the World
@@ -87,6 +87,4 @@ The fix for ZombieLoad was heavy-handed because the flaw is architectural.
 ZombieLoad taught us that **data in flight** is just as vulnerable as data at rest. It forced CPU architects to rethink how resources are shared between threads. In the next part, we will explore **Rowhammer**, where we stop reading memory and start breaking it.
 
 *Tharunaditya's Security Note: Keep your BIOS/Firmware updated. These hardware patches are your primary defense against MDS attacks.*
-
-> **System Update**: Notification automated links have been calibrated.
 

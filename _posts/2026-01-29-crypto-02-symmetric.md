@@ -42,7 +42,7 @@ AES isn't just "math"; it's a series of transformations designed to spread confu
 Inside AES, the data goes through multiple "rounds" (10, 12, or 14 rounds depending on key size). In each round, four operations occur:
 
 1.  **SubBytes**: A non-linear substitution step where each byte is replaced with another according to a lookup table (S-Box). This provides **Confusion**.
-2.  **ShiftRows**: A transposition step where the rows of the state usage are shifted cyclically.
+2.  **ShiftRows**: A transposition step where the rows of the state are shifted cyclically.
 3.  **MixColumns**: A mixing operation which operates on the columns of the state, combining the four bytes in each column. This provides **Diffusion**.
 4.  **AddRoundKey**: The state is combined (XOR) with the round key derived from the main secret key.
 
